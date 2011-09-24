@@ -1,0 +1,59 @@
+%!TEX TS-program = xetex 
+%!TEX encoding = UTF-8 Unicode
+\documentclass[letter]{article}
+
+\input{../build/shapeperfect/utils}
+\input{../build/shapeperfect/sp}
+\input{../build/shapeperfect/extra}
+
+\title{INF4000 : Projet personnel}
+\authors{Maxime \tsc{Gaudin}}
+\shorttitle{}
+
+\newcommand{\raytracing}[0]
+{\tsl{ray tracing} }
+
+\begin{document}
+\maketitle
+
+Le \raytracing est une technique de synthèse d'image consistant à simuler le
+parcours de la lumière mais en chemin inverse. En effet, puisqu'il serait bien
+trop complexe de suivre la lumière de la source (\eg d'une lampe de poche)
+jusqu'à l'objectif, et ce, en calculant toutes les interactions possibles avec
+l'environnement, l'algorithme effectue le chemin inverse : De l'objectif à
+l'environnement. 
+
+\newpar Cette technique est utilisée dans de nombreux domaines allant de
+l'imagerie médicale, en passant par la représentation 3D de systèmes complexes
+jusqu'au cinéma.
+
+\newpar Enfin, afin de rendre le sujet encore plus interessant, j'aimerais
+tenter d'implémenter la technique de cartographie de photons, permettant de
+simuler des interactions lumineuses telles que les caustiques.
+
+\section{Spécification du projet}
+\subsection{Liste des fonctionnalités}
+\begin{enumerate}
+  \item Un moteur de \raytracing ``classique''.
+  \item La gestion de primitives (sphères, plan, tores, et en général toutes
+    les figures ayant une représentation paramétrique).
+  \item La gestion de plusieurs types de caméras : Orthographique,
+    perspective, \etc
+  \item La gestion de plusieurs types de lumières : Point, plan, sphérique,
+    \etc.
+  \item La gestion d'au moins un format de représentation polygonale.
+  \item La mise en place des structures accélératrices.
+\end{enumerate}
+
+Comme spécifié plus haut, il serait intéressant d'implémenter la cartographie
+des photons mais j'ai peur que le nombre d'heures allouées au projets ne
+me permettent pas de le faire.
+
+\subsection{Aspects de conception}
+La technique du \raytracing, bien que très simple, nécessite une architecture
+logicielle très bien conçu car le développement de ce genre de programme se
+faire de manière incrémentale et itérative (d'autant plus lorsqu'il n'y a
+qu'un seul développeur). 
+
+\end{document}
+
