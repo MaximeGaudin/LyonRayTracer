@@ -1,2 +1,7 @@
 .*.swp
 .DS_Store
+
+code/lrt
+code/lrt.dSYM/
+
+code/objs/

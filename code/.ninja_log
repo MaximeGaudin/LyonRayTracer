@@ -1,0 +1,40 @@
+# ninja log v2
+0 292 objs/Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -c src/Vector3.cc -o objs/Vector3.o
+0 193 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -c test/t_Vector3.cc -o objs/t_Vector3.o
+1 211 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -c test/t_Vector3.cc -o objs/t_Vector3.o
+1 217 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -c test/t_Vector3.cc -o objs/t_Vector3.o
+1 247 objs/Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -c src/Vector3.cc -o objs/Vector3.o
+0 278 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wexta -Werror -pedantic -ansi -c test/t_Vector3.cc -o objs/t_Vector3.o
+0 291 objs/Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wexta -Werror -pedantic -ansi -c src/Vector3.cc -o objs/Vector3.o
+0 226 objs/Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Vector3.cc -o objs/Vector3.o
+1 227 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c test/t_Vector3.cc -o objs/t_Vector3.o
+2 225 objs/t_Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c test/t_Vector3.cc -o objs/t_Vector3.o
+0 257 objs/Vector3.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Vector3.cc -o objs/Vector3.o
+0 194 objs/t_main.o clang++ -I/opt/local/include -I./ -I./src -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c test/t_main.cc -o objs/t_main.o
+0 768 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+0 591 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+0 593 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+0 803 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+3 812 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+0 715 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+1 733 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+733 2186 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 755 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+0 631 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+632 1246 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 747 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+0 591 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+0 583 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+0 362 objs/Exceptions.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/exceptions.cc -o objs/Exceptions.o
+0 605 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+605 1273 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 557 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+557 1219 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 593 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+594 1265 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 606 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+606 1486 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -std=c++0x -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 642 objs/Exceptions.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/exceptions.cc -o objs/Exceptions.o
+0 985 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+7 1012 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+1013 1686 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt

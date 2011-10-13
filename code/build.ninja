@@ -1,0 +1,17 @@
+iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/
+lflags=-L/opt/local/lib/ 
+flags=-g -Wall -Wextra -Werror -pedantic -ansi
+
+src_dir=src/
+test_dir=test/
+obj_dir=objs/
+
+compiler=clang++
+
+rule compile
+  command = $compiler $iflags $flags -c $in -o $out
+
+rule link
+  command = $compiler $iflags $lflags $flags $in -o $out
+
+include deps.ninja
