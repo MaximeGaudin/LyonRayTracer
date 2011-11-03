@@ -10,7 +10,7 @@ video: gource.webm
 	
 gource.webm:
 	@echo "Encoding repository video..."
-	@gource -800x600  --stop-at-end -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libvpx -b 10000K gource.webm > /dev/null
+	@gource -800x600 --title "LRT" -s 0.5 --stop-at-end -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libvpx -b 10000K gource.webm > /dev/null
 
 code/lrt:
 	@echo "Compiling..."
@@ -22,7 +22,7 @@ doc/html/index.html:
 
 doc/latex/refman.pdf:
 	@echo "Building latex documentation..."
-	@doxygen >/dev/null
+	@cd doc/latex && make >/dev/null
 
 clean:
 	@echo "Cleaning..."
