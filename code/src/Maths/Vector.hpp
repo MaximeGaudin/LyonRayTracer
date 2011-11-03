@@ -16,6 +16,8 @@ class Vector {
 
     /**
       * Initialise toutes les composantes à v
+      *
+      * @param v Valeur de toutes les composantes.
       */
 		Vector (P v);
 
@@ -31,16 +33,22 @@ class Vector {
     /**
       * Renvoie la taille du vecteur calculé comme la racine du produit
       * scalaire du vecteur avec lui même.
+      *
+      * @return Taille du vecteur.
       */
 		P Length () const;
 
     /** 
-      * Renvoie la taille du vecteur au carré
+      * Renvoie la taille du vecteur au carré.
+      *
+      * @return Taille du vecteur au carré.
       */
 		P SquaredLength () const;
 
     /**
-      * Renvoie la versione normalisée du vecteur (i.e. de taille unitaire)
+      * Renvoie la versione normalisée du vecteur (i.e. de taille unitaire).
+      *
+      * @return Vecteur normalisé.
       */
 		Vector<P, N> Normalized () const;
 
@@ -49,12 +57,20 @@ class Vector {
 	public:
     /**
       * Renvoie la produit scalaire des deux vecteurs passés en 
-      * paramètre
+      * paramètre.
+      *
+      * @param v1 Membre de gauche du produit scalaire.
+      * @param v2 Membre de droite du produit scalaire.
+      * @return Résultat du produit scalaire.
       */
 		static P Dot ( const Vector<P, N>& v1, const Vector<P, N>& v2 );
 
     /**
       * Renvoie le produit vectoriel de deux vecteur de dimension 3
+      *
+      * @param v1 Membre de gauche du produit vectoriel.
+      * @param v2 Membre de droite du produit vectoriel.
+      * @return Résultat du produit vectoriel.
       */
 		static Vector<P, 3> Cross 
       ( const Vector<P, 3>& v1, const Vector<P, 3>& v2 );

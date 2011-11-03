@@ -1,5 +1,7 @@
 all: bin doc video
 
+.PHONY: clean doc
+
 doc: doc/html/index.html doc/latex/refman.pdf
 
 bin: code/lrt
