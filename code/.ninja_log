@@ -18,3 +18,8 @@
 1691 3887 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
 0 366 objs/Color.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Graphics/Color.cc -o objs/Color.o
 14 713 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 1066 objs/Exceptions.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/exceptions.cc -o objs/Exceptions.o
+14 1152 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
+1152 1468 objs/Color.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Graphics/Color.cc -o objs/Color.o
+0 350 objs/Image.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Graphics/Image.cc -o objs/Image.o
+8 1690 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt

@@ -5,5 +5,6 @@ build $obj_dir/Vector.o: compile $src_dir/Maths/Vector.cc | $src_dir/Maths/Vecto
 build $obj_dir/Ray.o: compile $src_dir/Ray.cc | $src_dir/Ray.hpp
 
 build $obj_dir/Color.o: compile $src_dir/Graphics/Color.cc | $src_dir/Graphics/Color.hpp
+build $obj_dir/Image.o: compile $src_dir/Graphics/Image.cc | $src_dir/Graphics/Image.hpp
 
 build lrt: link $obj_dir/Exceptions.o $obj_dir/Vector.o $obj_dir/Ray.o $src_dir/main.cc 
