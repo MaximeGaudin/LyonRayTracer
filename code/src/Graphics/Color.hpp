@@ -1,3 +1,17 @@
+/**
+  * @file Color.hpp
+  * @brief Définition de la classe Color.
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * La classe couleur est paramétrée par le type numérique stockant chaque 
+  * composante. Les types autorisés sont :
+  * - unsigned char/ char
+  * - unsigned short/ short
+  * - unsigned int/ int
+  * - double
+  * - float
+  */
 #ifndef COLOR_H_
 #define COLOR_H_
 
@@ -9,8 +23,30 @@ using namespace std;
 template < typename P >
 class Color {
   public: // Ctors 
+    /**
+      * Constructeur par défaut. Toutes les composantes de la couleur sont à 0.
+      */
+    Color ();
+
+    /**
+      * Construit une couleur dont toutes les composantes sont mise à v.
+      *
+      * @param v Valeur de toutes les composantes.
+      */
     Color ( P const& v );
+
+    /** 
+      * Construit une couleur en fonction des composantes passées en paramètre.
+      *
+      * @param R Valeur de la composante rouge.
+      * @param G Valeur de la composante Verte.
+      * @param B Valeur de la composante bleue.
+      */
     Color ( P const& R, P const& G, P const &B );
+
+    /**
+      * Constructeur de copie.
+      */
     Color ( Color<P> const& C );
 
   public:
