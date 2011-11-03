@@ -1,5 +1,6 @@
 build $obj_dir/Exceptions.o: compile $src_dir/exceptions.cc | $src_dir/exceptions.hpp
 
+build $obj_dir/Matrix.o: compile $src_dir/Maths/Matrix.cc | $src_dir/Maths/Matrix.hpp
 build $obj_dir/Vector.o: compile $src_dir/Maths/Vector.cc | $src_dir/Maths/Vector.hpp
 build $obj_dir/Ray.o: compile $src_dir/Ray.cc | $src_dir/Ray.hpp
 
