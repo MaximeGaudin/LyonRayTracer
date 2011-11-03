@@ -19,5 +19,7 @@ int main () {
   cout << ( M * M2 ) << endl;
   cout << Matrix< double, 4, 4 >::Rotation ( 1, 2, 3 ) << endl;
 
+  cout << Matrix < double, 4, 4>::Translation ( 1, 1, 1 ) << endl;
+  cout << Matrix < double, 4, 4>::Scale ( 1, 1, 1 ) << endl;
   return 0;
 }

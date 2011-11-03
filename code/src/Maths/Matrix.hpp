@@ -24,6 +24,16 @@ class Matrix {
            double Yangle, 
            double Zangle );
 
+    static Matrix < P, 4, 4 > Translation ( 
+    double X,
+    double Y, 
+    double Z );
+ 
+    static Matrix < P, 4, 4 > Scale ( 
+    double X,
+    double Y, 
+    double Z );
+
   public:
     P* operator [] ( int i );
     Matrix < P, N, M > operator * ( const Matrix < P, N, M >& m ) const;

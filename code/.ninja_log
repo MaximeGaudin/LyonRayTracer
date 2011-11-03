@@ -84,3 +84,11 @@
 0 318 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
 0 365 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
 4 676 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 327 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
+0 619 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt
+0 334 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
+0 535 objs/Exceptions.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/exceptions.cc -o objs/Exceptions.o
+13 592 objs/Matrix.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Matrix.cc -o objs/Matrix.o
+15 836 objs/Vector.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Maths/Vector.cc -o objs/Vector.o
+535 1066 objs/Ray.o clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -g -Wall -Wextra -Werror -pedantic -ansi -c src/Ray.cc -o objs/Ray.o
+1066 1671 lrt clang++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -L/opt/local/lib/  -g -Wall -Wextra -Werror -pedantic -ansi objs/Exceptions.o objs/Vector.o objs/Ray.o src/main.cc -o lrt

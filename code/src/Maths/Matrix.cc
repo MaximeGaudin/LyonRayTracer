@@ -47,8 +47,8 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::RotationX ( double angle ) {
   Matrix < P, 4, 4 > result ( IDENTITY ); 
 
   result[1][1] = cos(angle);
-  result[2][1] = -sin(angle);
-  result[1][2] = sin(angle);
+  result[2][1] = sin(angle);
+  result[1][2] = -sin(angle);
   result[2][2] = cos(angle);
 
   return result;
@@ -59,8 +59,8 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::RotationY ( double angle ) {
   Matrix < P, 4, 4 > result ( IDENTITY ); 
 
   result[0][0] = cos(angle);
-  result[2][0] = sin(angle);
-  result[0][2] = -sin(angle);
+  result[0][2] = sin(angle);
+  result[2][0] = -sin(angle);
   result[2][2] = cos(angle);
 
   return result;
@@ -71,8 +71,8 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::RotationZ ( double angle ) {
   Matrix < P, 4, 4 > result ( IDENTITY ); 
 
   result[0][0] = cos(angle);
-  result[1][0] = -sin(angle);
-  result[0][1] = sin(angle);
+  result[1][0] = sin(angle);
+  result[0][1] = -sin(angle);
   result[1][1] = cos(angle);
 
   return result;
@@ -88,6 +88,33 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Rotation (
     * Matrix < P, 4, 4 >::RotationZ ( Zangle );
 }
 
+template < typename P, int N, int M >
+Matrix < P, 4, 4 > Matrix < P, N, M >::Translation ( 
+    double X,
+    double Y, 
+    double Z ) {
+  Matrix < P, 4, 4 > result ( IDENTITY ); 
+
+  result[0][3] = X;
+  result[1][3] = Y;
+  result[2][3] = Z; 
+
+  return result;
+}
+
+template < typename P, int N, int M >
+Matrix < P, 4, 4 > Matrix < P, N, M >::Scale ( 
+    double X,
+    double Y, 
+    double Z ) {
+  Matrix < P, 4, 4 > result ( IDENTITY ); 
+
+  result[0][0] = X;
+  result[1][1] = Y;
+  result[2][2] = Z; 
+
+  return result;
+}
 // Pretty printing
 string generateSpaces ( int n ) {
   string spaces;
