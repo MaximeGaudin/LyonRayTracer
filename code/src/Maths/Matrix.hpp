@@ -1,9 +1,32 @@
+/**
+  * @file Matrix.hpp
+  * @brief Header de la classe Matrix.
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * La classe Matrix dépend de 3 paramètres template :
+  * - P : Le type numérique à stocker.
+  * - N : Le nombre de lignes de la matrice.
+  * - M : Le nombre de colonne de la matrice. 
+  *
+  * Les types numériques acceptés sont :
+  * - unsigned char / char
+  * - unsigned short / short 
+  * - unsigned int / int 
+  * - float
+  * - double
+  * - long
+  * - long X
+  */ 
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <string>
 
 using namespace std;
 
+/**
+  * Type de la matrice à construire. Cf. constructeur.
+  */
 enum MATRIX_TYPE { ZERO = 0, IDENTITY = 1};
 
 template < typename P, int N, int M >

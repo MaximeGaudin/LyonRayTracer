@@ -1,3 +1,22 @@
+/**
+  * @file Vector.hpp
+  * @brief Header de la classe Vector.
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * La classe Vector dépend de 2 paramètres template :
+  * - P : Le type numérique à stocker.
+  * - N : Le nombre de lignes du vecteur.
+  *
+  * Les types numériques acceptés sont :
+  * - unsigned char / char
+  * - unsigned short / short 
+  * - unsigned int / int 
+  * - float
+  * - double
+  * - long
+  * - long X
+  */ 
 #ifndef VECTOR_H_
 #define VECTOR_H_
 #include <string>
