@@ -1,5 +1,5 @@
-#ifndef VECTOR_TI_H
-#define VECTOR_TI_H
+#ifndef VECTOR_TI_H_
+#define VECTOR_TI_H_
 #include "Vector.hpp"
 
 #include <exceptions.hpp>
@@ -12,6 +12,7 @@ typedef Vector<double, 2> Vector2d;
 typedef Vector<double, 3> Vector3d;
 typedef Vector<double, 4> Vector4d;
 
+/* Ctor */
 template <typename P, int N>
 Vector<P, N>::Vector () {
   checkType();
@@ -30,7 +31,7 @@ Vector<P, N>::Vector(const Vector<P, N>& v) {
   for( int i = 0; i < N; ++i) _values[i] = v._values[i]; 
 }
 
-/* Worker Methods =========================================================== */
+/* Worker Methods */
 template <typename P, int N >
 P Vector<P, N >::Length () const {
   P acc = 0;
@@ -94,7 +95,7 @@ P& Vector<P, N >::operator [] ( int i ) {
   return _values[i];
 }
 
-///* Tool methods */
+/* Tool methods */
 template <typename P, int N>
 void Vector<P, N>::checkType () const {
   BOOST_STATIC_ASSERT 	( 
@@ -106,7 +107,7 @@ void Vector<P, N>::checkType () const {
 }
 
 
-///* Getters & setters */
+/* Getters & setters */
 template <typename P,int N> P Vector<P, N>::X() const {
   BOOST_STATIC_ASSERT ( N >= 1 );
   return _values[0];
@@ -127,4 +128,4 @@ template <typename P,int N> P Vector<P, N>::T() const {
   BOOST_STATIC_ASSERT ( N >= 4);
   return _values[3];
 }
-#endif
+#endif // VECTOR_TI_H_
