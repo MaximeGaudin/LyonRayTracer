@@ -1,5 +1,6 @@
 #include <Ray.cc>
-#include <Matrix.cc>
+#include <Maths.hpp>
+#include <Color.cc>
 
 #include <iostream>
 
@@ -21,5 +22,16 @@ int main () {
 
   cout << Matrix < double, 4, 4>::Translation ( 1, 1, 1 ) << endl;
   cout << Matrix < double, 4, 4>::Scale ( 1, 1, 1 ) << endl;
+
+  Color<double> c (1.0);
+  cout << c << endl;
+
+  Color<double> c2 (1,0.5, .01);
+  cout << c2 << endl;
+
+  cout << (c + c2) << endl;
+  cout << (c - c2) << endl;
+  cout << (c * c2) << endl;
+
   return 0;
 }

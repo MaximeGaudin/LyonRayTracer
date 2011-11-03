@@ -4,4 +4,6 @@ build $obj_dir/Matrix.o: compile $src_dir/Maths/Matrix.cc | $src_dir/Maths/Matri
 build $obj_dir/Vector.o: compile $src_dir/Maths/Vector.cc | $src_dir/Maths/Vector.hpp
 build $obj_dir/Ray.o: compile $src_dir/Ray.cc | $src_dir/Ray.hpp
 
+build $obj_dir/Color.o: compile $src_dir/Graphics/Color.cc | $src_dir/Graphics/Color.hpp
+
 build lrt: link $obj_dir/Exceptions.o $obj_dir/Vector.o $obj_dir/Ray.o $src_dir/main.cc 

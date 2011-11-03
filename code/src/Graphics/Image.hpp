@@ -6,7 +6,8 @@ class Image {
     Image (unsigned int width, unsigned int heigth);
 
   public: // Methods
-    void write( unsigned int x, unsigned int y, 
+    void write( 
+        unsigned int x, unsigned int y, 
         unsigned char r, unsigned char g, unsigned char b );
 
   private:

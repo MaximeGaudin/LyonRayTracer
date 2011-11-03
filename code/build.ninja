@@ -1,4 +1,4 @@
-iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/
+iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/
 lflags=-L/opt/local/lib/ 
 flags=-g -Wall -Wextra -Werror -pedantic -ansi
 
