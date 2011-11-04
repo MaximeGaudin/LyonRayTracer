@@ -3,6 +3,7 @@
 #include <Color.cc>
 #include <Image.cc>
 #include <JPGWriter.cc>
+#include <PNGWriter.cc>
 
 #include <iostream>
 
@@ -36,10 +37,11 @@ int main () {
   cout << (c * c2) << endl;
 
   Image<double>img ( 500, 500 );
-  for ( int X = 0; X < img.W(); ++X )
-    for ( int Y = 0; Y < img.H(); ++Y ) 
-      img [X][Y] = Color<double> ( 1, 0, 0 );
+  for ( unsigned int X = 0; X < img.W(); ++X )
+    for ( unsigned int Y = 0; Y < img.H(); ++Y ) 
+      img [X][Y] = Color<double> ( 1, 0, (double)Y / (double)img.H() );
 
   JPGWriter<double> IW; IW.Save ( img, "test.jpg" );
+  PNGWriter<double> IW2; IW2.Save ( img, "test.png" );
   return 0;
 }
