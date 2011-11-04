@@ -11,7 +11,7 @@ class Ray {
   public:
     string pretty() const; 
 
-    friend ostream& operator << (ostream& oss, const Ray<P, N>& r ) const {
+    friend ostream& operator << (ostream& oss, const Ray<P, N>& r ) {
       oss << r.pretty();
       return oss;
     }

@@ -26,7 +26,8 @@ class Image {
     ~Image ();
 
   public: // Operators 
-    Color<P>* operator [] ( int i );
+    Color<P>* operator [] ( unsigned int i );
+    Color<P>* operator [] ( unsigned int i ) const;
 
   public: // Getters
     /**

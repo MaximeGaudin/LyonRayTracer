@@ -102,7 +102,7 @@ class Vector {
 
 		P& operator [] ( int i );
 
-		friend ostream &operator << (ostream& oss, const Vector<P, N >& v) const {
+		friend ostream &operator << (ostream& oss, const Vector<P, N >& v) {
       oss << v.pretty();
       return oss;
     }

@@ -21,10 +21,14 @@ Image<P>::~Image () {
 
 // Operator
 template < typename P >
-Color<P>* Image<P>::operator [] ( int i ) {
+Color<P>* Image<P>::operator [] ( unsigned int i ) {
   return pixelsData_[i];
 }
 
+template < typename P >
+Color<P>* Image<P>::operator [] ( unsigned int i ) const {
+  return pixelsData_[i];
+}
 
 // Getters 
 template < typename P >

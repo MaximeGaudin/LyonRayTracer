@@ -121,7 +121,7 @@ class Matrix {
     P* operator [] ( int i );
     Matrix < P, N, M > operator * ( const Matrix < P, N, M >& m ) const;
 
-    friend ostream &operator << (ostream& oss, const Matrix <P, N, M >& m) const {
+    friend ostream &operator << (ostream& oss, const Matrix <P, N, M >& m) {
       oss << m.pretty();
       return oss;
     }

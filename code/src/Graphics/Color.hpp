@@ -62,7 +62,7 @@ class Color {
     Color<P> operator * ( Color <P> const& C2 ) const;
     Color<P> operator * ( P const& C2 ) const;
 
-    friend ostream& operator << (ostream& oss, Color<P> const& c) const {
+    friend ostream& operator << (ostream& oss, Color<P> const& c) {
       oss << c.pretty();
       return oss;
     }

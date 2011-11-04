@@ -9,6 +9,14 @@ using namespace std;
 
 // Ctors
 template < typename P >
+Color<P>::Color ( ) 
+  : r_(0)
+  , g_(0)
+    , b_(0)
+{ }
+
+
+template < typename P >
 Color<P>::Color ( P const& v ) 
   : r_(v)
   , g_(v)

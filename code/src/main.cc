@@ -1,6 +1,8 @@
 #include <Ray.cc>
 #include <Maths.hpp>
 #include <Color.cc>
+#include <Image.cc>
+#include <PNGWriter.cc>
 
 #include <iostream>
 
@@ -33,5 +35,7 @@ int main () {
   cout << (c - c2) << endl;
   cout << (c * c2) << endl;
 
+  Image<double>img ( 50, 50 );
+  PNGWriter<double> IW; IW.Save ( img, "test.png" );
   return 0;
 }
