@@ -2,7 +2,7 @@
 #include <Maths.hpp>
 #include <Color.cc>
 #include <Image.cc>
-#include <PNGWriter.cc>
+#include <JPGWriter.cc>
 
 #include <iostream>
 
@@ -35,7 +35,11 @@ int main () {
   cout << (c - c2) << endl;
   cout << (c * c2) << endl;
 
-  Image<double>img ( 50, 50 );
-  PNGWriter<double> IW; IW.Save ( img, "test.png" );
+  Image<double>img ( 500, 500 );
+  for ( int X = 0; X < img.W(); ++X )
+    for ( int Y = 0; Y < img.H(); ++Y ) 
+      img [X][Y] = Color<double> ( 1, 0, 0 );
+
+  JPGWriter<double> IW; IW.Save ( img, "test.jpg" );
   return 0;
 }

@@ -1,12 +1,12 @@
 iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/
-lflags=-L/opt/local/lib/ -lm -lpthread -L/usr/X11R6/lib -lm -lpthread -lX11
-flags=-g -Wall -Wextra -pedantic -ansi -Wno-unused-but-set-parameter -Wno-variadic-macros
+lflags=-L/opt/local/lib/ -ljpeg 
+flags=-g -Wall -Wextra -pedantic -ansi 
 
 src_dir=src/
 test_dir=test/
 obj_dir=objs/
 
-compiler=g++
+compiler=clang++
 
 rule compile
   command = $compiler $iflags $flags -c $in -o $out

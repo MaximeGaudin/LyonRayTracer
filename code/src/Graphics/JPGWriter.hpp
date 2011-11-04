@@ -1,11 +1,11 @@
-#ifndef PNGWRITER_H_
-#define PNGWRITER_H_
+#ifndef JPGWRITER_H_
+#define JPGWRITER_H_
 #include "ImageWriter.hpp"
 
 using namespace std;
 
 template <typename P>
-class PNGWriter : public ImageWriter<P> {
+class JPGWriter : public ImageWriter<P> {
   public:
     void Save ( Image<P> const& img, string filename );
 };

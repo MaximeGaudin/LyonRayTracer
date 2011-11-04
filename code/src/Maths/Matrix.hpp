@@ -33,16 +33,11 @@ template < typename P, int N, int M >
 class Matrix {
   public:
     /**
-      * Constructeur d'une matrice.
-      *
       * @param type Si ZERO, construit une matrice nulle, si IDENTITY, 
       * construit une matrice identité
       */
     Matrix ( MATRIX_TYPE type );
 
-    /**
-      * Constructeur de copie d'une matrice.
-      */
     Matrix ( const Matrix < P, N, M >& m );
 
   public:
