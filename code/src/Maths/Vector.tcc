@@ -98,6 +98,13 @@ Vector<P, N> Vector<P, N>::operator - ( const Vector<P, N>& v2 ) const {
   return result + ( - v2 );
 }
 
+template <typename P, int N>
+Vector<P, N> Vector<P, N>::operator * ( double const& d ) const {
+  Vector<P, N> result ( *this );
+  for ( unsigned int i = 0; i < N; ++i ) result[i] *= d;
+  return result;
+}
+
 template <typename P, int N >
 P& Vector<P, N >::operator [] ( unsigned int i ) {
   if ( i >= N ) logException ( VECTOR_OUT_OF_BOUNDS_EXCEPTION_MESSAGE );

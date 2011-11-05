@@ -6,7 +6,11 @@
 
 class Geometry {
   public:
-    HitRecord getRecord ( Ray ray ) const;
+    Geometry ( ) {}
+    Geometry ( Material material ) : material_( material ) {}
+
+  public:
+    virtual HitRecord getRecord ( Ray ray ) const = 0 ;
 
   public:
     Material& Mat();

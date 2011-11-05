@@ -106,6 +106,8 @@ class Vector {
 		Vector<P, N> operator - ( ) const;
 		Vector<P, N> operator - ( const Vector<P, N>& v2 ) const;
 
+    Vector<P, N> operator * ( double const& d ) const;
+
 		P& operator [] ( unsigned int i );
 		P const& operator [] ( unsigned int i ) const;
 

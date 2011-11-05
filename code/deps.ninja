@@ -9,4 +9,6 @@ build $obj_dir/PNGWriter.o: compile $src_dir/Graphics/PNGWriter.cc | $src_dir/Gr
 
 build $obj_dir/Perspective.o: compile $src_dir/Cameras/Perspective.cc | $src_dir/Maths/Vector.hpp $src_dir/Maths/Matrix.hpp $src_dir/Cameras/Camera.hpp
 
-build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $obj_dir/Perspective.o $src_dir/main.cc 
+build $obj_dir/Sphere.o: compile $src_dir/Geometry/Sphere.cc | $obj_dir/Material.o $src_dir/HitRecord.hpp $src_dir/Ray.hpp $src_dir/Geometry/Geometry.hpp $src_dir/Geometry/Sphere.hpp
+
+build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $obj_dir/Perspective.o $obj_dir/Material.o  $obj_dir/Sphere.o $src_dir/main.cc 
