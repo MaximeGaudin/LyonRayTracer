@@ -1,7 +1,5 @@
 #ifndef MATRIX_TI_H
 #define MATRIX_TI_H
-#include "Matrix.hpp"
-
 #include <cmath>
 #include <sstream>
 

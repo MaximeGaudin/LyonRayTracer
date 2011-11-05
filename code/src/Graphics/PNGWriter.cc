@@ -1,23 +1,23 @@
 #include "PNGWriter.hpp"
-#include <Image.cc>
-
-#include <png.h>
 
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
 
+#include <Color.hpp>
+
+#include <png.h>
+
 using namespace std;
 
-template <typename P>
-void PNGWriter<P>::Save ( Image<P> const& img, string filename ) {
+void PNGWriter::Save ( Image const& img, string const& filename ) {
  png_bytep* row_pointers = (png_bytep*) malloc( sizeof(png_bytep) * img.H() );
 
   for ( unsigned int Y = 0; Y < img.H(); ++Y ) {
     row_pointers[Y] = (png_byte*) malloc( sizeof(png_byte) * 3 * img.W() );
 
     for ( unsigned int X = 0; X < img.W(); ++X ) {
-      Color<P> C (img[X][Y]); 
+      Color<double> C (img[X][Y]); 
       unsigned char R = C.R() * 255.0;
       unsigned char G = C.G() * 255.0;
       unsigned char B = C.B() * 255.0;
@@ -54,4 +54,6 @@ void PNGWriter<P>::Save ( Image<P> const& img, string filename ) {
   png_write_end(png_ptr, NULL);
 
   fclose(fp);
+
+ free(row_pointers);
 }

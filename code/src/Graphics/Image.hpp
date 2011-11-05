@@ -10,9 +10,8 @@
   */
 #ifndef IMAGE_H_
 #define IMAGE_H_
-#include <Color.cc>
+#include <Color.hpp>
 
-template < typename P >
 class Image {
   public: // Ctor && Dtor
     /**
@@ -26,22 +25,22 @@ class Image {
     ~Image ();
 
   public: // Operators 
-    Color<P>* operator [] ( unsigned int i );
-    Color<P>* operator [] ( unsigned int i ) const;
+    Color<double>* operator [] ( unsigned int i );
+    Color<double>* operator [] ( unsigned int i ) const;
 
   public: // Getters
     /**
-      * Renvoie la largeur de l'image.
+      * @return La largeur de l'image.
       */
     unsigned int W() const;
 
     /**
-      * Renvoie la hauteur de l'image.
+      * @return La hauteur de l'image.
       */
     unsigned int H() const;
 
   private:
-    Color<P>** pixelsData_;
+    Color<double>** pixelsData_;
     unsigned int w_, h_;
 };
 #endif // IMAGE_H_

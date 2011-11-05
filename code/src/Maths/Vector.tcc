@@ -1,7 +1,5 @@
 #ifndef VECTOR_TI_H_
 #define VECTOR_TI_H_
-#include "Vector.hpp"
-
 #include <exceptions.hpp>
 
 #include <cmath>

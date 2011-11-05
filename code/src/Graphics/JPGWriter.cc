@@ -1,12 +1,13 @@
 #include "JPGWriter.hpp"
-#include <Image.cc>
+
+#include <Color.hpp>
 
 #include <cstdio>
 #include <cstdlib>
+
 #include <jpeglib.h>
 
-template <typename P>
-void JPGWriter<P>::Save ( Image<P> const& img, string filename ) {
+void JPGWriter::Save ( Image const& img, string const& filename ) {
 	struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr jerr;
 
@@ -29,7 +30,7 @@ void JPGWriter<P>::Save ( Image<P> const& img, string filename ) {
 	jpeg_start_compress( &cinfo, TRUE );
   for ( unsigned int Y = 0; Y < img.H(); ++Y ) {
     for ( unsigned int X = 0; X < img.W(); ++X ) {
-      Color<P> C (img[X][Y]); 
+      Color<double> C (img[X][Y]); 
       unsigned char R = C.R() * 255.0;
       unsigned char G = C.G() * 255.0;
       unsigned char B = C.B() * 255.0;

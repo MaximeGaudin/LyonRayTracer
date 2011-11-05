@@ -124,4 +124,6 @@ class Matrix {
   private:
     P values_[N][M];
 };
+
+#include "Matrix.tcc"
 #endif // MATRIX_H

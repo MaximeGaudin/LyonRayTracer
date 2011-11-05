@@ -1,8 +1,5 @@
 #ifndef COLOR_TI_H_
 #define COLOR_TI_H_
-
-#include "Color.hpp"
-
 #include <sstream>
 
 using namespace std;
@@ -93,6 +90,21 @@ Color<P> Color<P>::operator * ( P const& C2 ) const {
   result.b_ *= C2;
 
   return result;
+}
+
+template < typename P >
+Color<P>& Color<P>::operator [] ( unsigned int i ) { 
+  switch ( i % 3 ) {
+    case ( 0 ): return r_;
+    case ( 1 ): return g_;
+    case ( 2 ): return b_;
+    default: return r_;
+  }
+}
+
+template < typename P >
+Color<P>& Color<P>::operator [] ( unsigned int i ) const { 
+  return (*this)[i];
 }
 
 // Getters

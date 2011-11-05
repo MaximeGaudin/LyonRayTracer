@@ -6,13 +6,11 @@
   */
 #ifndef IMAGE_WRITER_H
 #define IMAGE_WRITER_H
-#include <Image.cc>
-
+#include <Image.hpp>
 #include <string>
 
 using namespace std;
 
-template <typename P>
 class ImageWriter {
   public:
   /**
@@ -21,6 +19,6 @@ class ImageWriter {
     * @param img Image à écrire.
     * @param filename Nom du fichier où l'image sera écrite.
     */
-  virtual void Save ( Image<P> const& img, string filename ) = 0;
+  virtual void Save ( Image const& img, string const& filename ) = 0;
 };
 #endif // IMAGE_WRITER_H

@@ -137,4 +137,6 @@ class Vector {
 	protected:
 		P _values [N];
 };
+
+#include "Vector.tcc"
 #endif // VECTOR_H_

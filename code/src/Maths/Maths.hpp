@@ -6,5 +6,5 @@
   * Fichier agrégeant les déclarations des différents templates mathématiques.
   *
   */
-#include <Matrix.cc>
-#include <Vector.cc>
+#include <Matrix.hpp>
+#include <Vector.hpp>

@@ -6,7 +6,7 @@ src_dir=src/
 test_dir=test/
 obj_dir=objs/
 
-compiler=clang++
+compiler=g++
 
 rule compile
   command = $compiler $iflags $flags -c $in -o $out

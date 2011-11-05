@@ -62,6 +62,9 @@ class Color {
     Color<P> operator * ( Color <P> const& C2 ) const;
     Color<P> operator * ( P const& C2 ) const;
 
+    Color<P>& operator [] ( unsigned int i );
+    Color<P>& operator [] ( unsigned int i ) const;
+
     friend ostream& operator << (ostream& oss, Color<P> const& c) {
       oss << c.pretty();
       return oss;
@@ -78,4 +81,5 @@ class Color {
    P b_;
 };
 
+#include "Color.tcc"
 #endif // COLOR_H_

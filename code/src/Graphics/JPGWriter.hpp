@@ -4,9 +4,8 @@
 
 using namespace std;
 
-template <typename P>
-class JPGWriter : public ImageWriter<P> {
+class JPGWriter : public ImageWriter {
   public:
-    void Save ( Image<P> const& img, string filename );
+    void Save ( Image const& img, string const& filename );
 };
 #endif

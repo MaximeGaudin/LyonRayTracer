@@ -29,7 +29,7 @@ clean:
 	@rm -rf doc/html
 	@rm -rf doc/latex
 	@rm code/lrt
-	@rm gource.webm
 
 mrproper: clean
 	@cd code && ninja -t clean
+	@rm gource.webm
