@@ -6,6 +6,11 @@
 
 class Perspective : public Camera {
   public:
+    /**
+      * @param eye Position de la caméra.
+      * @param lookTo Endroit où la caméra pointe.
+      * @param up Vecteur indiquant où doit pointer le haut de l'image.
+      */
     Perspective ( 
         unsigned int resX, unsigned int resY,
         Vector < double, 3 > eye,
