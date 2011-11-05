@@ -1,4 +1,4 @@
-iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/
+iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/
 lflags=-L/opt/local/lib/ -ljpeg -lpng
 flags=-g -Wall -Wextra -pedantic -ansi 
 

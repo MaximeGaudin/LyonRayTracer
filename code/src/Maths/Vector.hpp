@@ -71,6 +71,12 @@ class Vector {
       */
 		Vector<P, N> Normalized () const;
 
+    /**
+      * @return Le vecteur en coordonnées homogènes.
+      * @remark Attention, les composantes d'indices > 3 seront perdues!
+      */
+    Vector<P, 4> Homogenous () const;
+
 		string pretty () const;
 
 	public:
@@ -100,7 +106,8 @@ class Vector {
 		Vector<P, N> operator - ( ) const;
 		Vector<P, N> operator - ( const Vector<P, N>& v2 ) const;
 
-		P& operator [] ( int i );
+		P& operator [] ( unsigned int i );
+		P const& operator [] ( unsigned int i ) const;
 
 		friend ostream &operator << (ostream& oss, const Vector<P, N >& v) {
       oss << v.pretty();

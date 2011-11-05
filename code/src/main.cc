@@ -16,6 +16,7 @@ int main () {
 
   Vector <double, 3> vv(1);
   cout << vv << endl;
+  cout << vv.Homogenous() << endl;
 
   Matrix < double, 4, 4 > M ( IDENTITY );
   cout << M << endl;

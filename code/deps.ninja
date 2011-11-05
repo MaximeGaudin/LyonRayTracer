@@ -6,4 +6,6 @@ build $obj_dir/Image.o: compile $src_dir/Graphics/Image.cc | $src_dir/Graphics/I
 build $obj_dir/JPGWriter.o: compile $src_dir/Graphics/JPGWriter.cc | $src_dir/Graphics/JPGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Image.o
 build $obj_dir/PNGWriter.o: compile $src_dir/Graphics/PNGWriter.cc | $src_dir/Graphics/PNGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Image.o
 
-build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $src_dir/main.cc 
+build $obj_dir/Perspective.o: compile $src_dir/Cameras/Perspective.cc | $src_dir/Maths/Vector.hpp $src_dir/Maths/Matrix.hpp $src_dir/Cameras/Camera.hpp
+
+build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $obj_dir/Perspective.o $src_dir/main.cc 

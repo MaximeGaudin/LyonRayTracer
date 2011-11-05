@@ -113,8 +113,11 @@ class Matrix {
     double Z );
 
   public:
-    P* operator [] ( int i );
+    P* operator [] ( unsigned int i );
+    const P* operator [] ( unsigned int i ) const;
+
     Matrix < P, N, M > operator * ( const Matrix < P, N, M >& m ) const;
+    Vector < P, M > operator * ( Vector < P, M > const& v ) const;
 
     friend ostream &operator << (ostream& oss, const Matrix <P, N, M >& m) {
       oss << m.pretty();

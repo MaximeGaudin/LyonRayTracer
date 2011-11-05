@@ -56,6 +56,16 @@ Vector<P, N > Vector<P, N >::Normalized () const {
 }
 
 template <typename P, int N >
+Vector<P, 4 > Vector<P, N >::Homogenous() const {
+  Vector<P, 4 > newVector;
+
+  for ( int i = 0; i < 3; ++i ) newVector[i] = _values[i]; 
+  newVector[3] = 1;
+
+  return newVector;
+}
+
+template <typename P, int N >
 string Vector<P, N >::pretty () const {
   stringstream ss;
   ss << "( ";
@@ -87,8 +97,15 @@ Vector<P, N> Vector<P, N>::operator - ( const Vector<P, N>& v2 ) const {
   Vector<P, N> result ( *this );
   return result + ( - v2 );
 }
+
 template <typename P, int N >
-P& Vector<P, N >::operator [] ( int i ) {
+P& Vector<P, N >::operator [] ( unsigned int i ) {
+  if ( i >= N ) logException ( VECTOR_OUT_OF_BOUNDS_EXCEPTION_MESSAGE );
+  return _values[i];
+}
+
+template <typename P, int N >
+P const& Vector<P, N >::operator [] ( unsigned int i ) const {
   if ( i >= N ) logException ( VECTOR_OUT_OF_BOUNDS_EXCEPTION_MESSAGE );
   return _values[i];
 }
@@ -103,7 +120,6 @@ void Vector<P, N>::checkType () const {
       || (boost::is_same <P, char>::type::value)
       );
 }
-
 
 /* Getters & setters */
 template <typename P,int N> P Vector<P, N>::X() const {

@@ -17,3 +17,27 @@
 676 1217 objs/JPGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/JPGWriter.cc -o objs/JPGWriter.o
 676 1225 objs/PNGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/PNGWriter.cc -o objs/PNGWriter.o
 1225 1974 lrt g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -L/opt/local/lib/ -ljpeg -lpng -g -Wall -Wextra -pedantic -ansi  objs/Exceptions.o objs/Ray.o objs/Image.o objs/JPGWriter.o objs/PNGWriter.o src/main.cc -o lrt
+1 3257 objs/Exceptions.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/exceptions.cc -o objs/Exceptions.o
+1 3258 objs/Image.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/Image.cc -o objs/Image.o
+3258 3853 objs/JPGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/JPGWriter.cc -o objs/JPGWriter.o
+3258 4202 objs/PNGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/PNGWriter.cc -o objs/PNGWriter.o
+1 5048 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+0 1962 lrt g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -L/opt/local/lib/ -ljpeg -lpng -g -Wall -Wextra -pedantic -ansi  objs/Exceptions.o objs/Ray.o objs/Image.o objs/JPGWriter.o objs/PNGWriter.o src/main.cc -o lrt
+0 702 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+702 1505 lrt g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -L/opt/local/lib/ -ljpeg -lpng -g -Wall -Wextra -pedantic -ansi  objs/Exceptions.o objs/Ray.o objs/Image.o objs/JPGWriter.o objs/PNGWriter.o src/main.cc -o lrt
+0 750 objs/Exceptions.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/exceptions.cc -o objs/Exceptions.o
+2 751 objs/Image.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/Image.cc -o objs/Image.o
+1 1045 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+751 1385 objs/JPGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/JPGWriter.cc -o objs/JPGWriter.o
+1045 1681 objs/PNGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/PNGWriter.cc -o objs/PNGWriter.o
+1 781 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+0 812 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+0 1008 objs/Perspective.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Cameras/Perspective.cc -o objs/Perspective.o
+9 612 objs/Image.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/Image.cc -o objs/Image.o
+0 644 objs/Exceptions.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/exceptions.cc -o objs/Exceptions.o
+645 1249 objs/PNGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/PNGWriter.cc -o objs/PNGWriter.o
+613 1310 objs/JPGWriter.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Graphics/JPGWriter.cc -o objs/JPGWriter.o
+7 1402 objs/Ray.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Ray.cc -o objs/Ray.o
+1249 2139 objs/Perspective.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Cameras/Perspective.cc -o objs/Perspective.o
+0 882 objs/Perspective.o g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -g -Wall -Wextra -pedantic -ansi  -c src/Cameras/Perspective.cc -o objs/Perspective.o
+882 1725 lrt g++ -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -L/opt/local/lib/ -ljpeg -lpng -g -Wall -Wextra -pedantic -ansi  objs/Exceptions.o objs/Ray.o objs/Image.o objs/JPGWriter.o objs/PNGWriter.o objs/Perspective.o src/main.cc -o lrt

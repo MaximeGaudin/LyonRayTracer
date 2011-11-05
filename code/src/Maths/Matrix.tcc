@@ -23,8 +23,24 @@ Matrix < P, N, M >::Matrix ( const Matrix < P, N, M >& m ) {
 
 // Operators
 template < typename P, int N, int M >
-P* Matrix < P, N, M >::operator [] ( int i ) {
+P* Matrix < P, N, M >::operator [] ( unsigned int i ) {
   return values_[i];
+}
+
+template < typename P, int N, int M >
+const P* Matrix < P, N, M >::operator [] ( unsigned int i ) const {
+  return values_[i];
+}
+
+template < typename P, int N, int M >
+Vector < P, M > Matrix < P, N, M >::operator * ( Vector < P, M > const& v ) const {
+  Vector < P, M > result;
+
+  for ( unsigned int i = 0; i < M; ++i ) 
+    for ( unsigned int k = 0; k < M; ++k ) 
+      result[i] += (*this)[i][k] * v[i];
+
+  return result;
 }
 
 template < typename P, int N, int M >
@@ -114,14 +130,14 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Scale (
   return result;
 }
 // Pretty printing
-string generateSpaces ( int n ) {
+static string generateSpaces ( int n ) {
   string spaces;
 
   while ( n-- ) spaces.append( " " );
   return spaces;
 }
 
-unsigned int getNumberSize ( double N ) {
+static unsigned int getNumberSize ( double N ) {
   stringstream ss;
   ss << N;
 
