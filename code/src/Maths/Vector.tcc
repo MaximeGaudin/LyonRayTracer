@@ -10,6 +10,15 @@ typedef Vector<double, 2> Vector2d;
 typedef Vector<double, 3> Vector3d;
 typedef Vector<double, 4> Vector4d;
 
+const Vector3d V3d_Zero     ( 0.0, 0.0, 0.0 );
+const Vector3d V3d_One      ( 1.0, 1.0, 1.0 );
+const Vector3d V3d_Up       ( 0.0, 1.0, 0.0 );
+const Vector3d V3d_Down     ( 0.0, -1.0, 0.0 );
+const Vector3d V3d_Left     ( -1.0, 0.0, 0.0 );
+const Vector3d V3d_Right    ( 1.0, 0.0, 0.0 );
+const Vector3d V3d_Forward  ( 0.0, 0.0, 1.0 );
+const Vector3d V3d_Backward ( 0.0, 0.0, -1.0 );
+
 /* Ctor */
 template <typename P, int N>
 Vector<P, N>::Vector () {
@@ -22,6 +31,15 @@ template <typename P, int N>
 Vector<P, N>::Vector (P v) {
   checkType();
   for( int i = 0; i < N; ++i) _values[i] = v;
+}
+
+
+template <typename P, int N>
+Vector <P, N>::Vector ( P const& X, P const& Y, P const& Z ) {
+  BOOST_STATIC_ASSERT ( N >= 3 );
+  _values[0] = X;
+  _values[1] = Y;
+  _values[2] = Z;
 }
 
 template <typename P, int N>
@@ -74,6 +92,17 @@ string Vector<P, N >::pretty () const {
 
   return ss.str();
 }
+
+// Static methods
+template <typename P, int N>
+P Vector<P,N>::Dot ( const Vector<P, N>& v1, const Vector<P, N>& v2 ) {
+  double dotProduct = 0;
+  for(unsigned int i = 0; i < N; ++i )
+    dotProduct += v1[i] * v2[i];
+
+  return dotProduct;
+}
+
 
 /* Operators */
 template <typename P, int N>

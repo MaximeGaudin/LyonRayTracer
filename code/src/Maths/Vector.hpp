@@ -48,6 +48,8 @@ class Vector {
       */
 		Vector (const Vector<P, N>& v);
 
+    Vector ( P const& X, P const& Y, P const& Z );
+
 	public:
     /**
       * Renvoie la taille du vecteur calculé comme la racine du produit

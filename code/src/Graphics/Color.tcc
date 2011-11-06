@@ -4,6 +4,11 @@
 
 using namespace std;
 
+typedef Color<double> Color_d;
+
+const Color_d Color_d_WHITE ( 1.0 );
+const Color_d Color_d_BLACK ( 0.0 );
+
 // Ctors
 template < typename P >
 Color<P>::Color ( ) 
@@ -32,6 +37,20 @@ Color<P>::Color ( Color<P> const& C ) {
   r_ = C.r_;
   g_ = C.g_;
   b_ = C.b_;
+}
+
+// Worker methods
+template < typename P >
+Color<P> Color<P>::Clamped () const {
+  Color<P> result ( *this );
+  P max = ( r_ > g_ ) ? r_ : g_;
+  max = ( max > b_ ) ? max : g_;
+
+  result.r_ /= max;
+  result.g_ /= max;
+  result.b_ /= max;
+
+  return result;
 }
 
 // Operators
@@ -92,6 +111,15 @@ Color<P> Color<P>::operator * ( P const& C2 ) const {
   return result;
 }
 
+
+template < typename P >
+Color<P>& Color<P>::operator += ( Color<P> const& C2 ) {
+  r_ += C2.r_;
+  g_ += C2.g_;
+  b_ += C2.b_;
+
+  return *this;
+}
 template < typename P >
 Color<P>& Color<P>::operator [] ( unsigned int i ) { 
   switch ( i % 3 ) {

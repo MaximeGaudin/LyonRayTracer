@@ -14,18 +14,60 @@
 #include <JPGWriter.hpp>
 #include <PNGWriter.hpp>
 
+#include <Light.hpp>
+#include <Directional.hpp>
+
 #include <iostream>
+#include <limits>
+
+#include <boost/foreach.hpp>
+#define feach BOOST_FOREACH
 
 using namespace std;
 
-void Render ( Image& result, Camera* camera, vector < Geometry* > geometries ) {
+HitRecord getClosestHit ( Ray ray, vector<Geometry*> const& geometries ) {
+  HitRecord closestHit; closestHit.hit = false;
+  double closestT = numeric_limits<double>::infinity();
+
+  for ( unsigned int i = 0; i < geometries.size(); ++i ) {
+    HitRecord currentRecord = geometries[i]->getRecord ( ray );
+    if ( currentRecord.hit && currentRecord.t < closestT ) closestHit = currentRecord;
+  }
+
+  return closestHit;
+}
+
+Color_d computeDirectLighting (
+    HitRecord record,
+    Camera* camera, 
+    vector < Geometry* > const& geometries, 
+    vector < Light* > const& lights ) {
+  Color_d result ( Color_d_BLACK );
+
+  feach ( Light* l, lights )
+    result += l->getContribution ( camera, geometries, record );
+
+  return result;
+}
+
+void Render ( 
+    Image& result, 
+    Camera* camera, 
+    vector < Geometry* > const& geometries, 
+    vector < Light* > const& lights ) {
   vector<Ray>::const_iterator it = camera->begin();
-  
+
   for ( unsigned int Y = 0; Y < result.H(); ++Y ) {
     for ( unsigned int X = 0; X < result.W(); ++X ){
+      HitRecord record = getClosestHit ( *it, geometries );
 
-      for ( unsigned int i = 0; i < geometries.size(); ++i )
-        if(geometries[i]->getRecord ( *it ).hit ) result[X][Y] = Color<double>(1,0,0);
+      if ( record.hit ) {
+        Color_d directLighting = 
+          computeDirectLighting ( record, camera, geometries, lights );
+
+         result[X][Y] = (directLighting * record.hitGeometry->material().diffuse).Clamped();
+         // result[X][Y] = Color_d_WHITE;
+      }
 
       ++it;
     }
@@ -36,15 +78,16 @@ void Render ( Image& result, Camera* camera, vector < Geometry* > geometries ) {
 int main () {
   Image result ( 800, 600 );
 
-  Vector<double,3> eye; eye[2] = 40;
-  Camera* camera = new Perspective ( result.W(), result.H(),  eye, Vector<double,3>(), Vector<double, 3>() );
-
-  Geometry* sph = new Sphere ( Vector<double,3>(), 10 );
-  
   vector<Geometry*> geometries;
-  geometries.push_back( sph );
+  vector<Light*> lights;
 
-  Render ( result, camera, geometries );
+  Camera* camera = new Perspective ( result.W(), result.H(),  
+      V3d_Backward * 40, V3d_Zero, V3d_Zero );
+
+  geometries.push_back( new Sphere ( V3d_Zero, 20, Material ( Color_d_WHITE ) ) );
+  lights.push_back ( new Directional ( V3d_Forward ) );
+
+  Render ( result, camera, geometries, lights );
 
   JPGWriter IW; 
   IW.Save ( result, "result.jpg" );

@@ -11,4 +11,6 @@ build $obj_dir/Perspective.o: compile $src_dir/Cameras/Perspective.cc | $src_dir
 
 build $obj_dir/Sphere.o: compile $src_dir/Geometry/Sphere.cc | $obj_dir/Material.o $src_dir/HitRecord.hpp $src_dir/Ray.hpp $src_dir/Geometry/Geometry.hpp $src_dir/Geometry/Sphere.hpp
 
-build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $obj_dir/Perspective.o $obj_dir/Material.o  $obj_dir/Sphere.o $src_dir/main.cc 
+build $obj_dir/Directional.o: compile $src_dir/Lights/Directional.cc | $src_dir/Lights/Light.hpp 
+
+build lrt: link $obj_dir/Exceptions.o $obj_dir/Ray.o $obj_dir/Image.o $obj_dir/JPGWriter.o $obj_dir/PNGWriter.o $obj_dir/Perspective.o $obj_dir/Material.o  $obj_dir/Sphere.o $obj_dir/Directional.o $src_dir/main.cc 

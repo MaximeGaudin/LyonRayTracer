@@ -13,7 +13,7 @@ class Geometry {
     virtual HitRecord getRecord ( Ray ray ) const = 0 ;
 
   public:
-    Material& Mat();
+    Material material() const { return material_; }
 
   protected:
     Material material_;

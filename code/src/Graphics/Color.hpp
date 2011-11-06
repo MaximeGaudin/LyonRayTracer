@@ -44,13 +44,12 @@ class Color {
       */
     Color ( P const& R, P const& G, P const &B );
 
-    /**
-      * Constructeur de copie.
-      */
     Color ( Color<P> const& C );
 
   public:
     string pretty () const;
+
+    Color<P> Clamped () const;
 
   public:
     Color<P> operator + ( Color <P> const& C2 ) const;
@@ -61,6 +60,8 @@ class Color {
 
     Color<P> operator * ( Color <P> const& C2 ) const;
     Color<P> operator * ( P const& C2 ) const;
+
+    Color<P>& operator += ( Color<P> const& C2 );
 
     Color<P>& operator [] ( unsigned int i );
     Color<P>& operator [] ( unsigned int i ) const;

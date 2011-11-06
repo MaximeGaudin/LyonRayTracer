@@ -10,15 +10,15 @@ class Material {
     Material ( Color<double> ambient, Color<double> diffuse, Color<double> specular );
 
   public:
-    Color<double> ambient_;
-    double opacity_;
-    double IOR_;
-    double reflexivity_;
+    Color<double> ambient;
+    double opacity;
+    double IOR;
+    double reflexivity;
 
-    Color<double> diffuse_;
-    double diffuseIntensity_;
+    Color<double> diffuse;
+    double diffuseIntensity;
 
-    Color<double> specular_;
-    double specularPower_;
+    Color<double> specular;
+    double specularPower;
 };
 #endif // MATERIAL_H_

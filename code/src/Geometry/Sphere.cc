@@ -46,10 +46,10 @@ HitRecord Sphere::getRecord( Ray ray ) const {
   }
 
   HitRecord record;
-  record.hit = (t != -1);
+  record.hit = (t > 0);
   record.t = t;
   record.position = ray.from() + ray.direction() * t;
-  record.normal = record.position - centre_ * (1.0 / radius_);
+  record.normal = (record.position - centre_) * (1.0 / radius_);
   record.hitGeometry = this;
 
   return record;
