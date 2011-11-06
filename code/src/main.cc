@@ -1,21 +1,9 @@
 #include <Maths.hpp>
-
-#include <Ray.hpp>
-#include <Color.hpp>
-
-#include <Camera.hpp>
-#include <Perspective.hpp>
-
-#include <HitRecord.hpp>
-#include <Geometry.hpp>
-#include <Sphere.hpp>
-
-#include <Image.hpp>
-#include <JPGWriter.hpp>
-#include <PNGWriter.hpp>
-
-#include <Light.hpp>
-#include <Directional.hpp>
+#include <Basics.hpp>
+#include <Cameras.hpp>
+#include <Graphics.hpp>
+#include <Lights.hpp>
+#include <Geometries.hpp>
 
 #include <iostream>
 #include <limits>
