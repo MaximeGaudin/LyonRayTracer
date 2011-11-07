@@ -102,6 +102,32 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Rotation (
     * Matrix < P, 4, 4 >::RotationZ ( Zangle );
 }
 
+
+template < typename P, int N, int M >
+Matrix < P, 4, 4 > Matrix < P, N, M>::RotationFromAxis (
+    Vector< P, 3 > const& axis,
+    double angle ) {
+    Matrix < P, 4, 4 > result ( IDENTITY );
+
+    Vector< P, 3 > u = axis.Normalized();
+    double ux = u[0]; double uy = u[1]; double uz = u[2];
+    double cost = cos(angle); double sint = sin(angle);
+
+    result[0][0] = cost + ux * ux * ( 1 - cost );
+    result[1][0] = uy * ux * ( 1 - cost ) + uz * sint;
+    result[2][0] = uz * ux * ( 1 - cost ) - uy * sint;
+
+    result[0][1] = ux * uy * ( 1 - cost ) - uz * sint;
+    result[1][1] = cost + uy * uy * ( 1 - cost );
+    result[2][1] = uz * uy * ( 1 - cost ) + ux * sint;
+
+    result[0][2] = ux * uz * ( 1 - cost ) + uy * sint;
+    result[1][2] = uy * uz * ( 1 - cost ) - ux * sint;
+    result[2][2] = cost + uz * uz * ( 1 - cost );
+
+    return result;
+}
+
 template < typename P, int N, int M >
 Matrix < P, 4, 4 > Matrix < P, N, M >::Translation ( 
     double X,

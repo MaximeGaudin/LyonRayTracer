@@ -79,6 +79,8 @@ class Vector {
       */
     Vector<P, 4> Homogenous () const;
 
+    Vector<P, N> Project ( Vector<P, N> const& v2 ) const;
+
 		string pretty () const;
 
 	public:
@@ -103,6 +105,8 @@ class Vector {
       ( const Vector<P, 3>& v1, const Vector<P, 3>& v2 );
 
 	public:
+    bool operator == ( Vector<P,N> const& v2 ) const;
+
 		Vector<P, N> operator + ( const Vector<P, N>& v2 ) const;
 
 		Vector<P, N> operator - ( ) const;

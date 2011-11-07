@@ -19,7 +19,10 @@ HitRecord getClosestHit ( Ray ray, vector<Geometry*> const& geometries ) {
 
   for ( unsigned int i = 0; i < geometries.size(); ++i ) {
     HitRecord currentRecord = geometries[i]->getRecord ( ray );
-    if ( currentRecord.hit && currentRecord.t < closestT ) closestHit = currentRecord;
+    if ( currentRecord.hit && currentRecord.t < closestT ) {
+      closestT = currentRecord.t;
+      closestHit = currentRecord;
+    }
   }
 
   return closestHit;
@@ -48,13 +51,17 @@ void Render (
   for ( unsigned int Y = 0; Y < result.H(); ++Y ) {
     for ( unsigned int X = 0; X < result.W(); ++X ){
       HitRecord record = getClosestHit ( *it, geometries );
+      cout << *it << endl;
 
       if ( record.hit ) {
+        cout << "HIT!" << endl;
         Color_d directLighting = 
           computeDirectLighting ( record, camera, geometries, lights );
 
-         result[X][Y] = (directLighting * record.hitGeometry->material().diffuse).Clamped();
-         // result[X][Y] = Color_d_WHITE;
+          Color_d finalColor = record.hitGeometry->material().diffuse;
+          finalColor *= directLighting;
+
+          result[X][Y] = finalColor.Clamped();
       }
 
       ++it;
@@ -72,10 +79,17 @@ int main () {
   Camera* camera = new Perspective ( result.W(), result.H(),  
       V3d_Backward * 40, V3d_Zero, V3d_Zero );
 
-  geometries.push_back( new Sphere ( V3d_Zero, 20, Material ( Color_d_WHITE ) ) );
-  lights.push_back ( new Directional ( V3d_Forward ) );
+  geometries.push_back( new Sphere ( V3d_Zero, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
+  geometries.push_back( new Sphere ( V3d_Zero, 3, Material ( Color_d(0.6) ) ) );
 
-  Render ( result, camera, geometries, lights );
+  lights.push_back ( new Directional (V3d_Forward, Material ( Color_d_WHITE ) ) );
+
+  Ray r ( V3d_Backward * 40, V3d_Forward );
+  cout << "Ray :" << r << endl;
+  cout << "S1 :" << geometries[0]->getRecord( r ) << endl;
+  cout << "S2 :" << geometries[1]->getRecord( r ) << endl;
+  cout << "Closest :" << getClosestHit ( r, geometries ) << endl;
+  // Render ( result, camera, geometries, lights );
 
   JPGWriter IW; 
   IW.Save ( result, "result.jpg" );

@@ -8,25 +8,26 @@ typedef Color<double> Color_d;
 
 const Color_d Color_d_WHITE ( 1.0 );
 const Color_d Color_d_BLACK ( 0.0 );
+const Color_d Color_d_BLUE ( 0.0, 0.0, 1.0 );
 
 // Ctors
-template < typename P >
-Color<P>::Color ( ) 
+  template < typename P >
+  Color<P>::Color ( ) 
   : r_(0)
   , g_(0)
     , b_(0)
 { }
 
 
-template < typename P >
-Color<P>::Color ( P const& v ) 
+  template < typename P >
+  Color<P>::Color ( P const& v ) 
   : r_(v)
   , g_(v)
     , b_(v)
 { }
 
-template < typename P >
-Color<P>::Color ( P const& R, P const& G, P const &B )
+  template < typename P >
+  Color<P>::Color ( P const& R, P const& G, P const &B )
   : r_(R)
   , g_(G)
     , b_(B)
@@ -43,12 +44,24 @@ Color<P>::Color ( Color<P> const& C ) {
 template < typename P >
 Color<P> Color<P>::Clamped () const {
   Color<P> result ( *this );
+
+  P min = ( r_ < g_ ) ? r_ : g_;
+  min = ( min < b_ ) ? min : g_;
+
+  if ( min < 0 ) {
+    result.r_ += -min;
+    result.g_ += -min;
+    result.b_ += -min;
+  }
+
   P max = ( r_ > g_ ) ? r_ : g_;
   max = ( max > b_ ) ? max : g_;
 
-  result.r_ /= max;
-  result.g_ /= max;
-  result.b_ /= max;
+  if ( max > 1 ) {
+    result.r_ /= max;
+    result.g_ /= max;
+    result.b_ /= max;
+  }
 
   return result;
 }
@@ -120,6 +133,25 @@ Color<P>& Color<P>::operator += ( Color<P> const& C2 ) {
 
   return *this;
 }
+
+template < typename P >
+Color<P>& Color<P>::operator *= ( Color<P> const& C2 ) {
+  r_ *= C2.r_;
+  g_ *= C2.g_;
+  b_ *= C2.b_;
+
+  return *this;
+}
+
+template < typename P >
+Color<P>& Color<P>::operator *= ( P const& C2 ) {
+  r_ *= C2;
+  g_ *= C2;
+  b_ *= C2;
+
+  return *this;
+}
+
 template < typename P >
 Color<P>& Color<P>::operator [] ( unsigned int i ) { 
   switch ( i % 3 ) {

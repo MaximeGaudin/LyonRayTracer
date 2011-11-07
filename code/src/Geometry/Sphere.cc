@@ -1,9 +1,9 @@
 #include "Sphere.hpp"
 
-Sphere::Sphere ( Vector < double, 3 > centre, double radius )
+  Sphere::Sphere ( Vector < double, 3 > centre, double radius )
   : Geometry ( )
- , centre_(centre)
-, radius_(radius) 
+  , centre_(centre)
+    , radius_(radius) 
 {}
 
   Sphere::Sphere ( Vector < double, 3 > centre, double radius, Material material )
@@ -13,26 +13,14 @@ Sphere::Sphere ( Vector < double, 3 > centre, double radius )
 {}
 
 HitRecord Sphere::getRecord( Ray ray ) const {
-  double dX = ray.direction()[0];
-  double dY = ray.direction()[1];
-  double dZ = ray.direction()[2];
+  Vector3d d = ray.direction();
+  Vector3d p0 = ray.from();
+  Vector3d pc = centre_;
 
-  double fX = ray.from()[0];
-  double fY = ray.from()[1];
-  double fZ = ray.from()[2];
+  double A = Vector3d::Dot ( d, d );
+  double B = 2 * Vector3d::Dot ( d, p0 - pc );
+  double C = Vector3d::Dot ( p0 - pc, p0 - pc ) - radius_ * radius_;
 
-  double A = dX * dX
-    + dY * dY
-    + dZ * dZ;
-
-  double B = 2 * (dX * (fX - centre_[0]))
-    + 2 * (dY * (fY - centre_[1]))
-    + 2 * (dZ * (fZ - centre_[2]));
-
-  double C = (fX - centre_[0]) * (fX - centre_[0])
-    + (fY - centre_[1]) * (fY - centre_[1])
-    + (fZ - centre_[2]) * (fZ - centre_[2])
-    - radius_ * radius_;
   double Delta = B * B - 4 * (A * C);
 
   double t = -1;
@@ -47,10 +35,12 @@ HitRecord Sphere::getRecord( Ray ray ) const {
 
   HitRecord record;
   record.hit = (t > 0);
-  record.t = t;
-  record.position = ray.from() + ray.direction() * t;
-  record.normal = (record.position - centre_) * (1.0 / radius_);
   record.hitGeometry = this;
+  if ( t > 0 ) {
+    record.t = t;
+    record.position = ray.from() + ray.direction() * t;
+    record.normal = (record.position - centre_) * (1.0 / radius_);
+  }
 
   return record;
 }

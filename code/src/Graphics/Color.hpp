@@ -63,6 +63,9 @@ class Color {
 
     Color<P>& operator += ( Color<P> const& C2 );
 
+    Color<P>& operator *= ( Color<P> const& C2 ) ;
+    Color<P>& operator *= ( P const& C2 ) ;
+
     Color<P>& operator [] ( unsigned int i );
     Color<P>& operator [] ( unsigned int i ) const;
 

@@ -12,12 +12,17 @@ typedef Vector<double, 4> Vector4d;
 
 const Vector3d V3d_Zero     ( 0.0, 0.0, 0.0 );
 const Vector3d V3d_One      ( 1.0, 1.0, 1.0 );
+
+const Vector3d V3d_X        ( 1.0, 0.0, 0.0 );
+const Vector3d V3d_Y        ( 0.0, 1.0, 0.0 );
+const Vector3d V3d_Z        ( 0.0, 0.0, 1.0 );
+
 const Vector3d V3d_Up       ( 0.0, 1.0, 0.0 );
 const Vector3d V3d_Down     ( 0.0, -1.0, 0.0 );
 const Vector3d V3d_Left     ( -1.0, 0.0, 0.0 );
 const Vector3d V3d_Right    ( 1.0, 0.0, 0.0 );
-const Vector3d V3d_Forward  ( 0.0, 0.0, 1.0 );
-const Vector3d V3d_Backward ( 0.0, 0.0, -1.0 );
+const Vector3d V3d_Forward  ( 0.0, 0.0, -1.0 );
+const Vector3d V3d_Backward ( 0.0, 0.0, 1.0 );
 
 /* Ctor */
 template <typename P, int N>
@@ -84,6 +89,14 @@ Vector<P, 4 > Vector<P, N >::Homogenous() const {
 }
 
 template <typename P, int N >
+Vector<P, N> Vector<P,N>::Project ( Vector<P, N> const& v2 ) const {
+  Vector<P, N> newVector ( *this );
+
+  for ( int i = 0; i < N; ++i ) newVector[i] *= v2[i]; 
+  return newVector;
+}
+
+template <typename P, int N >
 string Vector<P, N >::pretty () const {
   stringstream ss;
   ss << "( ";
@@ -103,8 +116,28 @@ P Vector<P,N>::Dot ( const Vector<P, N>& v1, const Vector<P, N>& v2 ) {
   return dotProduct;
 }
 
+template <typename P, int N>
+Vector<P,3> Vector<P,N>::Cross ( const Vector<P, 3>& v1, const Vector<P, 3>& v2 ) {
+  Vector<P,3> result;
+
+  result [0] = v1[1]*v2[2] - v1[2]*v2[1];
+  result [1] = v1[2]*v2[0] - v1[0]*v2[2];
+  result [2] = v1[0]*v2[1] - v1[1]*v2[0];
+
+  return result;
+}
 
 /* Operators */
+
+template <typename P, int N>
+bool Vector<P,N>::operator == ( Vector<P,N> const& v2 ) const
+{
+  for ( unsigned int i = 0; i < N; ++i ) 
+    if ( _values[i] != v2[i] ) return false;
+
+  return true;
+}
+
 template <typename P, int N>
 Vector<P, N> Vector<P, N>::operator + ( const Vector<P, N>& v2 ) const {
   Vector <P, N> result ( v2 );

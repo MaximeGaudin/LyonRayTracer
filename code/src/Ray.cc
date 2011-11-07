@@ -16,7 +16,8 @@ Ray::Ray ( Vector<double, 3> from, Vector<double, 3> direction, bool Normalize)
 
 string Ray::pretty () const {
  	stringstream ss;
-	ss << "{ From = " << from_ << "; To = " << to_ << "; Direction = " << (to_ - from_) << " }"; 
+	ss << "{ From = " << from_ << "; To = " << to_ 
+    << "; Direction = " << (to_ - from_).Normalized() << " }"; 
 
   return ss.str();
 }

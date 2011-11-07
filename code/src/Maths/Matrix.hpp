@@ -87,6 +87,10 @@ class Matrix {
            double Yangle, 
            double Zangle );
 
+    static Matrix < P, 4, 4 > RotationFromAxis (
+        Vector< P, 3 > const& axis,
+        double angle );
+
     /**
       * Construit la matrice homogène de translation.
       *

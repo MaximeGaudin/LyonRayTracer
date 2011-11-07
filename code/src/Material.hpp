@@ -6,8 +6,8 @@ class Material {
   public:
     Material ( );
 
-    Material ( Color<double> ambient );
-    Material ( Color<double> ambient, Color<double> diffuse, Color<double> specular );
+    Material ( Color<double> diffuse );
+    Material ( Color<double> diffuse, Color<double> ambient, Color<double> specular );
 
   public:
     Color<double> ambient;
