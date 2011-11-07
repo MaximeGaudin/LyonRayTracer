@@ -4,8 +4,8 @@ build $obj_dir/Ray.o: compile $src_dir/Ray.cc | $src_dir/Ray.hpp $src_dir/Maths/
 build $obj_dir/Material.o: compile $src_dir/Material.cc | $src_dir/Material.hpp $src_dir/Graphics/Color.hpp
 
 build $obj_dir/Image.o: compile $src_dir/Graphics/Image.cc | $src_dir/Graphics/Image.hpp $src_dir/Graphics/Color.hpp
-build $obj_dir/JPGWriter.o: compile $src_dir/Graphics/JPGWriter.cc | $src_dir/Graphics/JPGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Image.o
-build $obj_dir/PNGWriter.o: compile $src_dir/Graphics/PNGWriter.cc | $src_dir/Graphics/PNGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Image.o
+build $obj_dir/JPGWriter.o: compile $src_dir/Graphics/JPGWriter.cc | $src_dir/Graphics/JPGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Exceptions.o $obj_dir/Image.o
+build $obj_dir/PNGWriter.o: compile $src_dir/Graphics/PNGWriter.cc | $src_dir/Graphics/PNGWriter.hpp $src_dir/Graphics/ImageWriter.hpp $obj_dir/Exceptions.o $obj_dir/Image.o
 
 build $obj_dir/Perspective.o: compile $src_dir/Cameras/Perspective.cc | $src_dir/Maths/Vector.hpp $src_dir/Maths/Matrix.hpp $src_dir/Cameras/Camera.hpp
 

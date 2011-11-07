@@ -8,3 +8,9 @@ void logException ( string message ) {
 	cerr << "CRITICAL EXCEPTION : " << message << endl;
 	exit(1);
 }
+
+void logException ( string launcher, string message ) {
+  cerr << launcher; 
+  logException ( message );
+	exit(1);
+}

@@ -8,6 +8,8 @@
 
 #include <png.h>
 
+#include <exceptions.hpp>
+
 using namespace std;
 
 void PNGWriter::Save ( Image const& img, string const& filename ) {
@@ -29,28 +31,28 @@ void PNGWriter::Save ( Image const& img, string const& filename ) {
   }
 
   FILE *fp = fopen(filename.c_str(), "wb");
-  if (!fp) cout << "Error" << endl;
+  if (!fp) logException ( "PNGwriter", "Can't open file." );
 
   png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-  if (!png_ptr) cout << "Error" << endl;
+  if (!png_ptr) logException("PNGWriter", "Export failed.");
 
   png_infop info_ptr = png_create_info_struct(png_ptr);
-  if (!info_ptr) cout << "Error" << endl;
+  if (!info_ptr) logException("PNGWriter", "Export failed.");
 
-  if (setjmp(png_jmpbuf(png_ptr))) cout << "Error" << endl;
+  if (setjmp(png_jmpbuf(png_ptr))) logException("PNGWriter", "Export failed.");
   png_init_io(png_ptr, fp);
 
-  if (setjmp(png_jmpbuf(png_ptr))) cout << "Error" << endl;
+  if (setjmp(png_jmpbuf(png_ptr))) logException("PNGWriter", "Export failed.");
 
   png_set_IHDR(png_ptr, info_ptr, img.W(), img.H(),
       8, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
       PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
   png_write_info(png_ptr, info_ptr);
 
-  if (setjmp(png_jmpbuf(png_ptr))) cout << "Error" << endl;
+  if (setjmp(png_jmpbuf(png_ptr))) logException("PNGWriter", "Export failed.");
   png_write_image(png_ptr, row_pointers);
 
-  if (setjmp(png_jmpbuf(png_ptr))) cout << "Error" << endl;
+  if (setjmp(png_jmpbuf(png_ptr))) logException("PNGWriter", "Export failed.");
   png_write_end(png_ptr, NULL);
 
   fclose(fp);

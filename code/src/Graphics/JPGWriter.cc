@@ -7,6 +7,8 @@
 
 #include <jpeglib.h>
 
+#include <exceptions.hpp>
+
 void JPGWriter::Save ( Image const& img, string const& filename ) {
 	struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr jerr;
@@ -15,7 +17,9 @@ void JPGWriter::Save ( Image const& img, string const& filename ) {
 	
 	JSAMPROW row_pointer[1];
 	FILE *outfile = fopen( filename.c_str(), "wb" );
-	if ( !outfile ) { return ; }
+	if ( !outfile ) {
+    logException ( "JPGWriter", "Can't open file." );
+  }
 
 	cinfo.err = jpeg_std_error( &jerr );
 	jpeg_create_compress(&cinfo);
