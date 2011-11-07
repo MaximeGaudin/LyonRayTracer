@@ -22,13 +22,16 @@ Color<double> Directional::getContribution (
     vector<Geometry*> geometries,
     HitRecord record ) const {
 
+  int i = 1;
   feach (Geometry* g, geometries) {
-    HitRecord currentRecord = g->getRecord ( Ray ( record.position + record.normal * 0.001, -direction_ ) );
-   // cout << currentRecord << endl;
+    Ray newRay ( record.position + record.normal * 0.0001, - direction_, true );
+    HitRecord currentRecord = g->getRecord ( newRay );
 
-    if ( currentRecord.hit ) return Color<double>(0.0); // Ombre
+    if ( currentRecord.hit ) {
+      return material_.ambient; // Ombre
+    }
   }
 
-  double phongCoef = abs(Vector3d::Dot ( record.normal, direction_ ) );
+  double phongCoef = Vector3d::Dot ( record.normal, - direction_ );
   return material_.diffuse * phongCoef;
 }

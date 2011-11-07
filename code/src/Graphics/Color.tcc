@@ -45,14 +45,9 @@ template < typename P >
 Color<P> Color<P>::Clamped () const {
   Color<P> result ( *this );
 
-  P min = ( r_ < g_ ) ? r_ : g_;
-  min = ( min < b_ ) ? min : g_;
-
-  if ( min < 0 ) {
-    result.r_ += -min;
-    result.g_ += -min;
-    result.b_ += -min;
-  }
+  result.r_ = ( result.r_ < 0 ) ? 0 : result.r_;
+  result.g_ = ( result.g_ < 0 ) ? 0 : result.g_;
+  result.b_ = ( result.b_ < 0 ) ? 0 : result.b_;
 
   P max = ( r_ > g_ ) ? r_ : g_;
   max = ( max > b_ ) ? max : g_;
