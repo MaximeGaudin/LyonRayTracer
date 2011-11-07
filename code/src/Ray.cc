@@ -6,10 +6,10 @@
 
 using namespace std;
 
-Ray::Ray ( Vector<double, 3> from, Vector<double, 3> to )
+Ray::Ray ( Vector3d from, Vector3d to )
 : from_(from), to_(to) { }
 
-Ray::Ray ( Vector<double, 3> from, Vector<double, 3> direction, bool Normalize) 
+Ray::Ray ( Vector3d from, Vector3d direction, bool Normalize) 
 : from_(from) {
   direction_ = ((Normalize) ? direction.Normalized() : direction);
   to_ = direction_ + from;
@@ -23,7 +23,7 @@ string Ray::pretty () const {
   return ss.str();
 }
 
-Vector<double, 3> Ray::from() const { return from_; }
-Vector<double, 3> Ray::to() const { return to_; }
-Vector<double, 3> Ray::direction() const { return direction_; }
+Vector3d Ray::from() const { return from_; }
+Vector3d Ray::to() const { return to_; }
+Vector3d Ray::direction() const { return direction_; }
 #endif // RAY_TI_H

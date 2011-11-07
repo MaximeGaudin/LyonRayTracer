@@ -7,8 +7,8 @@
 
 class Directional : public Light {
   public:
-    Directional ( Vector<double, 3> direction );
-    Directional ( Vector<double, 3> direction, Material material );
+    Directional ( Vector3d direction );
+    Directional ( Vector3d direction, Material material );
 
   public:
     Color<double> getContribution ( 
@@ -19,6 +19,6 @@ class Directional : public Light {
     Vector3d getDirection() { return direction_; }
 
   protected:
-    Vector<double, 3> direction_;
+    Vector3d direction_;
 };
 #endif // DIRECTIONAL_H_

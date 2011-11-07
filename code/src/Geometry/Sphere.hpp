@@ -2,15 +2,27 @@
 #define SPHERE_H_
 #include <Geometry.hpp>
 
+#include <Vector.hpp>
+
 class Sphere : public Geometry {
   public:
-    Sphere ( Vector < double, 3 > centre, double radius );
-    Sphere ( Vector < double, 3 > centre, double radius, Material material );
+    /**
+      * @param centre Position du centre de la sphère.
+      * @param radius Rayon de la sphère.
+      */
+    Sphere ( Vector3d centre, double radius );
+
+    /**
+      * @param centre Position du centre de la sphère.
+      * @param radius Rayon de la sphère.
+      * @param material Matériaux de la sphère.
+      */
+    Sphere ( Vector3d centre, double radius, Material material );
 
     HitRecord getRecord ( Ray ray ) const;
 
   protected:
-    Vector < double, 3 > centre_;
+    Vector3d centre_;
     double radius_;
 };
 #endif // SPHERE_H_

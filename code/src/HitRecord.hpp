@@ -24,13 +24,13 @@ struct HitRecord {
     * Indique la normal à l'endroit de l'intersection.
     * @remark Valable si seulement une géométrie à été touchée.
     */
-  Vector < double, 3 > normal;
+  Vector3d normal;
 
   /**
     * Indique l'endroit de l'intersection.
     * @remark Valable si seulement une géométrie à été touchée.
     */
-  Vector < double, 3 > position;
+  Vector3d position;
 
   /**
     * Indique l'endroit de l'intersection.

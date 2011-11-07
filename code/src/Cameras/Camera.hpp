@@ -18,6 +18,9 @@ using namespace std;
 
 class Camera {
   public:
+    typedef std::vector<Ray>::const_iterator RayIterator;
+
+  public:
     /**
       * @param resX Nombre de pixel à remplir sur l'axe horizontal de l'image 
       * finale.
@@ -26,8 +29,8 @@ class Camera {
       */
     Camera ( unsigned int resX, unsigned int resY ) : resX_(resX), resY_(resY) {}
 
-    vector<Ray>::const_iterator begin() { return rayCollection_.begin(); }
-    vector<Ray>::const_iterator end() { return rayCollection_.end(); }
+    RayIterator begin() { return rayCollection_.begin(); }
+    RayIterator end() { return rayCollection_.end(); }
 
   protected:
       /** 
@@ -45,6 +48,6 @@ class Camera {
     /**
       * Collection des rayons à lancer pour calculer l'image.
       */
-    vector <Ray> rayCollection_;
+    vector<Ray> rayCollection_;
 };
 #endif // CAMERA_H_

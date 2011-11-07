@@ -4,14 +4,14 @@
 #define feach BOOST_FOREACH
 
 // Ctors
-  Directional::Directional ( Vector<double, 3> direction ) 
+  Directional::Directional ( Vector3d direction ) 
   : Light ()
     , direction_(direction) 
 {
   material_.diffuse = Color_d_WHITE;
 }
 
-  Directional::Directional ( Vector<double, 3> direction, Material material ) 
+  Directional::Directional ( Vector3d direction, Material material ) 
   : Light( material)
     , direction_(direction)
 {}

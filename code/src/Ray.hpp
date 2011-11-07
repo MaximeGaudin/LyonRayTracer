@@ -4,8 +4,8 @@
 
 class Ray {
   public: // Ctor & Dtor
-    Ray ( Vector<double, 3> from, Vector<double, 3> to );
-    Ray ( Vector<double, 3> from, Vector<double, 3> direction, bool Normalize );
+    Ray ( Vector3d from, Vector3d to );
+    Ray ( Vector3d from, Vector3d direction, bool Normalize );
 
   public:
     string pretty() const; 
@@ -16,13 +16,13 @@ class Ray {
     }
 
   public: // Getters & Setters
-    Vector<double, 3> from() const;
-    Vector<double, 3> to() const;
-    Vector<double, 3> direction() const;
+    Vector3d from() const;
+    Vector3d to() const;
+    Vector3d direction() const;
 
   private: 
-    Vector<double, 3> from_;
-    Vector<double, 3> to_;
-    Vector<double, 3> direction_;
+    Vector3d from_;
+    Vector3d to_;
+    Vector3d direction_;
 };
 #endif
