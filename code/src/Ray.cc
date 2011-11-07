@@ -11,7 +11,8 @@ Ray::Ray ( Vector<double, 3> from, Vector<double, 3> to )
 
 Ray::Ray ( Vector<double, 3> from, Vector<double, 3> direction, bool Normalize) 
 : from_(from) {
-  to_ = ((Normalize) ? direction.Normalized() : direction) + from;
+  direction_ = ((Normalize) ? direction.Normalized() : direction);
+  to_ = direction_ + from;
 }
 
 string Ray::pretty () const {
@@ -24,5 +25,5 @@ string Ray::pretty () const {
 
 Vector<double, 3> Ray::from() const { return from_; }
 Vector<double, 3> Ray::to() const { return to_; }
-Vector<double, 3> Ray::direction() const { return (to_ - from_).Normalized(); }
+Vector<double, 3> Ray::direction() const { return direction_; }
 #endif // RAY_TI_H

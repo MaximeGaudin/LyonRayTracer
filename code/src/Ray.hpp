@@ -23,5 +23,6 @@ class Ray {
   private: 
     Vector<double, 3> from_;
     Vector<double, 3> to_;
+    Vector<double, 3> direction_;
 };
 #endif

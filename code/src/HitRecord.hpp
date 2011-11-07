@@ -8,13 +8,34 @@ using namespace std;
 class Geometry;
 
 struct HitRecord {
+  /**
+    * Indique si le rayon à touché une géométrie
+    */
   bool hit;
 
+  /**
+    * Indique à quelle proportion du rayon la géométrie à été
+    * touchée.
+    * @remark Valable si seulement une géométrie à été touchée.
+    */
   double t;
 
+  /**
+    * Indique la normal à l'endroit de l'intersection.
+    * @remark Valable si seulement une géométrie à été touchée.
+    */
   Vector < double, 3 > normal;
+
+  /**
+    * Indique l'endroit de l'intersection.
+    * @remark Valable si seulement une géométrie à été touchée.
+    */
   Vector < double, 3 > position;
 
+  /**
+    * Indique l'endroit de l'intersection.
+    * @remark Valable si seulement une géométrie à été touchée.
+    */
   Geometry const * hitGeometry;
 
   friend ostream& operator << (ostream& oss, HitRecord const& m) {
