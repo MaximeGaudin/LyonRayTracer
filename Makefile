@@ -26,10 +26,11 @@ doc/latex/refman.pdf:
 
 clean:
 	@echo "Cleaning..."
-	@rm -rf doc/html
-	@rm -rf doc/latex
-	@rm code/lrt
+	-@rm -rf doc/html
+	-@rm -rf doc/latex
+	-@rm code/lrt
+	-@rm code/result.png
 
 mrproper: clean
 	@cd code && ninja -t clean
-	@rm gource.webm
+	-@rm gource.webm
