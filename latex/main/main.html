@@ -44,7 +44,7 @@ Description</A>
 </H1>
 <SPAN  CLASS="textsl">LyonRayTracer</SPAN>, en hommage à ma ville natale : Lyon, est un ray tracer
 qui, en plus de constituer mon projet de dernière année d'ingénierie, est
-développé dans les optiques :
+développé dans l'optique :
 
 <UL>
 <LI>d'être facile à prendre en main
@@ -52,25 +52,33 @@ développé dans les optiques :
 <LI>d'être un vrai projet, <SPAN  CLASS="textsl">i.e.</SPAN> documenté, mis à jour
   régulièrement, doté d'une page web, <SPAN  CLASS="textsl">etc.</SPAN>
 </LI>
-<LI>de pouvoir servir de base à des fonctionnalités plus poussées comme le
-  photon mapping, l'illumination globale, les caméras avec gestion de la
-  profondeur de champs, un moteur d'animation ou encore la gestion des ombres
-  douces.
-</LI>
 </UL>
 
 <P>
-Bien qu'encore au début de son développement, LRT possèdes les fonctionnalités
-suivantes :
+LRT est de plus développé dans une optique de base pour un moteur plus
+compliqué. En effet, développer un moteur de ray tracing demande beaucoup de
+code boilerplate et notamment au niveau des vecteurs et des matrices.
+Ce code est déjà fait ici et il ne vous reste plus qu'à jouer et qui sait,
+<SPAN  CLASS="textbf">contribuer au projet !</SPAN>
+
+<P>
+
+<H2><A NAME="SECTION00021000000000000000">
+Fonctionnalités</A>
+</H2>
+Bien qu'encore au début de son développement, LRT possèdes tout de même
+quelques fonctionnalités :
 
 <UL>
 <LI>Lumière : Lumière directionnelle.
 </LI>
 <LI>Caméra : Caméra avec perspective.
 </LI>
-<LI>Géométrie : Sphère.
+<LI>Géométrie : Sphère, Triangle, Mesh (agrégat de triangles).
 </LI>
-<LI>Exporteurs : Possibilité d'exporter les images au format PNG et JPG.
+<LI>Importeurs : Format 3ds
+</LI>
+<LI>Exporteurs : Format PNG et JPG.
 </LI>
 </UL>
 
@@ -84,11 +92,15 @@ La compilation du projet nécessite :
 </LI>
 <LI>make
 </LI>
+<LI>ninja (qui sera remplacé par make à terme)
+</LI>
 <LI>boost
 </LI>
 <LI>libjpeg
 </LI>
 <LI>libpng
+</LI>
+<LI>lib3ds
 </LI>
 </OL>
 

@@ -1,22 +1,26 @@
 \section{Description}
 \textsl{LyonRayTracer}, en hommage à ma ville natale : Lyon, est un ray tracer
 qui, en plus de constituer mon projet de dernière année d'ingénierie, est
-développé dans les optiques :
+développé dans l'optique :
 \begin{itemize}
   \item d'être facile à prendre en main
   \item d'être un vrai projet, \textsl{i.e.} documenté, mis à jour
   régulièrement, doté d'une page web, \textsl{etc.}
-  \item de pouvoir servir de base à des fonctionnalités plus poussées comme le
-  photon mapping, l'illumination globale, les caméras avec gestion de la
-  profondeur de champs, un moteur d'animation ou encore la gestion des ombres
-  douces.
 \end{itemize}
 
-Bien qu'encore au début de son développement, LRT possèdes les fonctionnalités
-suivantes :
+LRT est de plus développé dans une optique de base pour un moteur plus
+compliqué. En effet, développer un moteur de ray tracing demande beaucoup de
+code \tsxtsl{boilerplate} et notamment au niveau des vecteurs et des matrices.
+Ce code est déjà fait ici et il ne vous reste plus qu'à jouer et qui sait,
+\textbf{contribuer au projet !}
+
+\subsection{Fonctionnalités}
+Bien qu'encore au début de son développement, LRT possèdes tout de même
+quelques fonctionnalités :
 \begin{itemize}
   \item Lumière : Lumière directionnelle.
   \item Caméra : Caméra avec perspective.
-  \item Géométrie : Sphère.
-  \item Exporteurs : Possibilité d'exporter les images au format PNG et JPG.
+  \item Géométrie : Sphère, Triangle, Mesh (agrégat de triangles).
+  \item Importeurs : Format 3ds
+  \item Exporteurs : Format PNG et JPG.
 \end{itemize}
