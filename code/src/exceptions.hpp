@@ -7,4 +7,6 @@ using namespace std;
 
 void logException ( string message );
 void logException ( string launcher, string message );
+
+void logInformation ( string launcher, string message );
 #endif

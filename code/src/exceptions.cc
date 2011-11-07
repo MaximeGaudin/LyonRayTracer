@@ -14,3 +14,7 @@ void logException ( string launcher, string message ) {
   logException ( message );
 	exit(1);
 }
+
+void logInformation ( string launcher, string message ) {
+  cout << "[" << launcher << "] - " << message << endl;
+}

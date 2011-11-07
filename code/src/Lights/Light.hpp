@@ -11,8 +11,8 @@ using namespace std;
 
 class Light {
   public:
-    Light () {};
-    Light (Material material) : material_(material) {};
+    Light () {}
+    Light (Material material) : material_(material) {}
 
   public:
     virtual Color<double> getContribution ( 

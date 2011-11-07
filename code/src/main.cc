@@ -4,6 +4,7 @@
 #include <Graphics.hpp>
 #include <Lights.hpp>
 #include <Geometries.hpp>
+#include <MeshImporters.hpp>
 
 #include <iostream>
 #include <limits>
@@ -49,6 +50,11 @@ void Render (
   vector<Ray>::const_iterator it = camera->begin();
 
   for ( unsigned int Y = 0; Y < result.H(); ++Y ) {
+
+    int percentage = ((double)Y / (double)result.H()) * 100;
+    if ( percentage % 10 == 0 ) cout << percentage << "%";
+    else { cout << "."; cout.flush(); }
+
     for ( unsigned int X = 0; X < result.W(); ++X ){
       HitRecord record = getClosestHit ( *it, geometries );
 
@@ -69,17 +75,21 @@ void Render (
 }
 
 int main () {
-  Image result ( 800, 600 );
+  Image result ( 600, 600);
 
   vector<Geometry*> geometries;
   vector<Light*> lights;
 
   Camera* camera = new Perspective ( result.W(), result.H(),  
-      V3d_Backward * 30, V3d_Zero, V3d_Zero );
+      V3d_Backward * 140, V3d_Zero, V3d_Zero );
 
+  MeshImporter3ds MI;
+  //Mesh m = MI.build ( "models/teapot.3ds" );
+  Mesh m = MI.build ( "models/cube.3ds" );
+  geometries.push_back ( &m );
   //geometries.push_back( new Sphere ( V3d_Zero, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
-  geometries.push_back( new Sphere ( V3d_Backward * 10 + V3d_Right * 10 , 2, Material ( Color_d(0.6) ) ) );
-  geometries.push_back( new Triangle ( V3d_Right * 10, V3d_Left* 10 , V3d_Down* 10, Material ( Color_d(0.6) ) ) );
+  //geometries.push_back( new Sphere ( V3d_Backward * 10 + V3d_Right * 10 , 2, Material ( Color_d(0.6) ) ) );
+  //geometries.push_back( new Triangle ( V3d_Right * 10, V3d_Left* 10 , V3d_Down* 10, Material ( Color_d(0.6) ) ) );
 
   lights.push_back ( new Directional ( V3d_Forward , Material ( Color_d_WHITE ) ) );
 
