@@ -77,10 +77,11 @@ int main () {
   Camera* camera = new Perspective ( result.W(), result.H(),  
       V3d_Backward * 30, V3d_Zero, V3d_Zero );
 
-  geometries.push_back( new Sphere ( V3d_Zero, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
+  //geometries.push_back( new Sphere ( V3d_Zero, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
   geometries.push_back( new Sphere ( V3d_Backward * 10 + V3d_Right * 10 , 2, Material ( Color_d(0.6) ) ) );
+  geometries.push_back( new Triangle ( V3d_Right * 10, V3d_Left* 10 , V3d_Down* 10, Material ( Color_d(0.6) ) ) );
 
-  lights.push_back ( new Directional ( V3d_Forward + V3d_Left, Material ( Color_d_WHITE ) ) );
+  lights.push_back ( new Directional ( V3d_Forward , Material ( Color_d_WHITE ) ) );
 
   Render ( result, camera, geometries, lights );
 

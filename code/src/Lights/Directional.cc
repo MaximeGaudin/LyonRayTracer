@@ -32,6 +32,6 @@ Color<double> Directional::getContribution (
     }
   }
 
-  double phongCoef = Vector3d::Dot ( record.normal, - direction_ );
+  double phongCoef = Vector3d::Dot ( record.normal, -direction_ ) / (record.normal.Length() * direction_.Length());
   return material_.diffuse * phongCoef;
 }
