@@ -24,20 +24,16 @@ template < typename P >
 class Color {
   public: // Ctors 
     /**
-      * Constructeur par défaut. Toutes les composantes de la couleur sont à 0.
+      * Toutes les composantes de la couleur sont à 0.
       */
     Color ();
 
     /**
-      * Construit une couleur dont toutes les composantes sont mise à v.
-      *
       * @param v Valeur de toutes les composantes.
       */
     Color ( P const& v );
 
     /** 
-      * Construit une couleur en fonction des composantes passées en paramètre.
-      *
       * @param R Valeur de la composante rouge.
       * @param G Valeur de la composante Verte.
       * @param B Valeur de la composante bleue.
@@ -60,6 +56,9 @@ class Color {
 
     Color<P> operator * ( Color <P> const& C2 ) const;
     Color<P> operator * ( P const& C2 ) const;
+
+    friend Color<P> operator * ( P const& v, Color<P> const& C1 )
+    { return C1 * v; }
 
     Color<P>& operator += ( Color<P> const& C2 );
 

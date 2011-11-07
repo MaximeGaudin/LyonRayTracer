@@ -113,6 +113,11 @@ class Vector {
 		Vector<P, N> operator - ( const Vector<P, N>& v2 ) const;
 
     Vector<P, N> operator * ( double const& d ) const;
+    friend Vector<P, N> operator * ( double const& d, Vector<P, N> const& v ) 
+    { return v * d; }
+
+    Vector<P, N> operator / ( double const& d ) const 
+    { return (*this) * 1.0/d; }
 
 		P& operator [] ( unsigned int i );
 		P const& operator [] ( unsigned int i ) const;
