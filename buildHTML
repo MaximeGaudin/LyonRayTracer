@@ -1,0 +1,6 @@
+#! /bin/sh
+cd latex 
+latex2html \
+-title "DigitalGuru/LyonRayTracer @ GitHub" \
+-split 0 -local_icons -no_navigation -html_version 4.0,latin1,unicode main.tex
+cp -r main/* ../
