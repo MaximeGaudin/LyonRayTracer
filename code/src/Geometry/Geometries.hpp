@@ -2,4 +2,4 @@
 #include <Sphere.hpp>
 #include <Triangle.hpp>
 #include <Mesh.hpp>
-#include <Plan.hpp>
+#include <Plane.hpp>

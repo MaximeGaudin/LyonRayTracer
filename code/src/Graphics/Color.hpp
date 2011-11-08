@@ -57,6 +57,8 @@ class Color {
     Color<P> operator * ( Color <P> const& C2 ) const;
     Color<P> operator * ( P const& C2 ) const;
 
+    Color<P> operator / ( P const& C2 ) const;
+
     friend Color<P> operator * ( P const& v, Color<P> const& C1 )
     { return C1 * v; }
 

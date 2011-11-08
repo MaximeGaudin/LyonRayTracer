@@ -12,42 +12,11 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 #include <Ray.hpp>
-#include <vector>
 
 using namespace std;
 
 class Camera {
   public:
-    typedef std::vector<Ray>::const_iterator RayIterator;
-
-  public:
-    /**
-      * @param resX Nombre de pixel à remplir sur l'axe horizontal de l'image 
-      * finale.
-      * @param resY Nombre de pixel à remplir sur l'axe vertical de l'image 
-      * finale.
-      */
-    Camera ( unsigned int resX, unsigned int resY ) : resX_(resX), resY_(resY) {}
-
-    RayIterator begin() { return rayCollection_.begin(); }
-    RayIterator end() { return rayCollection_.end(); }
-
-  protected:
-      /** 
-        * resX Nombre de pixel à remplir sur l'axe horizontal de l'image 
-        * finale.
-        */
-    unsigned int resX_;
-
-      /** 
-        * resX Nombre de pixel à remplir sur l'axe horizontal de l'image 
-        * finale.
-        */
-    unsigned int resY_;
-
-    /**
-      * Collection des rayons à lancer pour calculer l'image.
-      */
-    vector<Ray> rayCollection_;
+    virtual Ray getRay ( double u, double v ) const = 0;
 };
 #endif // CAMERA_H_

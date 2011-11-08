@@ -13,7 +13,7 @@
 {}
 
 HitRecord Sphere::getRecord( Ray ray ) const {
-  Vector3d d = ray.direction();
+  Vector3d d = ray.direction().Normalized();
   Vector3d p0 = ray.from();
   Vector3d pc = centre_;
 

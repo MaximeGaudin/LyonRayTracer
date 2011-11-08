@@ -106,6 +106,7 @@ class Vector {
 
 	public:
     bool operator == ( Vector<P,N> const& v2 ) const;
+    bool operator != ( Vector<P,N> const& v2 ) const;
 
 		Vector<P, N> operator + ( const Vector<P, N>& v2 ) const;
 

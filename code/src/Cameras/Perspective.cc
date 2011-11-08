@@ -9,59 +9,28 @@
 using namespace std;
 
 // Ctors
-Perspective::Perspective ( 
-    unsigned int resX, unsigned int resY,
-    Vector < double, 3 > eye,
-    Vector < double, 3 > lookTo,
-    Vector < double, 3 > up ) 
-: Camera ( resX, resY )
+
+Perspective::Perspective (
+    double focaleDistance,
+    Vector3d eye,
+    Vector3d lookAt,
+    Vector3d up )
+  : focaleDistance_(focaleDistance_)
+  , eye_(eye)
+  , lookAt_(lookAt)
+    , up_(up)
 {
-  initialize ( eye, (lookTo - eye).Normalized(), up );
+  IPNormal_ = (lookAt_ - eye).Normalized();
+  if ( IPNormal_ != V3d_Up ) IPXAxis_ = Vector3d::Cross ( IPNormal_, V3d_Up ).Normalized(); 
+  else IPXAxis_ = Vector3d::Cross ( IPNormal_, V3d_Left ).Normalized(); 
+
+  IPYAxis_ = Vector3d::Cross ( IPNormal_, IPXAxis_ ).Normalized(); 
+  IPZAxis_ = Vector3d::Cross ( IPXAxis_, IPYAxis_ ).Normalized(); 
+
 }
 
-// Worker methods
-void Perspective::initialize (  
-    Vector < double, 3 > eye,
-    Vector < double, 3 > direction,
-    Vector < double, 3 > up )
-{
-  const double SCREEN_DISTANCE = 1.0;
-  const double FoVX = M_PI / 2.0;
-  const double FoVY = FoVX * ( (double)resY_ / (double)resX_ );
-
-  const double UpperLeftCornerX = SCREEN_DISTANCE * tan ( FoVX / 2.0 );
-  const double UpperLeftCornerY = SCREEN_DISTANCE * tan ( FoVY / 2.0 );
-  const double LowerRightCornerX = -UpperLeftCornerX;
-  const double LowerRightCornerY = -UpperLeftCornerY;
-
-  const double StepX = (LowerRightCornerX - UpperLeftCornerX) / resX_;
-  const double StepY = (LowerRightCornerY - UpperLeftCornerY) / resY_;
-
-  Vector3d rotationAxix ( Vector3d::Cross ( V3d_Z, direction ) );
-  double rotationAngle = acos ( Vector3d::Dot ( V3d_Z, direction ) / direction.Length() );
-
-  // Si les vecteurs sont collinéaires
-  if ( abs ( Vector3d::Dot ( V3d_Z, direction ) / direction.Length() ) == 1 ) {
-    // On prend n'importe quel autre pour le produit vectoriel
-    rotationAxix  = Vector3d::Cross ( V3d_Z, V3d_X );
-    rotationAngle = M_PI; 
-  }
-
-  const Matrix < double, 4, 4 > transformation = 
-    Matrix<double,4,4>::RotationFromAxis ( rotationAxix, rotationAngle );
-
-  for ( unsigned int Y = 0; Y < resY_; ++Y ) {
-    for ( unsigned int X = 0; X < resX_; ++X ) {
-      Vector3d position;
-      position[0] = UpperLeftCornerX + X * StepX;
-      position[1] = UpperLeftCornerY + Y * StepY;
-      position[2] = SCREEN_DISTANCE;
-
-      Vector < double, 4 > currentRayDir (  transformation * position.Homogenous() );
-      Vector < double, 3 > truncatedVector; 
-      for ( unsigned int i = 0; i < 3; ++i ) truncatedVector[i] = currentRayDir[i];
-
-      rayCollection_.push_back ( Ray ( eye, truncatedVector, true ) );
-    }
-  }
+Ray Perspective::getRay ( double u, double v ) const { 
+  return Ray ( eye_, IPNormal_ * focaleDistance_
+      + IPXAxis_ * (u - 0.5)
+      + IPYAxis_ * (v - 0.5), true );
 }

@@ -4,10 +4,10 @@
 
 #include <Vector.hpp>
 
-class Plan : public Geometry {
+class Plane : public Geometry {
   public:
-    Plan ( Vector3d point, Vector3d normal );
-    Plan ( Vector3d point, Vector3d normal, Material material );
+    Plane ( Vector3d point, Vector3d normal );
+    Plane ( Vector3d point, Vector3d normal, Material material );
 
     HitRecord getRecord ( Ray ray ) const;
 

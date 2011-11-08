@@ -109,6 +109,7 @@ Color<P> Color<P>::operator * ( Color <P> const& C2 ) const {
 
   return result;
 }
+
 template < typename P >
 Color<P> Color<P>::operator * ( P const& C2 ) const {
   Color<P> result ( *this );
@@ -119,6 +120,10 @@ Color<P> Color<P>::operator * ( P const& C2 ) const {
   return result;
 }
 
+template < typename P >
+Color<P> Color<P>::operator / ( P const& C2 ) const {
+  return *this * (1.0 / C2);
+}
 
 template < typename P >
 Color<P>& Color<P>::operator += ( Color<P> const& C2 ) {

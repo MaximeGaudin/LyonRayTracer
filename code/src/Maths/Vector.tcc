@@ -139,6 +139,12 @@ bool Vector<P,N>::operator == ( Vector<P,N> const& v2 ) const
 }
 
 template <typename P, int N>
+bool Vector<P,N>::operator != ( Vector<P,N> const& v2 ) const
+{
+  return !(*this == v2);
+}
+
+template <typename P, int N>
 Vector<P, N> Vector<P, N>::operator + ( const Vector<P, N>& v2 ) const {
   Vector <P, N> result ( v2 );
   Vector <P, N> copy ( *this );

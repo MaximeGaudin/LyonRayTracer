@@ -1,19 +1,19 @@
-#include <Plan.hpp>
+#include <Plane.hpp>
 
-  Plan::Plan ( Vector3d point, Vector3d normal ) 
+  Plane::Plane ( Vector3d point, Vector3d normal ) 
   : Geometry()
   , point_(point)
     , normal_(normal.Normalized())
 {}
 
-  Plan::Plan ( Vector3d point, Vector3d normal, Material material )
+  Plane::Plane ( Vector3d point, Vector3d normal, Material material )
   : Geometry(material)
   , point_(point)
     , normal_(normal.Normalized())
 {}
 
 
-HitRecord Plan::getRecord ( Ray ray ) const {
+HitRecord Plane::getRecord ( Ray ray ) const {
   HitRecord record;
   record.hit = false;
   record.hitGeometry = this;
