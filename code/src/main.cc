@@ -29,15 +29,11 @@ HitRecord getClosestHit ( Ray ray, vector<Geometry*> const& geometries ) {
   return closestHit;
 }
 
-Color_d computeDirectLighting (
-    HitRecord record,
-    Camera* camera, 
-    vector < Geometry* > const& geometries, 
-    vector < Light* > const& lights ) {
+Color_d computeDirectLighting ( Scene& scene, HitRecord record ) {
   Color_d result ( Color_d_BLACK );
 
-  feach ( Light* l, lights )
-    result += l->getContribution ( camera, geometries, record );
+  feach ( Light* l, scene.lights )
+    result += l->getContribution ( scene.camera, scene.geometries, record );
 
   return result;
 }
@@ -48,62 +44,58 @@ void displayProgress ( unsigned int Y, unsigned int H ) {
     else { cout << "."; cout.flush(); }
 }
 
-void Render ( 
-    Image& result, 
-    Camera* camera, 
-    vector < Geometry* > const& geometries, 
-    vector < Light* > const& lights ) {
-  vector<Ray>::const_iterator it = camera->begin();
+void Render ( Scene& scene ) {
+  vector<Ray>::const_iterator it = scene.camera->begin();
 
-  for ( unsigned int Y = 0; Y < result.H(); ++Y ) {
-
-    displayProgress ( Y, result.H() );
-
-    for ( unsigned int X = 0; X < result.W(); ++X ){
-      HitRecord record = getClosestHit ( *it, geometries );
+  for ( unsigned int Y = 0; Y < scene.frame->H(); ++Y ) {
+    displayProgress ( Y, scene.frame->H() );
+    for ( unsigned int X = 0; X < scene.frame->W(); ++X ){
+      HitRecord record = getClosestHit ( *it, scene.geometries );
 
       if ( record.hit ) {
         Color_d directLighting = 
-          computeDirectLighting ( record, camera, geometries, lights );
+          computeDirectLighting ( scene, record ); 
 
           Color_d finalColor = record.hitGeometry->material().diffuse;
-          finalColor *= directLighting;
+          // finalColor *= directLighting;
 
-          result[X][Y] = finalColor.Clamped();
+          (*scene.frame)[X][Y] = finalColor.Clamped();
       }
 
       ++it;
     }
   } 
 
+  cout << endl;
+}
+
+Scene buildScene0 () {
+  Scene scene0;
+
+  scene0.frame = new Image ( 800, 600 );
+
+  scene0.camera = new Perspective ( scene0.frame->W(), scene0.frame->H(),  
+      (V3d_Up + V3d_Backward) * 50, V3d_Zero, V3d_Zero );
+
+  scene0.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE ) ) );
+
+  scene0.geometries.push_back ( new Sphere ( V3d_Zero, 20, Material ( Color_d ( 0, 0, 0.7 ) ) ) );
+//  scene0.geometries.push_back ( new Plan ( V3d_Up, V3d_Down * 30, Material ( Color_d ( 0.3, 0.3, 0.3 ) ) ) );
+
+  return scene0;
 }
 
 int main () {
-  Image result ( 800, 800);
-
-  vector<Geometry*> geometries;
-  vector<Light*> lights;
-
-  Camera* camera = new Perspective ( result.W(), result.H(),  
-      V3d_Backward * 50, V3d_Zero, V3d_Zero );
-
-  MeshImporter3ds MI;
-   Mesh m = MI.build ( "models/teapot.3ds" );
-  // Mesh m = MI.build ( "models/cube.3ds" );
-//  geometries.push_back ( &m );
-  //geometries.push_back( new Sphere ( V3d_Zero, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
-  //geometries.push_back( new Sphere ( V3d_Backward * 10 + V3d_Right * 10 , 2, Material ( Color_d(0.6) ) ) );
-  //geometries.push_back( new Triangle ( V3d_Right * 10, V3d_Left* 10 , V3d_Down* 10, Material ( Color_d(0.6) ) ) );
-
-  geometries.push_back( new Sphere ( V3d_Up * 10, 10, Material ( Color_d(0.5, 0, 0 ) ) ) );
-  geometries.push_back ( new Plan ( V3d_Forward * 20, 0.1 * V3d_Backward + V3d_Up, Material ( Color_d ( 0, 0, 1 ) ) ) );
-
-  lights.push_back ( new Directional ( V3d_Forward , Material ( Color_d_WHITE ) ) );
-  lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE ) ) );
-
-  Render ( result, camera, geometries, lights );
-
   PNGWriter IW; 
-  IW.Save ( result, "result.png" );
+
+  logInformation ( "Core", "Scene building..." );
+  Scene scene = buildScene0();
+
+  logInformation ( "Core", "Rendering..." );
+  Render ( scene ); 
+
+  logInformation ( "Core", "Saving..." );
+  IW.Save ( *scene.frame, "result.png" );
+
   return 0;
 }
