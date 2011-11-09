@@ -6,6 +6,8 @@
 #include <sstream>
 #include <boost/static_assert.hpp>
 
+#include <iostream>
+using namespace std;
 typedef Vector<double, 2> Vector2d;
 typedef Vector<double, 3> Vector3d;
 typedef Vector<double, 4> Vector4d;
@@ -170,6 +172,7 @@ template <typename P, int N>
 Vector<P, N> Vector<P, N>::operator * ( double const& d ) const {
   Vector<P, N> result ( *this );
   for ( unsigned int i = 0; i < N; ++i ) result[i] *= d;
+
   return result;
 }
 

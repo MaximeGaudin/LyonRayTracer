@@ -4,6 +4,6 @@
 
 class MeshImporter {
   public:
-    virtual Mesh build ( string const& filename ) = 0;
+    virtual Mesh* build ( string const& filename ) = 0;
 };
 #endif // MESH_IMPORTER_H_

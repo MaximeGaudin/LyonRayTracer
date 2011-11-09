@@ -38,7 +38,7 @@ Color_d computeDirectLighting ( Scene const& scene, HitRecord record ) {
   feach ( Light* l, scene.lights )
     result += l->getContribution ( scene.camera, scene.geometries, record );
 
-  return result;
+  return result.Clamped();
 }
 
 void displayProgress ( unsigned int Y, unsigned int H ) {
@@ -55,13 +55,15 @@ Color_d getPixel ( Scene const& scene, Ray const& ray,
 
   if ( record.hit ) {
     Color_d directColor = record.hitGeometry->material().diffuse;
-    //Color_d reflectedColor = getPixel ( scene, getReflectedRay ( ray, record.normal ) );
-    //Color_d refractedColor = getPixel ( scene, getRefractedRay ( ray, record.normal ) );
+    //Color_d reflectedColor = getPixel ( scene, getReflectedRay ( ray, record.normal ), recursionsLevel + 1 );
+    //Color_d refractedColor = getPixel ( scene, getRefractedRay ( ray, record.normal ), recursionsLevel + 1 );
 
     Color_d directLighting = computeDirectLighting ( scene, record );
+   // cout << "Hit" << endl;
 
-    //return scene.ambient + directLighting * ( directColor + reflectedColor + refractedColor );
-    return scene.ambient + directLighting * ( directColor );
+    // return scene.ambient + directLighting * ( directColor + reflectedColor + refractedColor );
+      return scene.ambient + directLighting * ( directColor );
+     //return scene.ambient + directColor;
   } else return scene.ambient;
 }
 
@@ -73,12 +75,15 @@ void Render ( Scene& scene, Sampler* sampler ) {
         vector<Ray> rays = sampler->getRays ( scene, X, Y );
         vector<Ray>::const_iterator it = rays.begin();
 
+        //cout << *it << endl;
         Color_d pixel = Color_d_BLACK;
 
         while ( it != rays.end() ) { 
           pixel += getPixel ( scene, *it, 0 ) / rays.size();
           ++it;
         }
+
+        (*scene.frame)[X][Y] = pixel;
     }
   } 
 
@@ -92,7 +97,7 @@ Scene buildScene0 () {
   scene0.frame = new Image ( 800, 600 );
 
   scene0.camera = new Perspective ( 1.0,
-      V3d_Backward * 50, V3d_Zero, V3d_Zero );
+      V3d_Backward * 100, V3d_Zero, V3d_Zero );
 
   scene0.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE ) ) );
 
@@ -100,19 +105,20 @@ Scene buildScene0 () {
 
   return scene0;
 }
-/*
+
 // Ok
 Scene buildScene1 () {
   Scene scene;
 
-  scene.frame = new Image ( 800, 600 );
+  scene.frame = new Image ( 600, 600 );
 
-  scene.camera = new Perspective ( scene.frame->W(), scene.frame->H(),  
-      V3d_Backward * 50, V3d_Zero, V3d_Zero );
+  scene.camera = new Perspective ( 1.0,
+      V3d_Backward * 100, V3d_Zero, V3d_Zero );
 
   scene.lights.push_back ( new Directional ( V3d_Forward, Material ( Color_d_WHITE ) ) );
 
   scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, Material ( Color_d ( 0, 0, 0.7 ) ) ) );
+  scene.geometries.push_back ( new Sphere ( V3d_Backward * 30, 5, Material ( Color_d ( 0.7, 0, 0 ) ) ) );
 
   return scene;
 }
@@ -121,14 +127,16 @@ Scene buildScene1 () {
 Scene buildScene2 () {
   Scene scene;
 
-  scene.frame = new Image ( 800, 600 );
+  scene.frame = new Image ( 600, 600 );
 
-  scene.camera = new Perspective ( scene.frame->W(), scene.frame->H(),  
-      V3d_Backward * 50, V3d_Zero, V3d_Zero );
+  scene.camera = new Perspective ( 1.0,
+      V3d_Backward * 100, V3d_Zero, V3d_Zero );
 
-  scene.lights.push_back ( new Directional ( V3d_Left, Material ( Color_d_WHITE ) ) );
+
+  scene.lights.push_back ( new Directional ( V3d_Forward + V3d_Right, Material ( Color_d_WHITE ) ) );
 
   scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, Material ( Color_d ( 0, 0, 0.7 ) ) ) );
+  scene.geometries.push_back ( new Sphere ( V3d_Left * 30 + V3d_Backward * 30, 5, Material ( Color_d ( 0.7, 0, 0 ) ) ) );
 
   return scene;
 }
@@ -136,25 +144,31 @@ Scene buildScene2 () {
 Scene buildScene3 () {
   Scene scene;
 
-  scene.frame = new Image ( 800, 600 );
+  scene.frame = new Image ( 200, 200 );
 
-  scene.camera = new Perspective ( scene.frame->W(), scene.frame->H(),  
-      V3d_Up * 50 + V3d_Backward * 50, V3d_Zero, V3d_Zero );
+  scene.camera = new Perspective ( 0.5,
+     (V3d_Backward + V3d_Up) * 25, V3d_Zero, V3d_Zero );
 
-  scene.lights.push_back ( new Directional ( V3d_Left, Material ( Color_d_WHITE ) ) );
+  scene.lights.push_back ( new Directional ( V3d_Forward, Material ( Color_d_WHITE  ) ) );
+  scene.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE  ) ) );
 
-  scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, Material ( Color_d ( 0, 0, 0.7 ) ) ) );
+  //scene.geometries.push_back ( new Triangle ( V3d_Left, V3d_Down, V3d_Right ) );
+
+  MeshImporter3ds MI;
+  //scene.geometries.push_back ( MI.build ( "models/cube.3ds" ) );
+
+  scene.geometries.push_back ( new Plane ( V3d_Down * 10, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
+  scene.geometries.push_back ( MI.build ( "models/teapot.3ds" ) );
 
   return scene;
 }
-*/
 
 int main () {
   PNGWriter IW; 
   Sampler* sampler = new DefaultSampler ();
 
   logInformation ( "Core", "Scene building..." );
-  Scene scene = buildScene0();
+  Scene scene = buildScene3();
 
   logInformation ( "Core", "Rendering..." );
   Render ( scene, sampler ); 

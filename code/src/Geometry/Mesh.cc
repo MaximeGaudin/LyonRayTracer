@@ -15,8 +15,9 @@ HitRecord Mesh::getRecord ( Ray ray ) const {
 
   vector<Triangle>::const_iterator it = triangleList_.begin();
   while ( it != triangleList_.end() ) {
-    HitRecord currentRecord = it->getRecord ( ray );
-    if ( currentRecord.hit ) return currentRecord;
+    HitRecord record = it->getRecord ( ray );
+
+    if ( record.hit ) return record;
     ++it;
   }
 

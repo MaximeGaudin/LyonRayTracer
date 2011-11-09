@@ -8,7 +8,7 @@ std::vector<Ray> DefaultSampler::getRays ( Scene const& scene,
   double u = (double)X / (double)scene.frame->W();
   double v = 1.0 - (double)Y / (double)scene.frame->H();
 
-  rays.push_back( Ray ( scene.camera->getRay(u, v) ) );
+  rays.push_back( Ray ( scene.camera->getRay(1.0 - u,1.0 - v) ) );
 
   return rays;
 }

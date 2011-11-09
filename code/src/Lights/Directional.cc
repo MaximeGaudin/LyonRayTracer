@@ -6,14 +6,14 @@
 // Ctors
   Directional::Directional ( Vector3d direction ) 
   : Light ()
-    , direction_(direction) 
+    , direction_(direction.Normalized()) 
 {
   material_.diffuse = Color_d_WHITE;
 }
 
   Directional::Directional ( Vector3d direction, Material material ) 
   : Light( material)
-    , direction_(direction)
+    , direction_(direction.Normalized())
 {}
 
 // Worker methods
@@ -32,6 +32,6 @@ Color<double> Directional::getContribution (
     }
   }
 
-  double phongCoef = Vector3d::Dot ( record.normal, -direction_ ) / (record.normal.Length() * direction_.Length());
+  double phongCoef = Vector3d::Dot ( record.normal, -direction_ ) / (record.normal.Length() );
   return material_.diffuse * phongCoef;
 }

@@ -6,6 +6,6 @@
 
 class MeshImporter3ds: public MeshImporter {
   public:
-    Mesh build ( string const& filename );
+    Mesh* build ( string const& filename );
 };
 #endif // MESH_IMPORTER_H_

@@ -7,7 +7,9 @@
 class Triangle : public Geometry {
   public:
     Triangle ( Vector3d a, Vector3d b, Vector3d c ); 
+    Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal ); 
     Triangle ( Vector3d a, Vector3d b, Vector3d c, Material material ); 
+    Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal, Material material ); 
 
   public:
     HitRecord getRecord ( Ray ray ) const;

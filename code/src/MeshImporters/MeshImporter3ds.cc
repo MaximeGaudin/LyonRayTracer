@@ -8,13 +8,7 @@
 
 #include <exceptions.hpp>
 
-#include <boost/format.hpp>
-
-using namespace std;
-using boost::format;
-using boost::io::group;
-
-Mesh MeshImporter3ds::build ( string const& filename ) {
+Mesh* MeshImporter3ds::build ( string const& filename ) {
   Lib3dsFile* model;
   model = lib3ds_file_load(filename.c_str());
   if ( !model ) logException ("MeshImporter3ds", "Can't open file.");
@@ -26,7 +20,7 @@ Mesh MeshImporter3ds::build ( string const& filename ) {
   for(mesh = model->meshes;mesh != NULL;mesh = mesh->next) {
     for(unsigned int i = 0; i < mesh->faces; ++i) {
       Lib3dsFace * face = &mesh->faceL[i];
-      Vector3d A; Vector3d B; Vector3d C;
+      Vector3d A; Vector3d B; Vector3d C; Vector3d N;
       
       A[0] = mesh->pointL[face->points[0]].pos[0];
       A[1] = mesh->pointL[face->points[0]].pos[1];
@@ -40,12 +34,16 @@ Mesh MeshImporter3ds::build ( string const& filename ) {
       C[1] = mesh->pointL[face->points[2]].pos[1];
       C[2] = mesh->pointL[face->points[2]].pos[2];
 
-      triangleList.push_back( Triangle (A, B, C ) );
+      N[0] = face->normal[0];
+      N[1] = face->normal[1];
+      N[2] = face->normal[2];
+
+      triangleList.push_back( Triangle (A, B, C, N ) );
     }
   }
 
   logInformation ( "MeshImporter3ds", str ( format("OK (%1$d faces)") % triangleList.size() ) );
   lib3ds_file_free( model );
 
-  return Mesh ( triangleList ); 
+  return new Mesh ( triangleList ); 
 }
