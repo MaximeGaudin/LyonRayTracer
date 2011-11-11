@@ -9,7 +9,8 @@ CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src
 CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 
-
+# Vérification des fonction de la libpng
+AC_CHECK_HEADER([png.h], [], [AC_MSG_ERROR([Missing header : png.h])])
 AC_CHECK_LIB([png], [png_create_write_struct], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 AC_CHECK_LIB([png], [png_create_info_struct], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 AC_CHECK_LIB([png], [setjmp], [], [AC_MSG_ERROR([Missing function in libpng])]) 
@@ -18,6 +19,10 @@ AC_CHECK_LIB([png], [png_write_info], [], [AC_MSG_ERROR([Missing function in lib
 AC_CHECK_LIB([png], [png_write_image], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 AC_CHECK_LIB([png], [png_write_end], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 
+# Vérification des fonctions de la libjpg
+
+# Intégration de Doxygen au processus et vérification
+# de la possibilité de compiler en LaTeX et d'utiliser dot
 AC_CHECK_PROGS([DOXYGEN], [doxygen])
 if test -z "$DOXYGEN"; then 
   AC_MSG_WARN([Doxygen not found - continuing without Doxygen support])
