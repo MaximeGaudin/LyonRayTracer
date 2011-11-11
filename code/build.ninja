@@ -1,6 +1,6 @@
 iflags=-I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/
 lflags=-L/opt/local/lib/ -ljpeg -lpng -l3ds
-flags=-Wall -Wextra -pedantic -ansi -O2
+flags=-Wall -Wextra -pedantic -ansi -O2 
 
 src_dir=src/
 test_dir=test/

@@ -12,12 +12,15 @@ Ray::Ray ( Vector3d from, Vector3d to )
 Ray::Ray ( Vector3d from, Vector3d direction, bool Normalize) 
 : from_(from) {
   direction_ = ((Normalize) ? direction.Normalized() : direction);
+  for ( unsigned int i = 0; i < 3; ++i ) 
+    if ( direction_[i] == -0.0 ) direction_[i] = 0.0;
+
   to_ = direction_ + from;
 }
 
 string Ray::pretty () const {
  	stringstream ss;
-	ss << "{ From = " << from_ << "; To = " << to_ 
+	ss << "{ From = " << from_ << ";" 
     << "; Direction = " << (to_ - from_).Normalized() << " }"; 
 
   return ss.str();

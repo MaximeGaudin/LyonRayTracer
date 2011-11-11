@@ -47,24 +47,58 @@ void displayProgress ( unsigned int Y, unsigned int H ) {
   else { cout << "."; cout.flush(); }
 }
 
+Ray getReflectedRay ( Ray const& ray, HitRecord const& record ) {
+  double d = Vector3d::Dot ( record.normal, -ray.direction() );
+  return Ray ( record.position + 0.01 * record.normal, ( 2 * record.normal * d ) + ray.direction(), true );
+}
+
+
+Ray getRefractedRay ( Ray const& ray, double IOR, HitRecord const& record, bool input ) {
+  double n1 = IOR;
+  double n2 = record.hitGeometry->material().IOR;
+  double n = n1 / n2;
+
+  double d = Vector3d::Dot ( record.normal, -ray.direction() );
+  double c = sqrt( 1 - n * n * (1 - d * d) );
+
+  Vector3d bias = ( input ) ? -0.01 * record.normal : 0.01 * record.normal;
+  return Ray ( record.position + bias, ( n * ray.direction() ) + ( n * d - c ) * record.normal, true );
+}
+
 Color_d getPixel ( Scene const& scene, Ray const& ray, 
+    double IOR,
+    bool input,
     unsigned char recursionsLevel ) {
-  if ( recursionsLevel > MAX_RECURSION ) return Color_d_BLACK;
+
+  Color_d c = scene.ambient;
+  if ( recursionsLevel > MAX_RECURSION ) return c;
 
   HitRecord record = getClosestHit ( ray, scene.geometries );
 
   if ( record.hit ) {
     Color_d directColor = record.hitGeometry->material().diffuse;
-    //Color_d reflectedColor = getPixel ( scene, getReflectedRay ( ray, record.normal ), recursionsLevel + 1 );
-    //Color_d refractedColor = getPixel ( scene, getRefractedRay ( ray, record.normal ), recursionsLevel + 1 );
+
+    Color_d reflectedColor;
+    if ( record.hitGeometry->material().reflexivity != 0 ) 
+      reflectedColor = getPixel ( scene, 
+          getReflectedRay ( ray, record ), IOR, !input, recursionsLevel + 1 );
+
+    Color_d refractedColor;
+    if ( record.hitGeometry->material().opacity != 1.0 ) 
+      refractedColor = getPixel ( scene, 
+          getRefractedRay ( ray, IOR, record, input), 
+          record.hitGeometry->material().IOR, !input, recursionsLevel + 1 );
 
     Color_d directLighting = computeDirectLighting ( scene, record );
-   // cout << "Hit" << endl;
 
-    // return scene.ambient + directLighting * ( directColor + reflectedColor + refractedColor );
-      return scene.ambient + directLighting * ( directColor );
-     //return scene.ambient + directColor;
-  } else return scene.ambient;
+//     cout << record.position << endl;
+     c += Color_d_WHITE;
+//    c += directLighting * directColor;
+//    c += reflectedColor * record.hitGeometry->material().reflexivity;
+//    c += refractedColor * ( 1.0 - record.hitGeometry->material().opacity);
+  }
+
+  return c.Clamped();
 }
 
 void Render ( Scene& scene, Sampler* sampler ) {
@@ -79,7 +113,7 @@ void Render ( Scene& scene, Sampler* sampler ) {
         Color_d pixel = Color_d_BLACK;
 
         while ( it != rays.end() ) { 
-          pixel += getPixel ( scene, *it, 0 ) / rays.size();
+          pixel += getPixel ( scene, *it, 1.0, true, 0 ) / rays.size();
           ++it;
         }
 
@@ -130,13 +164,20 @@ Scene buildScene2 () {
   scene.frame = new Image ( 600, 600 );
 
   scene.camera = new Perspective ( 1.0,
-      V3d_Backward * 100, V3d_Zero, V3d_Zero );
+      V3d_Up * 30 + V3d_Backward * 100, V3d_Zero, V3d_Zero );
 
 
-  scene.lights.push_back ( new Directional ( V3d_Forward + V3d_Right, Material ( Color_d_WHITE ) ) );
+  scene.lights.push_back ( new Directional ( V3d_Down + V3d_Forward + V3d_Right, Material ( Color_d_WHITE ) ) );
+  //scene.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE  ) ) );
 
-  scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, Material ( Color_d ( 0, 0, 0.7 ) ) ) );
-  scene.geometries.push_back ( new Sphere ( V3d_Left * 30 + V3d_Backward * 30, 5, Material ( Color_d ( 0.7, 0, 0 ) ) ) );
+  Material semiTransparent ( Color_d ( 0.0, 0.0, 0.0 ) );
+  semiTransparent.opacity = 1.0;
+  semiTransparent.IOR = 2.5;
+  semiTransparent.reflexivity = 0.9;
+  scene.geometries.push_back ( new Sphere ( V3d_Forward * 40, 5, Material ( Color_d ( 0,1,0)) ));
+  scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, semiTransparent ) );
+  scene.geometries.push_back ( new Sphere ( V3d_Left * 30 + V3d_Backward * 30, 5, Material ( Color_d ( 0.9, 0, 0 ) ) ) );
+  scene.geometries.push_back ( new Plane ( V3d_Down * 30, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
 
   return scene;
 }
@@ -144,21 +185,35 @@ Scene buildScene2 () {
 Scene buildScene3 () {
   Scene scene;
 
-  scene.frame = new Image ( 200, 200 );
+  scene.frame = new Image ( 600, 600 );
 
   scene.camera = new Perspective ( 0.5,
-     (V3d_Backward + V3d_Up) * 25, V3d_Zero, V3d_Zero );
+     (V3d_Backward ) * 5, V3d_Zero, V3d_Zero );
 
   scene.lights.push_back ( new Directional ( V3d_Forward, Material ( Color_d_WHITE  ) ) );
   scene.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE  ) ) );
 
-  //scene.geometries.push_back ( new Triangle ( V3d_Left, V3d_Down, V3d_Right ) );
+  scene.geometries.push_back ( new Triangle ( V3d_Left, V3d_Up, V3d_Right, V3d_Backward, Material ( Color_d ( 1, 0, 0) ) ) );
+  scene.geometries.push_back ( new Triangle ( V3d_Backward  + V3d_Left+ V3d_Left,  V3d_Backward  + V3d_Left+ V3d_Right,  V3d_Backward  + V3d_Left+ V3d_Up, Material ( Color_d ( 0, 1, 0) ) ) );
+//  scene.geometries.push_back ( new Plane ( V3d_Down * 200, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
+
+  return scene;
+}
+
+Scene buildScene4 () {
+  Scene scene;
+
+  scene.frame = new Image ( 600, 600 );
+
+  scene.camera = new Perspective ( 0.5,
+     (V3d_Backward + V3d_Up ) * 5, V3d_Zero, V3d_Zero );
+
+  scene.lights.push_back ( new Directional ( V3d_Forward, Material ( Color_d_WHITE  ) ) );
+  scene.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE  ) ) );
 
   MeshImporter3ds MI;
-  //scene.geometries.push_back ( MI.build ( "models/cube.3ds" ) );
-
-  scene.geometries.push_back ( new Plane ( V3d_Down * 10, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
-  scene.geometries.push_back ( MI.build ( "models/teapot.3ds" ) );
+  scene.geometries.push_back ( MI.build ( "models/cube.3ds" ) );
+  //scene.geometries.push_back ( new Plane ( V3d_Down * 200, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
 
   return scene;
 }
@@ -168,7 +223,7 @@ int main () {
   Sampler* sampler = new DefaultSampler ();
 
   logInformation ( "Core", "Scene building..." );
-  Scene scene = buildScene3();
+  Scene scene = buildScene4();
 
   logInformation ( "Core", "Rendering..." );
   Render ( scene, sampler ); 

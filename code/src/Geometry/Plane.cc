@@ -21,8 +21,7 @@ HitRecord Plane::getRecord ( Ray ray ) const {
   double d = Vector3d::Dot ( ray.direction(), normal_ );
 
   if ( d != 0.0 ) {
-
-    double t = -1.0 * Vector3d::Dot ( normal_, ray.from() - point_ ) / d;
+    double t = -1.0 * ( Vector3d::Dot ( normal_, ray.from() ) + point_.Length() ) / d;
     if ( t >= 0 ) {
       record.hit = true;
       record.t = t;

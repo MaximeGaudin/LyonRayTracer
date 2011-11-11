@@ -30,7 +30,9 @@ HitRecord Sphere::getRecord( Ray ray ) const {
     double T1 = (-B + sqrt(Delta)) / (2 * A);
     double T2 = (-B - sqrt(Delta)) / (2 * A);
 
-    t = min(T1, T2);
+    if ( T1 < 0 ) t = T2;
+    else if ( T2 < 0 ) t = T1;
+    else t = min(T1, T2);
   }
 
   HitRecord record;
