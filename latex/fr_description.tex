@@ -1,30 +1,76 @@
 \section{Description}
-\textsl{LyonRayTracer}, en hommage à ma ville natale : Lyon, est un ray tracer
-qui, en plus de constituer mon projet de dernière année d'ingénierie, est
-développé dans l'optique :
-\begin{itemize}
-  \item d'être facile à prendre en main,
-  \item d'être portable,
-  \item d'être un vrai projet : \textsl{i.e.} documenté, mis à jour
-  régulièrement, doté d'une page web, \textsl{etc.}
-\end{itemize}
+\subsection{Qu'est ce que c'est ?}
+\textsl{Lyon Ray Tracer}, en hommage à ma ville natale : Lyon, est un moteur
+de rendu utilisant la technique du \textsl{ray tracing} pour produire des
+images photoréalistes. Pour ceux qui ne connaissent pas encore le \textsl{ray
+tracing}, je vous invite à consulter notre ami \textsl{Wikipedia}
+(\url{http://fr.wikipedia.org/wiki/Lancer_de_rayon}).
 
-\textsl{LRT} est de plus développé afin de constituer une base pour un moteur plus
-compliqué. Pas forcément le mien d'ailleurs. Car, développer un moteur de ray tracing demande beaucoup de
-code \textsl{boilerplate} et notamment au niveau mathématique. Ici, pas de
-problème car ce code est déjà là et il ne vous reste plus qu'à jouer avec le
-moteur ou qui sait, \textbf{contribuer au projet !}
+Par conséquent, mon moteur prend en entrée des informations comme ``il existe
+une sphère de centre (0,0,0) et de rayon 10 qui possède un coefficient de
+réflexion de 0.5'', et produit ce genre d'image :
+
+\subsection{Pourquoi ?}
+Bien évidemment parce que j'aime ça ! Mon école ma proposé de réaliser le
+projet de mon choix et c'est ce que j'ai choisi. De plus, je trouve que le
+concept est formidable : Créer à partir de quelques informations textuelles
+des images ultra réalistes et respectant les principes physiques de propagation
+de la lumière.
+
+\subsection{Comment ?}
+En C++ et en utilisant le plus d'outils libres et standards. Pour vous donner
+une idée de mon toolkit, je vous conseil d'aller jeter un coup d'œil du côté
+des dépendances.
+
+\subsection{C'est cool, je peux participer ??}
+Oh oui !\\
+
+Un moteur de \textsl{ray tracing} c'est comme des Légo, on peu toujours
+ajouter quelques choses (surtout en ce moment, puisque le moteur n'est pas
+encore très évolué). C'est donc pour toi l'occasion de participer à quelques
+choses au tout début de son évolution.\\
+
+Tu peux par exemple :
+\begin{itemize}
+  \item Me laisser un petit mail pour m'encourager !
+  \item Essayer de compiler le programme et m'avertir des différents problèmes
+    que tu as pu rencontrer (si possible avec la solution ;) )
+  \item M'envoyer des \textsl{pull requests} (même si c'est pour un coquille
+    ou ajouter un peu de documentation).
+  \item M'aider à créer une vraie page web au lieux de ce PDF :p
+\end{itemize}
 
 \subsection{Fonctionnalités}
-Bien qu'encore au début de son développement, \textsl{LRT} possèdes tout de même
-quelques fonctionnalités :
+\paragraph{Lumières}
 \begin{itemize}
-  \item Lumière : Lumière directionnelle.
-  \item Caméra : Caméra avec perspective.
-  \item Géométrie : Sphère, Plan, Triangle, Mesh (agrégat de triangles).
-  \item Importeurs : Format 3ds
-  \item Exporteurs : Format PNG et JPG.
+  \item Lumière directionnelle.
 \end{itemize}
 
-Évidemment, le pipeline de ray tracing comprend la gestion des matériaux, des
-reflexions et des réfractions.
+\paragraph{Caméra}
+\begin{itemize}
+  \item Caméra classique avec prise en compte de la perspective.
+\end{itemize}
+
+\paragraph{Géométrie}
+\begin{itemize}
+  \item Sphère.
+  \item Plan infini.
+\end{itemize}
+
+\paragraph{Matériaux}
+\begin{itemize}
+  \item Couleur diffuse, spéculaire, ambiante.
+  \item Indice de réfraction.
+  \item Indice de réflexion.
+\end{itemize}
+
+\paragraph{Importeurs}
+\begin{itemize}
+  \item 3DS.
+\end{itemize}
+
+\paragraph{Exporteurs}
+\begin{itemize}
+  \item PNG.
+  \item JPG.
+\end{itemize}
