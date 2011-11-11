@@ -29,3 +29,5 @@ TD.eqno			{ }	/* equation-number cells */
 
 /* document-specific styles come next */
 DIV.navigation		{   }
+
+body {background-color:#F1F1F1;}

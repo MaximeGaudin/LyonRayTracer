@@ -17,7 +17,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <META NAME="Generator" CONTENT="LaTeX2HTML v2008">
 <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
 
-<LINK REL="STYLESHEET" HREF="main.css">
+<LINK REL="STYLESHEET" HREF="style.css">
 
 </HEAD>
 
@@ -47,19 +47,21 @@ qui, en plus de constituer mon projet de dernière année d'ingénierie, est
 développé dans l'optique :
 
 <UL>
-<LI>d'être facile à prendre en main
+<LI>d'être facile à prendre en main,
 </LI>
-<LI>d'être un vrai projet, <SPAN  CLASS="textsl">i.e.</SPAN> documenté, mis à jour
+<LI>d'être portable,
+</LI>
+<LI>d'être un vrai projet : <SPAN  CLASS="textsl">i.e.</SPAN> documenté, mis à jour
   régulièrement, doté d'une page web, <SPAN  CLASS="textsl">etc.</SPAN>
 </LI>
 </UL>
 
 <P>
-LRT est de plus développé dans une optique de base pour un moteur plus
-compliqué. En effet, développer un moteur de ray tracing demande beaucoup de
-code boilerplate et notamment au niveau des vecteurs et des matrices.
-Ce code est déjà fait ici et il ne vous reste plus qu'à jouer et qui sait,
-<SPAN  CLASS="textbf">contribuer au projet !</SPAN>
+LRT est de plus développé afin de constituer une base pour un moteur plus
+compliqué. Pas forcément le mien d'ailleurs. Car, développer un moteur de ray tracing demande beaucoup de
+code boilerplate et notamment au niveau mathématique. Ici, pas de
+problème car ce code est déjà là et il ne vous reste plus qu'à jouer avec le
+moteur ou qui sait, <SPAN  CLASS="textbf">contribuer au projet !</SPAN>
 
 <P>
 
@@ -74,7 +76,7 @@ quelques fonctionnalités :
 </LI>
 <LI>Caméra : Caméra avec perspective.
 </LI>
-<LI>Géométrie : Sphère, Triangle, Mesh (agrégat de triangles).
+<LI>Géométrie : Sphère, Plan, Triangle, Mesh (agrégat de triangles).
 </LI>
 <LI>Importeurs : Format 3ds
 </LI>
@@ -82,27 +84,29 @@ quelques fonctionnalités :
 </LI>
 </UL>
 
+<P>
+Évidemment, le pipeline de ray tracing comprend la gestion des matériaux, des
+reflexions et des réfractions.
+
 <H1><A NAME="SECTION00030000000000000000">
 Dépendences</A>
 </H1>
 La compilation du projet nécessite :
 
 <OL>
-<LI>Un compilateur C++ récent (<SPAN  CLASS="textsl">i.e.</SPAN> gcc 4.2+)
+<LI>Un compilateur C++ récent.
 </LI>
 <LI>make
 </LI>
-<LI>ninja (qui sera remplacé par make à terme)
-</LI>
-<LI>boost
-</LI>
-<LI>libjpeg
-</LI>
-<LI>libpng
+<LI>libjpeg et/ou libpng
 </LI>
 <LI>lib3ds
 </LI>
 </OL>
+
+<P>
+Autant dire que le projet est fait pour tourner sur le plus grande nombre de
+plateformes.
 
 <H1><A NAME="SECTION00040000000000000000">
 Licences</A>
@@ -111,9 +115,9 @@ Licences</A>
 
 <P>
 
-<H1><A NAME="SECTION00050000000000000000">
+<H3><A NAME="SECTION00050000000000000000">
 &#192; propos de ce document...</A>
-</H1>
+</H3>
  <STRONG>Lyon Ray Tracer</STRONG><P>
 This document was generated using the
 <A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2008 (1.71)
@@ -127,13 +131,13 @@ Copyright &#169; 1997, 1998, 1999,
 Mathematics Department, Macquarie University, Sydney.
 <P>
 The command line arguments were: <BR>
- <STRONG>latex2html</STRONG> <TT>-title 'DigitalGuru/LyonRayTracer @ GitHub' -split 0 -local_icons -no_navigation -html_version 4.0,latin1,unicode main.tex</TT>
+ <STRONG>latex2html</STRONG> <TT>-style style.css -title 'DigitalGuru/LyonRayTracer @ GitHub' -split 0 -local_icons -no_navigation -html_version 4.0,latin1,unicode main.tex</TT>
 <P>
-The translation was initiated by Maxime Gaudin on 2011-11-07
+The translation was initiated by Maxime Gaudin on 2011-11-11
 <BR><HR>
 <ADDRESS>
 Maxime Gaudin
-2011-11-07
+2011-11-11
 </ADDRESS>
 </BODY>
 </HTML>

@@ -3,24 +3,28 @@
 qui, en plus de constituer mon projet de dernière année d'ingénierie, est
 développé dans l'optique :
 \begin{itemize}
-  \item d'être facile à prendre en main
-  \item d'être un vrai projet, \textsl{i.e.} documenté, mis à jour
+  \item d'être facile à prendre en main,
+  \item d'être portable,
+  \item d'être un vrai projet : \textsl{i.e.} documenté, mis à jour
   régulièrement, doté d'une page web, \textsl{etc.}
 \end{itemize}
 
-LRT est de plus développé dans une optique de base pour un moteur plus
-compliqué. En effet, développer un moteur de ray tracing demande beaucoup de
-code \tsxtsl{boilerplate} et notamment au niveau des vecteurs et des matrices.
-Ce code est déjà fait ici et il ne vous reste plus qu'à jouer et qui sait,
-\textbf{contribuer au projet !}
+\textsl{LRT} est de plus développé afin de constituer une base pour un moteur plus
+compliqué. Pas forcément le mien d'ailleurs. Car, développer un moteur de ray tracing demande beaucoup de
+code \textsl{boilerplate} et notamment au niveau mathématique. Ici, pas de
+problème car ce code est déjà là et il ne vous reste plus qu'à jouer avec le
+moteur ou qui sait, \textbf{contribuer au projet !}
 
 \subsection{Fonctionnalités}
-Bien qu'encore au début de son développement, LRT possèdes tout de même
+Bien qu'encore au début de son développement, \textsl{LRT} possèdes tout de même
 quelques fonctionnalités :
 \begin{itemize}
   \item Lumière : Lumière directionnelle.
   \item Caméra : Caméra avec perspective.
-  \item Géométrie : Sphère, Triangle, Mesh (agrégat de triangles).
+  \item Géométrie : Sphère, Plan, Triangle, Mesh (agrégat de triangles).
   \item Importeurs : Format 3ds
   \item Exporteurs : Format PNG et JPG.
 \end{itemize}
+
+Évidemment, le pipeline de ray tracing comprend la gestion des matériaux, des
+reflexions et des réfractions.
