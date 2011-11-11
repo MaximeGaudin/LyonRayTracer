@@ -5,6 +5,19 @@ AC_PROG_CXX
 AC_CONFIG_HEADERS([config.hh])
 AC_CONFIG_FILES([Makefile])
 
+CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
+
+
+AC_CHECK_LIB([png], [png_create_write_struct], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [png_create_info_struct], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [setjmp], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [png_set_IHDR], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [png_write_info], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [png_write_image], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+AC_CHECK_LIB([png], [png_write_end], [], [AC_MSG_ERROR([Missing function in libpng])]) 
+
 AC_CHECK_PROGS([DOXYGEN], [doxygen])
 if test -z "$DOXYGEN"; then 
   AC_MSG_WARN([Doxygen not found - continuing without Doxygen support])
