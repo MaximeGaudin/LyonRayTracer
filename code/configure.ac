@@ -1,13 +1,21 @@
 AC_INIT([lrt], [0.1], [gaudin.maxime@gmail.com])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+
 AC_PROG_CC
 AC_PROG_CXX
+
 AC_CONFIG_HEADERS([config.hh])
 AC_CONFIG_FILES([Makefile])
+
+AC_LANG(C++)
 
 CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
 CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
+
+AC_CHECK_HEADER([cstdio], [], [AC_MSG_ERROR([Missing header : cstdio])])
+AC_CHECK_HEADER([cstdlib], [], [AC_MSG_ERROR([Missing header : cstdlib])])
+AC_CHECK_HEADER([iostream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
 
 # Vérification des fonction de la libpng
 AC_CHECK_HEADER([png.h], [], [AC_MSG_ERROR([Missing header : png.h])])
@@ -20,7 +28,12 @@ AC_CHECK_LIB([png], [png_write_image], [], [AC_MSG_ERROR([Missing function in li
 AC_CHECK_LIB([png], [png_write_end], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 
 # Vérification des fonctions de la libjpg
-# TODO
+AC_CHECK_HEADER([jpeglib.h], [], [AC_MSG_ERROR([Missing header : jpeglib.h])])
+AC_CHECK_LIB([jpeg], [jpeg_set_defaults], [], [AC_MSG_ERROR([Missing function in libjpeg])]) 
+AC_CHECK_LIB([jpeg], [jpeg_start_compress], [], [AC_MSG_ERROR([Missing function in libjpeg])]) 
+AC_CHECK_LIB([jpeg], [jpeg_write_scanlines], [], [AC_MSG_ERROR([Missing function in libjpeg])]) 
+AC_CHECK_LIB([jpeg], [jpeg_finish_compress], [], [AC_MSG_ERROR([Missing function in libjpeg])]) 
+AC_CHECK_LIB([jpeg], [jpeg_destroy_compress], [], [AC_MSG_ERROR([Missing function in libjpeg])]) 
 
 # Vérification des fontions de la lib3ds
 AC_CHECK_HEADER([lib3ds/file.h], [], [AC_MSG_ERROR([Missing header : libs3ds/files.h])])
