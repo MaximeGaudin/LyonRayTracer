@@ -92,10 +92,10 @@ Color_d getPixel ( Scene const& scene, Ray const& ray,
     Color_d directLighting = computeDirectLighting ( scene, record );
 
 //     cout << record.position << endl;
-     c += Color_d_WHITE;
-//    c += directLighting * directColor;
-//    c += reflectedColor * record.hitGeometry->material().reflexivity;
-//    c += refractedColor * ( 1.0 - record.hitGeometry->material().opacity);
+//     c += Color_d_WHITE;
+    c += directLighting * directColor;
+    c += reflectedColor * record.hitGeometry->material().reflexivity;
+    c += refractedColor * ( 1.0 - record.hitGeometry->material().opacity);
   }
 
   return c.Clamped();
@@ -170,14 +170,15 @@ Scene buildScene2 () {
   scene.lights.push_back ( new Directional ( V3d_Down + V3d_Forward + V3d_Right, Material ( Color_d_WHITE ) ) );
   //scene.lights.push_back ( new Directional ( V3d_Down, Material ( Color_d_WHITE  ) ) );
 
-  Material semiTransparent ( Color_d ( 0.0, 0.0, 0.0 ) );
-  semiTransparent.opacity = 1.0;
+  Material semiTransparent ( Color_d ( 1.0, 1.0, 1.0 ) );
+  semiTransparent.opacity = 1;
   semiTransparent.IOR = 2.5;
   semiTransparent.reflexivity = 0.9;
-  scene.geometries.push_back ( new Sphere ( V3d_Forward * 40, 5, Material ( Color_d ( 0,1,0)) ));
+//  scene.geometries.push_back ( new Sphere ( V3d_Forward * 40, 5, Material ( Color_d ( 0,1,0)) ));
+
   scene.geometries.push_back ( new Sphere ( V3d_Zero, 20, semiTransparent ) );
   scene.geometries.push_back ( new Sphere ( V3d_Left * 30 + V3d_Backward * 30, 5, Material ( Color_d ( 0.9, 0, 0 ) ) ) );
-  scene.geometries.push_back ( new Plane ( V3d_Down * 30, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
+  //scene.geometries.push_back ( new Plane ( V3d_Down * 30, V3d_Up, Material ( Color_d( 0,0,0.5) ) ) );
 
   return scene;
 }
@@ -223,7 +224,7 @@ int main () {
   Sampler* sampler = new DefaultSampler ();
 
   logInformation ( "Core", "Scene building..." );
-  Scene scene = buildScene4();
+  Scene scene = buildScene2();
 
   logInformation ( "Core", "Rendering..." );
   Render ( scene, sampler ); 
