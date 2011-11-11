@@ -20,6 +20,13 @@ AC_CHECK_LIB([png], [png_write_image], [], [AC_MSG_ERROR([Missing function in li
 AC_CHECK_LIB([png], [png_write_end], [], [AC_MSG_ERROR([Missing function in libpng])]) 
 
 # Vérification des fonctions de la libjpg
+# TODO
+
+# Vérification des fontions de la lib3ds
+AC_CHECK_HEADER([lib3ds/file.h], [], [AC_MSG_ERROR([Missing header : libs3ds/files.h])])
+AC_CHECK_HEADER([lib3ds/mesh.h], [], [AC_MSG_ERROR([Missing header : libs3ds/mesh.h])])
+AC_CHECK_LIB([3ds], [lib3ds_file_load], [], [AC_MSG_ERROR([Missing function in lib3ds])]) 
+AC_CHECK_LIB([3ds], [lib3ds_file_free], [], [AC_MSG_ERROR([Missing function in lib3ds])]) 
 
 # Intégration de Doxygen au processus et vérification
 # de la possibilité de compiler en LaTeX et d'utiliser dot
