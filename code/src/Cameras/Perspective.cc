@@ -1,16 +1,19 @@
 #include "Perspective.hpp"
-#include <Matrix.hpp>
+
 #include <exceptions.hpp>
 
-
-#define _USE_MATH_DEFINES
-#include <cmath>
-
-#include <iostream>
-
-using namespace std;
-
 // Ctors
+Perspective::Perspective (
+    Vector3d eye,
+    Vector3d lookAt,
+    Vector3d up )
+  : focaleDistance_(1.0)
+  , eye_(eye)
+  , lookAt_(lookAt)
+  , up_(up)
+{
+  setupCameraBase ();
+}
 
 Perspective::Perspective (
     double focaleDistance,
@@ -20,9 +23,14 @@ Perspective::Perspective (
   : focaleDistance_(focaleDistance)
   , eye_(eye)
   , lookAt_(lookAt)
-    , up_(up)
+  , up_(up)
 {
-  IPNormal_ = (lookAt_ - eye).Normalized();
+  setupCameraBase ();
+}
+
+// Worker methods
+void Perspective::setupCameraBase ( ) {
+IPNormal_ = (lookAt_ - eye_).Normalized();
   if ( IPNormal_ != V3d_Up ) IPXAxis_ = Vector3d::Cross ( IPNormal_, V3d_Up ).Normalized(); 
   else IPXAxis_ = Vector3d::Cross ( IPNormal_, V3d_Left ).Normalized(); 
 
