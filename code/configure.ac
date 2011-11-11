@@ -1,5 +1,5 @@
 AC_INIT([lrt], [0.1], [gaudin.maxime@gmail.com])
-AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+AM_INIT_AUTOMAKE([foreign -Wall -Werror silent-rules])
 
 AC_PROG_CC
 AC_PROG_CXX
@@ -8,6 +8,8 @@ AC_CONFIG_HEADERS([config.hh])
 AC_CONFIG_FILES([Makefile])
 
 AC_LANG(C++)
+
+AM_SILENT_RULES([yes])
 
 CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
 CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"

@@ -6,11 +6,12 @@ lrt_SOURCES= ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptio
 
 if HAVE_DOXYGEN
 doxyfile.stamp:
-	$(DOXYGEN) Doxyfile
+	@echo "Building documentation..."
+	@$(DOXYGEN) Doxyfile >/dev/null
 if HAVE_LATEX
-		cd ../doc/latex && make 
+	@cd doc/latex && make >/dev/null
 endif
-	echo Timestamp > doxyfile.stamp
+	@echo Timestamp > doxyfile.stamp
 
 CLEANFILES = doxyfile.stamp
 
