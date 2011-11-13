@@ -4016,8 +4016,12 @@ esac
 AM_BACKSLASH='\'
 
 
-CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
-CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+CXXFLAGS="$CXXFLAGS $NEW_INCLUDE_PATH"
+CFLAGS="$CFLAGS $NEW_INCLUDE_PATH"
+CPPFLAGS="$CPPFLAGS $NEW_INCLUDE_PATH"
+
+LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 
 
@@ -4432,6 +4436,22 @@ fi
 
 ac_fn_cxx_check_header_mongrel "$LINENO" "iostream" "ac_cv_header_iostream" "$ac_includes_default"
 if test "x$ac_cv_header_iostream" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "sstream" "ac_cv_header_sstream" "$ac_includes_default"
+if test "x$ac_cv_header_sstream" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "cmath" "ac_cv_header_cmath" "$ac_includes_default"
+if test "x$ac_cv_header_cmath" = xyes; then :
 
 else
   as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
@@ -5133,6 +5153,41 @@ _ACEOF
 else
   as_fn_error $? "Missing function in lib3ds" "$LINENO" 5
 fi
+
+
+# Vérification de la présence de boost
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/foreach.hpp" "ac_cv_header_boost_foreach_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_foreach_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/foreach.h" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/format.hpp" "ac_cv_header_boost_format_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_format_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/format.h" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/type_traits.hpp" "ac_cv_header_boost_type_traits_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_type_traits_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/type_traits.hpp" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/static_assert.hpp" "ac_cv_header_boost_static_assert_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_static_assert_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/static_assert.hpp" "$LINENO" 5
+fi
+
+
 
 
 # Intégration de Doxygen au processus et vérification

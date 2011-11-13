@@ -18,3 +18,6 @@ CLEANFILES = doxyfile.stamp
 all-local: doxyfile.stamp
 
 endif
+
+mrproper: clean
+

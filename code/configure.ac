@@ -11,13 +11,19 @@ AC_LANG(C++)
 
 AM_SILENT_RULES([yes])
 
-CFLAGS="$CFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
-CXXFLAGS="$CXXFLAGS -I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+CXXFLAGS="$CXXFLAGS $NEW_INCLUDE_PATH"
+CFLAGS="$CFLAGS $NEW_INCLUDE_PATH" 
+CPPFLAGS="$CPPFLAGS $NEW_INCLUDE_PATH"
+
+LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 
 AC_CHECK_HEADER([cstdio], [], [AC_MSG_ERROR([Missing header : cstdio])])
 AC_CHECK_HEADER([cstdlib], [], [AC_MSG_ERROR([Missing header : cstdlib])])
 AC_CHECK_HEADER([iostream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
+AC_CHECK_HEADER([sstream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
+AC_CHECK_HEADER([cmath], [], [AC_MSG_ERROR([Missing header : cstdlib])])
 
 # Vérification des fonction de la libpng
 AC_CHECK_HEADER([png.h], [], [AC_MSG_ERROR([Missing header : png.h])])
@@ -42,6 +48,13 @@ AC_CHECK_HEADER([lib3ds/file.h], [], [AC_MSG_ERROR([Missing header : libs3ds/fil
 AC_CHECK_HEADER([lib3ds/mesh.h], [], [AC_MSG_ERROR([Missing header : libs3ds/mesh.h])])
 AC_CHECK_LIB([3ds], [lib3ds_file_load], [], [AC_MSG_ERROR([Missing function in lib3ds])]) 
 AC_CHECK_LIB([3ds], [lib3ds_file_free], [], [AC_MSG_ERROR([Missing function in lib3ds])]) 
+
+# Vérification de la présence de boost
+AC_CHECK_HEADER([boost/foreach.hpp], [], [AC_MSG_ERROR([Missing header : boost/foreach.h])])
+AC_CHECK_HEADER([boost/format.hpp], [], [AC_MSG_ERROR([Missing header : boost/format.h])])
+AC_CHECK_HEADER([boost/type_traits.hpp], [], [AC_MSG_ERROR([Missing header : boost/type_traits.hpp])])
+AC_CHECK_HEADER([boost/static_assert.hpp], [], [AC_MSG_ERROR([Missing header : boost/static_assert.hpp])])
+
 
 # Intégration de Doxygen au processus et vérification
 # de la possibilité de compiler en LaTeX et d'utiliser dot
