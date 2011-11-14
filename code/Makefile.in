@@ -62,7 +62,7 @@ am_lrt_OBJECTS = ./src/Cameras/Perspective.$(OBJEXT) \
 	./src/Lights/Directional.$(OBJEXT) ./src/main.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
 	./src/MeshImporters/MeshImporter3ds.$(OBJEXT) \
-	./src/Ray.$(OBJEXT)
+	./src/Ray.$(OBJEXT) ./src/Optimization/OctreeNode.$(OBJEXT)
 lrt_OBJECTS = $(am_lrt_OBJECTS)
 lrt_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -199,7 +199,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc
+lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hh
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -364,6 +364,15 @@ src/MeshImporters/$(DEPDIR)/$(am__dirstamp):
 	src/MeshImporters/$(am__dirstamp) \
 	src/MeshImporters/$(DEPDIR)/$(am__dirstamp)
 ./src/Ray.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Optimization/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Optimization
+	@: > src/Optimization/$(am__dirstamp)
+src/Optimization/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Optimization/$(DEPDIR)
+	@: > src/Optimization/$(DEPDIR)/$(am__dirstamp)
+./src/Optimization/OctreeNode.$(OBJEXT):  \
+	src/Optimization/$(am__dirstamp) \
+	src/Optimization/$(DEPDIR)/$(am__dirstamp)
 lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES) 
 	@rm -f lrt$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(lrt_OBJECTS) $(lrt_LDADD) $(LIBS)
@@ -383,6 +392,7 @@ mostlyclean-compile:
 	-rm -f ./src/Lights/Directional.$(OBJEXT)
 	-rm -f ./src/Material.$(OBJEXT)
 	-rm -f ./src/MeshImporters/MeshImporter3ds.$(OBJEXT)
+	-rm -f ./src/Optimization/OctreeNode.$(OBJEXT)
 	-rm -f ./src/Ray.$(OBJEXT)
 	-rm -f ./src/exceptions.$(OBJEXT)
 	-rm -f ./src/main.$(OBJEXT)
@@ -406,6 +416,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGWriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Directional.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/MeshImporters/$(DEPDIR)/MeshImporter3ds.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Optimization/$(DEPDIR)/OctreeNode.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -666,6 +677,8 @@ distclean-generic:
 	-rm -f src/Lights/$(am__dirstamp)
 	-rm -f src/MeshImporters/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/MeshImporters/$(am__dirstamp)
+	-rm -f src/Optimization/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/Optimization/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -676,7 +689,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -724,7 +737,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

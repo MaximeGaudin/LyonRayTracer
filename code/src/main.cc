@@ -100,7 +100,6 @@ Color_d getPixel ( Scene const& scene, Ray const& ray,
     c += reflectedColor * record.hitGeometry->material().reflexivity;
 //    c += refractedColor * ( 1.0 - record.hitGeometry->material().opacity);
     c = c * directLighting;
-    c = Color_d_WHITE;
   }
 
   c += scene.ambient;
@@ -232,7 +231,7 @@ Scene buildScene5 () {
   Scene scene;
 
   scene.ambient = Color_d ( 0.1, 0.1, 0.1 );
-  scene.frame = new Image ( 400, 400 );
+  scene.frame = new Image ( 600, 600 );
 
   scene.camera = new Perspective ( 0.5,
      (V3d_Down + V3d_Backward + V3d_Right) * 25, V3d_Zero, V3d_Zero );
@@ -269,7 +268,7 @@ int main () {
   Sampler* sampler = new DefaultSampler ();
 
   logInformation ( "Core", "Scene building..." );
-  Scene scene = buildScene6();
+  Scene scene = buildScene5();
 
   logInformation ( "Core", "Rendering..." );
   Render ( scene, sampler ); 

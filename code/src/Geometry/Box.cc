@@ -1,5 +1,11 @@
 #include "Box.hpp"
 
+Box::Box ()
+  : Geometry()
+    , min_ (V3d_Zero)
+    , max_ (V3d_Zero)
+{}
+
 Box::Box ( Vector3d min, Vector3d max ) 
 : Geometry ()
   , min_(min)
@@ -36,4 +42,13 @@ HitRecord Box::getRecord ( Ray ray ) const {
   }
 
   record.hit = true;
+}
+
+bool Box::contains ( Triangle* t ) const {
+  Vector3d barycenter ( t->getBarycenter() );
+
+  for( unsigned int i = 0; i < 3; ++i )
+    if (!( barycenter[i] >= min_[i] && barycenter[i] <= max_[i] )) return false;
+
+  return true;
 }

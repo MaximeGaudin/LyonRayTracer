@@ -11,7 +11,7 @@ AC_LANG(C++)
 
 AM_SILENT_RULES([yes])
 
-NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/"
 CXXFLAGS="$CXXFLAGS $NEW_INCLUDE_PATH"
 CFLAGS="$CFLAGS $NEW_INCLUDE_PATH" 
 CPPFLAGS="$CPPFLAGS $NEW_INCLUDE_PATH"

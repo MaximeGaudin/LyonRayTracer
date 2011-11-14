@@ -15,7 +15,7 @@ Mesh* MeshImporter3ds::build ( string const& filename ) {
 
   logInformation ( "MeshImporter3ds", str ( format("Loading %1%...") % filename ) );
 
-  vector < Triangle > triangleList;
+  vector < Triangle* > triangleList;
   Lib3dsMesh * mesh;
   for(mesh = model->meshes;mesh != NULL;mesh = mesh->next) {
     for(unsigned int i = 0; i < mesh->faces; ++i) {
@@ -38,7 +38,7 @@ Mesh* MeshImporter3ds::build ( string const& filename ) {
       N[1] = face->normal[1];
       N[2] = face->normal[2];
 
-      triangleList.push_back( Triangle (A, B, C, N) );
+      triangleList.push_back( new Triangle (A, B, C, N) );
       //cout << N << endl;
     }
   }
