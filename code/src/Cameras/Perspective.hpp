@@ -29,6 +29,7 @@ class Perspective : public Camera {
 
   public:
     Ray getRay ( double u, double v ) const;
+    Vector3d direction () const;
 
   private:
     void setupCameraBase ( );

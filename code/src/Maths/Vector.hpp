@@ -109,6 +109,7 @@ class Vector {
     bool operator != ( Vector<P,N> const& v2 ) const;
 
 		Vector<P, N> operator + ( const Vector<P, N>& v2 ) const;
+		Vector<P, N>& operator += ( const Vector<P, N>& v2 );
 
 		Vector<P, N> operator - ( ) const;
 		Vector<P, N> operator - ( const Vector<P, N>& v2 ) const;
@@ -117,8 +118,8 @@ class Vector {
     friend Vector<P, N> operator * ( double const& d, Vector<P, N> const& v ) 
     { return v * d; }
 
-    Vector<P, N> operator / ( double const& d ) const 
-    { return (*this) * 1.0/d; }
+    Vector<P, N> operator / ( double const& d ) const;
+    Vector<P, N>& operator /= ( double const& d );
 
 		P& operator [] ( unsigned int i );
 		P const& operator [] ( unsigned int i ) const;

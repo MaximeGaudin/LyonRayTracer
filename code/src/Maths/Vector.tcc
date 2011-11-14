@@ -154,6 +154,13 @@ Vector<P, N> Vector<P, N>::operator + ( const Vector<P, N>& v2 ) const {
 
   return result;
 }
+
+template <typename P, int N>
+Vector<P, N>& Vector<P, N>::operator += ( const Vector<P, N>& v2 ) {
+  *this = *this + v2;
+  return *this;
+}
+
 template <typename P, int N>
 Vector<P, N> Vector<P, N>::operator - ( ) const {
   Vector <P, N> result ( *this );
@@ -176,6 +183,16 @@ Vector<P, N> Vector<P, N>::operator * ( double const& d ) const {
   return result;
 }
 
+template <typename P, int N>
+Vector<P, N> Vector<P, N>::operator / ( double const& d ) const {
+  return (*this) * (1.0/d);
+}
+
+template <typename P, int N>
+Vector<P, N>& Vector<P, N>::operator /= ( double const& d ) {
+  *this = *this / d;
+  return *this;
+}
 template <typename P, int N >
 P& Vector<P, N >::operator [] ( unsigned int i ) {
   if ( i >= N ) logException ( VECTOR_OUT_OF_BOUNDS_EXCEPTION_MESSAGE );

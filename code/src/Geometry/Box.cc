@@ -4,9 +4,7 @@ Box::Box ( Vector3d min, Vector3d max )
 : Geometry ()
   , min_(min)
   , max_(max)
-{ 
-  
-}
+{ }
 
 Box::Box ( Vector3d min, Vector3d max, Material material ) 
 : Geometry (material)
@@ -38,5 +36,4 @@ HitRecord Box::getRecord ( Ray ray ) const {
   }
 
   record.hit = true;
-
 }

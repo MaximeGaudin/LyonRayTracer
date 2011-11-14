@@ -3,6 +3,8 @@
 #include <boost/foreach.hpp>
 #define feach BOOST_FOREACH
 
+#include <Triangle.hpp>
+
 // Ctors
   Directional::Directional ( Vector3d direction ) 
   : Light ()
@@ -22,13 +24,12 @@ Color<double> Directional::getContribution (
     vector<Geometry*> geometries,
     HitRecord record ) const {
 
-  int i = 1;
   feach (Geometry* g, geometries) {
     Ray newRay ( record.position + record.normal * 0.0001, - direction_, true );
     HitRecord currentRecord = g->getRecord ( newRay );
 
     if ( currentRecord.hit ) {
-      return material_.ambient; // Ombre
+      return Color_d_BLACK; // Ombre
     }
   }
 

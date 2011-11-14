@@ -28,6 +28,10 @@ Perspective::Perspective (
   setupCameraBase ();
 }
 
+Vector3d Perspective::direction () const {
+  return (lookAt_ - eye_).Normalized();
+} 
+
 // Worker methods
 void Perspective::setupCameraBase ( ) {
 IPNormal_ = (lookAt_ - eye_).Normalized();

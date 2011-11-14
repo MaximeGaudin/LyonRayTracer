@@ -39,6 +39,7 @@ Mesh* MeshImporter3ds::build ( string const& filename ) {
       N[2] = face->normal[2];
 
       triangleList.push_back( Triangle (A, B, C, N) );
+      //cout << N << endl;
     }
   }
 

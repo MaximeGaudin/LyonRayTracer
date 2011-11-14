@@ -2,6 +2,7 @@
 #define MESH_H_
 #include <Maths.hpp>
 #include <Triangle.hpp>
+#include <Sphere.hpp>
 #include <vector>
 
 using namespace std;
@@ -22,5 +23,7 @@ class Mesh: public Geometry {
     Vector3d translation_; 
     Vector3d rotation_; 
     Vector3d scale_;
+
+    Sphere boundingSphere_;
 };
 #endif // MESH_H_

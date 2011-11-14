@@ -20,6 +20,9 @@ class Triangle : public Geometry {
   public:
     HitRecord getRecord ( Ray ray ) const;
 
+  public:
+    Vector3d getBarycenter () const;
+
   protected:
     Vector3d a_;
     Vector3d b_;
