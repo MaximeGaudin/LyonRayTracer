@@ -234,14 +234,13 @@ Scene buildScene5 () {
   scene.frame = new Image ( 600, 600 );
 
   scene.camera = new Perspective ( 0.5,
-     (V3d_Down + V3d_Backward + V3d_Right) * 25, V3d_Zero, V3d_Zero );
+     (V3d_Up + V3d_Backward) * 1, V3d_Zero, V3d_Zero );
 
-  scene.lights.push_back ( new Directional ( V3d_Up + V3d_Forward + V3d_Left, Material ( 0.5 * Color_d_WHITE  ) ) );
-//  scene.lights.push_back ( new Directional ( V3d_Down, Material ( 0.5 * Color_d_WHITE  ) ) );
+  scene.lights.push_back ( new Point ( (V3d_Up + V3d_Left + V3d_Backward) * 2, Material ( 0.5 * Color_d_WHITE  ) ) );
 
   MeshImporter3ds MI;
   scene.geometries.push_back ( MI.build ( "models/teapot.3ds" ) );
-//  scene.geometries.push_back ( new Plane ( V3d_Down * 5, V3d_Up, Material ( Color_d( 0.0,0.7,0.0) ) ) );
+  scene.geometries.push_back ( new Plane ( V3d_Down * 0.7, V3d_Up, Material ( Color_d( 0.0,0.7,0.0) ) ) );
 
   return scene;
 }
@@ -253,7 +252,7 @@ Scene buildScene7 () {
   scene.frame = new Image ( 600, 600 );
 
   scene.camera = new Perspective ( 0.5,
-     (V3d_Backward + V3d_Up) * 1, V3d_Zero, V3d_Zero );
+     (V3d_Backward + V3d_Up) * 0.5, V3d_Zero, V3d_Zero );
 
   scene.lights.push_back ( new Directional ( V3d_Forward + V3d_Down +V3d_Left, Material ( 0.5 * Color_d_WHITE  ) ) );
 //  scene.lights.push_back ( new Directional ( V3d_Down, Material ( 0.5 * Color_d_WHITE  ) ) );

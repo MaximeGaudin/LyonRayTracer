@@ -62,7 +62,8 @@ am_lrt_OBJECTS = ./src/Cameras/Perspective.$(OBJEXT) \
 	./src/Lights/Directional.$(OBJEXT) ./src/main.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
 	./src/MeshImporters/MeshImporter3ds.$(OBJEXT) \
-	./src/Ray.$(OBJEXT) ./src/Optimization/OctreeNode.$(OBJEXT)
+	./src/Ray.$(OBJEXT) ./src/Optimization/OctreeNode.$(OBJEXT) \
+	./src/Lights/Point.$(OBJEXT)
 lrt_OBJECTS = $(am_lrt_OBJECTS)
 lrt_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -199,7 +200,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc
+lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc ./src/Lights/Point.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hh
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -373,6 +374,8 @@ src/Optimization/$(DEPDIR)/$(am__dirstamp):
 ./src/Optimization/OctreeNode.$(OBJEXT):  \
 	src/Optimization/$(am__dirstamp) \
 	src/Optimization/$(DEPDIR)/$(am__dirstamp)
+./src/Lights/Point.$(OBJEXT): src/Lights/$(am__dirstamp) \
+	src/Lights/$(DEPDIR)/$(am__dirstamp)
 lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES) 
 	@rm -f lrt$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(lrt_OBJECTS) $(lrt_LDADD) $(LIBS)
@@ -390,6 +393,7 @@ mostlyclean-compile:
 	-rm -f ./src/Graphics/JPGWriter.$(OBJEXT)
 	-rm -f ./src/Graphics/PNGWriter.$(OBJEXT)
 	-rm -f ./src/Lights/Directional.$(OBJEXT)
+	-rm -f ./src/Lights/Point.$(OBJEXT)
 	-rm -f ./src/Material.$(OBJEXT)
 	-rm -f ./src/MeshImporters/MeshImporter3ds.$(OBJEXT)
 	-rm -f ./src/Optimization/OctreeNode.$(OBJEXT)
@@ -415,6 +419,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/JPGWriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGWriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Directional.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Point.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/MeshImporters/$(DEPDIR)/MeshImporter3ds.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Optimization/$(DEPDIR)/OctreeNode.Po@am__quote@
 

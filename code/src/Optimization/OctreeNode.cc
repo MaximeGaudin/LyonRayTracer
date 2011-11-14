@@ -46,6 +46,14 @@ OctreeNode::OctreeNode (
 
     vector< Triangle* > subBoxesTriangles[8];
     feach ( Triangle* t, triangles ) {
+      double u = (t->getB() - t->getA()).Length();
+      double v = (t->getC() - t->getA()).Length();
+      double w = (t->getB() - t->getC()).Length();
+      if ( u >= Up[1] || v >= Up[1] || w >= Up[1] ) {
+        isLeaf_ = true;
+        return ;
+       }
+
       for ( unsigned int i = 0; i < 8; ++i ) {
         if ( subBoxes[i].contains ( t ) ) {
           subBoxesTriangles[i].push_back( t );
@@ -54,7 +62,6 @@ OctreeNode::OctreeNode (
     }
 
     for ( unsigned int i = 0; i < 8; ++i ) {
-      // cout << "Ajout de la subboxes " << i << " : " << subBoxesTriangles[i].size() << endl;
       if ( subBoxesTriangles[i].size() != 0 )
         subNodes_.push_back ( new OctreeNode ( subBoxes[i], subBoxesTriangles[i], minTriangles ) );
     }

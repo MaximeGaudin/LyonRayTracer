@@ -45,12 +45,13 @@ HitRecord Box::getRecord ( Ray ray ) const {
 }
 
 bool Box::contains ( Triangle* t ) const {
-  Vector3d barycenter ( t->getBarycenter() );
+/*  Vector3d barycenter ( t->getBarycenter() );
 
   for( unsigned int i = 0; i < 3; ++i )
     if (!( barycenter[i] >= min_[i] && barycenter[i] <= max_[i] )) return false;
 
   return true;
+  */
 
   Vector3d a = t->getA(); 
   Vector3d b = t->getB(); 
@@ -68,6 +69,5 @@ bool Box::contains ( Triangle* t ) const {
   for( unsigned int i = 0; i < 3; ++i )
     if (!( c[i] >= min_[i] && c[i] <= max_[i] )) isCContained = false;
 
-  if ( !(isAContained || isBContained || isCContained ) ) cout << "Enfin" << endl;
   return isAContained || isBContained || isCContained;;
 }
