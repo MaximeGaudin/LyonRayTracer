@@ -12,8 +12,9 @@ Mesh::Mesh ( vector<Triangle*> triangleList )
     , rotation_(V3d_Zero)
     , boundingSphere_( V3d_Zero, 0.0 )
 {
-  Vector3d center; 
+  logInformation("Mesh", "Bounding sphere computation...");
 
+  Vector3d center; 
   feach ( Triangle* tr, triangleList) { 
     center += tr->getBarycenter();
   }
@@ -27,10 +28,11 @@ Mesh::Mesh ( vector<Triangle*> triangleList )
 
   boundingSphere_ = Sphere ( center, maxDistance );
 
+  logInformation("Mesh", "Octree computation...");
   octreeRoot_ = OctreeNode ( 
       Box (center + (1.0 + maxDistance) * (V3d_Down + V3d_Left + V3d_Forward),
       center + (1.0 + maxDistance) * (V3d_Up + V3d_Right + V3d_Backward) ),
-      triangleList_, 10 );
+      triangleList_, 20 );
 }
 
 HitRecord Mesh::getRecord ( Ray ray ) const {

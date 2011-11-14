@@ -17,11 +17,19 @@ class Triangle : public Geometry {
         Vector3d aNormal, Vector3d bNormal, Vector3d cNormal 
         );
 
+    Triangle ( 
+        Vector3d a, Vector3d b, Vector3d c, 
+        Vector3d aNormal, Vector3d bNormal, Vector3d cNormal,
+        Material material
+        );
   public:
     HitRecord getRecord ( Ray ray ) const;
 
   public:
     Vector3d getBarycenter () const;
+    Vector3d getA () const;
+    Vector3d getB () const;
+    Vector3d getC () const;
 
   protected:
     Vector3d a_;

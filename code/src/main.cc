@@ -246,6 +246,26 @@ Scene buildScene5 () {
   return scene;
 }
 
+Scene buildScene7 () {
+  Scene scene;
+
+  scene.ambient = Color_d ( 0.1, 0.1, 0.1 );
+  scene.frame = new Image ( 600, 600 );
+
+  scene.camera = new Perspective ( 0.5,
+     (V3d_Backward + V3d_Up) * 1, V3d_Zero, V3d_Zero );
+
+  scene.lights.push_back ( new Directional ( V3d_Forward + V3d_Down +V3d_Left, Material ( 0.5 * Color_d_WHITE  ) ) );
+//  scene.lights.push_back ( new Directional ( V3d_Down, Material ( 0.5 * Color_d_WHITE  ) ) );
+
+  MeshImporter3ds MI;
+  scene.geometries.push_back ( MI.build ( "models/angel.3ds" ) );
+  scene.geometries.push_back ( new Plane ( V3d_Down * 2, V3d_Up, Material ( Color_d( 0.0,0.0,0.4) ) ) );
+
+  return scene;
+}
+
+
 Scene buildScene6 () {
   Scene scene;
 

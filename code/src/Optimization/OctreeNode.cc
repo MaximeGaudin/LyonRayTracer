@@ -16,10 +16,8 @@ OctreeNode::OctreeNode (
   , box_(box)
     , triangles_(triangles)
 {
-  cout << box.getMin() << " || " << box.getMax() << endl;
   if ( triangles.size() <= minTriangles ) {
     isLeaf_ = true;
-    cout << "Leaf !" << endl;
   } else {
     isLeaf_ = false;
     Vector3d O ( box.getMin() );
@@ -33,7 +31,6 @@ OctreeNode::OctreeNode (
     Vector3d Forward;
     Forward[2] = ((box.getMax() - box.getMin()) / 2.0)[2];
 
-    cout << "Création des subboxes... (" << triangles.size() << ")" << endl;
     Box subBoxes[8];
     subBoxes[0] = createBox ( V3d_Zero ); 
     subBoxes[1] = createBox ( Up ); 
@@ -47,19 +44,17 @@ OctreeNode::OctreeNode (
     subBoxes[6] = createBox ( Right + Forward ); 
     subBoxes[7] = createBox ( Right + Forward + Up); 
 
-    cout << "Ajout des triangles aux subboxes..." << endl;
     vector< Triangle* > subBoxesTriangles[8];
     feach ( Triangle* t, triangles ) {
       for ( unsigned int i = 0; i < 8; ++i ) {
         if ( subBoxes[i].contains ( t ) ) {
-          cout << "Ajout d'un triangle..." << endl;
           subBoxesTriangles[i].push_back( t );
         }
       }
     }
 
     for ( unsigned int i = 0; i < 8; ++i ) {
-      cout << "Ajout de la subboxes " << i << " : " << subBoxesTriangles[i].size() << endl;
+      // cout << "Ajout de la subboxes " << i << " : " << subBoxesTriangles[i].size() << endl;
       if ( subBoxesTriangles[i].size() != 0 )
         subNodes_.push_back ( new OctreeNode ( subBoxes[i], subBoxesTriangles[i], minTriangles ) );
     }

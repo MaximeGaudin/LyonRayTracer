@@ -1,21 +1,21 @@
 #include "Box.hpp"
 
-Box::Box ()
+  Box::Box ()
   : Geometry()
-    , min_ (V3d_Zero)
+  , min_ (V3d_Zero)
     , max_ (V3d_Zero)
 {}
 
-Box::Box ( Vector3d min, Vector3d max ) 
-: Geometry ()
+  Box::Box ( Vector3d min, Vector3d max ) 
+  : Geometry ()
   , min_(min)
-  , max_(max)
+    , max_(max)
 { }
 
-Box::Box ( Vector3d min, Vector3d max, Material material ) 
-: Geometry (material)
+  Box::Box ( Vector3d min, Vector3d max, Material material ) 
+  : Geometry (material)
   , min_(min)
-  , max_(max)
+    , max_(max)
 { }
 
 HitRecord Box::getRecord ( Ray ray ) const {
@@ -27,11 +27,11 @@ HitRecord Box::getRecord ( Ray ray ) const {
   for ( unsigned int i = 0; i < 3; ++i ) {
 
     if ( ray.direction()[i] >= 0 ) {
-     tMin[i] = (min_[i] - ray.from()[i]) / ray.direction()[i];
-     tMax[i] = (max_[i] - ray.from()[i]) / ray.direction()[i];
+      tMin[i] = (min_[i] - ray.from()[i]) / ray.direction()[i];
+      tMax[i] = (max_[i] - ray.from()[i]) / ray.direction()[i];
     } else {
-     tMax[i] = (min_[i] - ray.from()[i]) / ray.direction()[i];
-     tMin[i] = (max_[i] - ray.from()[i]) / ray.direction()[i];
+      tMax[i] = (min_[i] - ray.from()[i]) / ray.direction()[i];
+      tMin[i] = (max_[i] - ray.from()[i]) / ray.direction()[i];
     }
 
     if ( i >= 1 ) {
@@ -51,4 +51,23 @@ bool Box::contains ( Triangle* t ) const {
     if (!( barycenter[i] >= min_[i] && barycenter[i] <= max_[i] )) return false;
 
   return true;
+
+  Vector3d a = t->getA(); 
+  Vector3d b = t->getB(); 
+  Vector3d c = t->getC(); 
+
+  bool isAContained = true;
+  for( unsigned int i = 0; i < 3; ++i )
+    if (!( a[i] >= min_[i] && a[i] <= max_[i] )) isAContained = false;
+
+  bool isBContained = true;
+  for( unsigned int i = 0; i < 3; ++i )
+    if (!( b[i] >= min_[i] && b[i] <= max_[i] )) isBContained = false;
+
+  bool isCContained = true;
+  for( unsigned int i = 0; i < 3; ++i )
+    if (!( c[i] >= min_[i] && c[i] <= max_[i] )) isCContained = false;
+
+  if ( !(isAContained || isBContained || isCContained ) ) cout << "Enfin" << endl;
+  return isAContained || isBContained || isCContained;;
 }
