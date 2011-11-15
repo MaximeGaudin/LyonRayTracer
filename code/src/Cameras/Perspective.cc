@@ -42,10 +42,13 @@ IPNormal_ = (lookAt_ - eye_).Normalized();
         % eye_.pretty() % lookAt_.pretty() % IPNormal_.pretty() ) );
 }
 
-Ray Perspective::getRay ( double u, double v ) const { 
+std::vector< Ray > Perspective::getRay ( double u, double v ) const { 
+  std::vector < Ray > cameraRays;
+
   Ray r  ( eye_, IPNormal_ * focaleDistance_
       + IPXAxis_ * (u - 0.5)
       + IPYAxis_ * (v - 0.5) );
 
-  return r;
+  cameraRays.push_back( r );
+  return cameraRays;
 }

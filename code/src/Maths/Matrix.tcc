@@ -102,6 +102,10 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Rotation (
     * Matrix < P, 4, 4 >::RotationZ ( Zangle );
 }
 
+template < typename P, int N, int M >
+Matrix < P, 4, 4 > Matrix < P, N, M>::Rotation ( Vector3d const& angle ) {
+  return Matrix<P,N,M>::Rotation ( angle[0], angle[1], angle[2] );
+}
 
 template < typename P, int N, int M >
 Matrix < P, 4, 4 > Matrix < P, N, M>::RotationFromAxis (
@@ -143,6 +147,11 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Translation (
 }
 
 template < typename P, int N, int M >
+Matrix < P, 4, 4 > Matrix < P, N, M >::Translation ( Vector3d const& translation ) {
+  return Matrix<P,N,M>::Translation ( translation[0], translation[1], translation[2] );
+}
+
+template < typename P, int N, int M >
 Matrix < P, 4, 4 > Matrix < P, N, M >::Scale ( 
     double X,
     double Y, 
@@ -155,6 +164,12 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Scale (
 
   return result;
 }
+
+template < typename P, int N, int M >
+Matrix < P, 4, 4 > Scale ( Vector3d const& scaleFactor ) {
+  return Matrix<P,N,M>::Scale ( scaleFactor[0], scaleFactor[1], scaleFactor[2] );
+}
+
 // Pretty printing
 static string generateSpaces ( int n ) {
   string spaces;

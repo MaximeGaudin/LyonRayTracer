@@ -1,26 +1,48 @@
+/**
+  * @file Geometry.hpp
+  * @author Maxime Gaudin.
+  * @date 2011
+  *
+  * Cette classe est l'interface de tous les objets dont on peut calculer
+  * l'intersection avec un ray
+  */
 #ifndef GEOMETRY_H_
 #define GEOMETRY_H_
 #include <HitRecord.hpp>
 #include <Ray.hpp>
 #include <Material.hpp>
+#include <Maths.hpp>
 
 class Geometry {
   public:
-    Geometry ( ) {}
+    Geometry ( );
 
     /**
       * @param material Matériaux lié à la géométrie
       */
-    Geometry ( Material material ) : material_( material ) {}
+    Geometry ( Material const& material );
+
+    /**
+      * @param material Matériaux lié à la géométrie.
+      * @param translation Translation à appliquer à la géométrie.
+      * @param rotation Rotation à appliquer à la géométrie.
+      * @param scale Mise à l'échelle à appliquer à la géométrie.
+      */ 
+    Geometry ( 
+        Material const& material, 
+        Vector3d const& translation,
+        Vector3d const& rotation,
+        Vector3d const& scale );
 
   public:
 
     /**
       * @return L'enregistrement lié à la collision du rayon @a ray et
       * la géométrie.
+      *
       * @param ray Rayon à intersecter.
       */
-    virtual HitRecord getRecord ( Ray ray ) const = 0 ;
+    virtual HitRecord getRecord ( Ray const& ray ) const = 0 ;
 
   public:
     /**
@@ -30,5 +52,10 @@ class Geometry {
 
   protected:
     Material material_;
+
+    Vector3d translation_; 
+    Vector3d rotation_; 
+    Vector3d scale_;
+    Matrix<double, 4, 4> transformation_;
 };
 #endif // GEOMETRY_H_

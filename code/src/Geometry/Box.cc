@@ -1,24 +1,24 @@
 #include "Box.hpp"
 
-  Box::Box ()
+Box::Box ()
   : Geometry()
   , min_ (V3d_Zero)
-    , max_ (V3d_Zero)
+  , max_ (V3d_Zero)
 {}
 
-  Box::Box ( Vector3d min, Vector3d max ) 
+Box::Box ( Vector3d const& min, Vector3d const& max ) 
   : Geometry ()
   , min_(min)
-    , max_(max)
+  , max_(max)
 { }
 
-  Box::Box ( Vector3d min, Vector3d max, Material material ) 
+  Box::Box ( Vector3d const& min, Vector3d const& max, Material const& material ) 
   : Geometry (material)
   , min_(min)
-    , max_(max)
+  , max_(max)
 { }
 
-HitRecord Box::getRecord ( Ray ray ) const {
+HitRecord Box::getRecord ( Ray const& ray ) const {
   HitRecord record;
   record.hit = false;
   record.hitGeometry = this;
@@ -45,7 +45,7 @@ HitRecord Box::getRecord ( Ray ray ) const {
   return record;
 }
 
-bool Box::contains ( Triangle* t ) const {
+bool Box::contains ( const Triangle *const t ) const {
 /*  Vector3d barycenter ( t->getBarycenter() );
 
   for( unsigned int i = 0; i < 3; ++i )

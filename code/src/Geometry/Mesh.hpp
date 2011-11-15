@@ -1,31 +1,32 @@
 #ifndef MESH_H_
 #define MESH_H_
-#include <Maths.hpp>
-#include <Triangle.hpp>
-#include <Sphere.hpp>
-#include <vector>
-#include <OctreeNode.hpp>
+#include <Geometry.hpp>
 
-using namespace std;
+#include <vector>
+
+#include <Maths.hpp>
+
+class OctreeNode;
+class Triangle;
 
 class Mesh: public Geometry {
   public:
-    Mesh ( vector<Triangle*> triangleList );
-    Mesh ( vector<Triangle*> triangleList, 
-        Vector3d translation, Vector3d rotation, Vector3d scale );
+    Mesh ( std::vector<Triangle*> const& triangleList );
+
+    Mesh ( 
+        std::vector<Triangle*> const& triangleList, 
+        Vector3d const& translation, 
+        Vector3d const& rotation,
+        Vector3d const& scale );
 
   public:
-    HitRecord getRecord ( Ray ray ) const;
+    HitRecord getRecord ( Ray const& ray ) const;
 
   protected:
-    vector<Triangle*> triangleList_;
-    OctreeNode octreeRoot_;
+    std::vector<Triangle*> triangleList_;
 
-    Matrix<double, 4, 4> transformation_;
-    Vector3d translation_; 
-    Vector3d rotation_; 
-    Vector3d scale_;
 
-    Sphere boundingSphere_;
+  private:
+    OctreeNode* octreeRoot_;
 };
 #endif // MESH_H_

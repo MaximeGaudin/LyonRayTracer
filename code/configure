@@ -4248,7 +4248,7 @@ ac_fn_cxx_check_header_mongrel "$LINENO" "iostream" "ac_cv_header_iostream" "$ac
 if test "x$ac_cv_header_iostream" = xyes; then :
 
 else
-  as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
+  as_fn_error $? "Missing header : iostream" "$LINENO" 5
 fi
 
 
@@ -4256,7 +4256,7 @@ ac_fn_cxx_check_header_mongrel "$LINENO" "sstream" "ac_cv_header_sstream" "$ac_i
 if test "x$ac_cv_header_sstream" = xyes; then :
 
 else
-  as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
+  as_fn_error $? "Missing header : sstream" "$LINENO" 5
 fi
 
 
@@ -4264,7 +4264,15 @@ ac_fn_cxx_check_header_mongrel "$LINENO" "cmath" "ac_cv_header_cmath" "$ac_inclu
 if test "x$ac_cv_header_cmath" = xyes; then :
 
 else
-  as_fn_error $? "Missing header : cstdlib" "$LINENO" 5
+  as_fn_error $? "Missing header : cmath" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "vector" "ac_cv_header_vector" "$ac_includes_default"
+if test "x$ac_cv_header_vector" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : vector" "$LINENO" 5
 fi
 
 

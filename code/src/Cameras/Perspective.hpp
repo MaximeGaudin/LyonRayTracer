@@ -1,5 +1,7 @@
 #ifndef PERSPECTIVE_H_
 #define PERSPECTIVE_H_
+#include <vector>
+
 #include <common.hpp>
 
 #include <Camera.hpp>
@@ -34,7 +36,7 @@ class Perspective : public Camera {
         Vector3d const& up );
 
   public:
-    Ray getRay ( double u, double v ) const;
+    std::vector<Ray> getRay ( double u, double v ) const;
 
   private:
     void setupCameraBase ( );

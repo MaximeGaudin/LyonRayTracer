@@ -52,19 +52,21 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_lrt_OBJECTS = ./src/Cameras/Perspective.$(OBJEXT) \
-	./src/Samplers/DefaultSampler.$(OBJEXT) \
 	./src/exceptions.$(OBJEXT) ./src/Geometry/Box.$(OBJEXT) \
+	./src/Geometry/Geometry.$(OBJEXT) \
 	./src/Geometry/Mesh.$(OBJEXT) ./src/Geometry/Plane.$(OBJEXT) \
 	./src/Geometry/Sphere.$(OBJEXT) \
 	./src/Geometry/Triangle.$(OBJEXT) \
 	./src/Graphics/Image.$(OBJEXT) \
 	./src/Graphics/JPGWriter.$(OBJEXT) \
 	./src/Graphics/PNGWriter.$(OBJEXT) \
-	./src/Lights/Directional.$(OBJEXT) ./src/main.$(OBJEXT) \
+	./src/Lights/AreaLight.$(OBJEXT) \
+	./src/Lights/Directional.$(OBJEXT) \
+	./src/Lights/Point.$(OBJEXT) ./src/main.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
 	./src/MeshImporters/MeshImporter3ds.$(OBJEXT) \
-	./src/Ray.$(OBJEXT) ./src/Optimization/OctreeNode.$(OBJEXT) \
-	./src/Lights/Point.$(OBJEXT) ./src/Lights/AreaLight.$(OBJEXT)
+	./src/Optimization/OctreeNode.$(OBJEXT) ./src/Ray.$(OBJEXT) \
+	./src/Samplers/DefaultSampler.$(OBJEXT)
 lrt_OBJECTS = $(am_lrt_OBJECTS)
 lrt_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -201,7 +203,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/Samplers/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc ./src/Lights/Point.cc ./src/Lights/AreaLight.cc
+lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/AreaLight.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hpp
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -306,14 +308,6 @@ src/Cameras/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Cameras/$(DEPDIR)/$(am__dirstamp)
 ./src/Cameras/Perspective.$(OBJEXT): src/Cameras/$(am__dirstamp) \
 	src/Cameras/$(DEPDIR)/$(am__dirstamp)
-src/Samplers/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Samplers
-	@: > src/Samplers/$(am__dirstamp)
-src/Samplers/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) ./src/Samplers/$(DEPDIR)
-	@: > src/Samplers/$(DEPDIR)/$(am__dirstamp)
-./src/Samplers/DefaultSampler.$(OBJEXT): src/Samplers/$(am__dirstamp) \
-	src/Samplers/$(DEPDIR)/$(am__dirstamp)
 src/$(am__dirstamp):
 	@$(MKDIR_P) ./src
 	@: > src/$(am__dirstamp)
@@ -329,6 +323,8 @@ src/Geometry/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Geometry/$(DEPDIR)
 	@: > src/Geometry/$(DEPDIR)/$(am__dirstamp)
 ./src/Geometry/Box.$(OBJEXT): src/Geometry/$(am__dirstamp) \
+	src/Geometry/$(DEPDIR)/$(am__dirstamp)
+./src/Geometry/Geometry.$(OBJEXT): src/Geometry/$(am__dirstamp) \
 	src/Geometry/$(DEPDIR)/$(am__dirstamp)
 ./src/Geometry/Mesh.$(OBJEXT): src/Geometry/$(am__dirstamp) \
 	src/Geometry/$(DEPDIR)/$(am__dirstamp)
@@ -356,7 +352,11 @@ src/Lights/$(am__dirstamp):
 src/Lights/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Lights/$(DEPDIR)
 	@: > src/Lights/$(DEPDIR)/$(am__dirstamp)
+./src/Lights/AreaLight.$(OBJEXT): src/Lights/$(am__dirstamp) \
+	src/Lights/$(DEPDIR)/$(am__dirstamp)
 ./src/Lights/Directional.$(OBJEXT): src/Lights/$(am__dirstamp) \
+	src/Lights/$(DEPDIR)/$(am__dirstamp)
+./src/Lights/Point.$(OBJEXT): src/Lights/$(am__dirstamp) \
 	src/Lights/$(DEPDIR)/$(am__dirstamp)
 ./src/main.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -371,7 +371,6 @@ src/MeshImporters/$(DEPDIR)/$(am__dirstamp):
 ./src/MeshImporters/MeshImporter3ds.$(OBJEXT):  \
 	src/MeshImporters/$(am__dirstamp) \
 	src/MeshImporters/$(DEPDIR)/$(am__dirstamp)
-./src/Ray.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Optimization/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Optimization
 	@: > src/Optimization/$(am__dirstamp)
@@ -381,10 +380,15 @@ src/Optimization/$(DEPDIR)/$(am__dirstamp):
 ./src/Optimization/OctreeNode.$(OBJEXT):  \
 	src/Optimization/$(am__dirstamp) \
 	src/Optimization/$(DEPDIR)/$(am__dirstamp)
-./src/Lights/Point.$(OBJEXT): src/Lights/$(am__dirstamp) \
-	src/Lights/$(DEPDIR)/$(am__dirstamp)
-./src/Lights/AreaLight.$(OBJEXT): src/Lights/$(am__dirstamp) \
-	src/Lights/$(DEPDIR)/$(am__dirstamp)
+./src/Ray.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Samplers/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Samplers
+	@: > src/Samplers/$(am__dirstamp)
+src/Samplers/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Samplers/$(DEPDIR)
+	@: > src/Samplers/$(DEPDIR)/$(am__dirstamp)
+./src/Samplers/DefaultSampler.$(OBJEXT): src/Samplers/$(am__dirstamp) \
+	src/Samplers/$(DEPDIR)/$(am__dirstamp)
 lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES) 
 	@rm -f lrt$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(lrt_OBJECTS) $(lrt_LDADD) $(LIBS)
@@ -393,6 +397,7 @@ mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f ./src/Cameras/Perspective.$(OBJEXT)
 	-rm -f ./src/Geometry/Box.$(OBJEXT)
+	-rm -f ./src/Geometry/Geometry.$(OBJEXT)
 	-rm -f ./src/Geometry/Mesh.$(OBJEXT)
 	-rm -f ./src/Geometry/Plane.$(OBJEXT)
 	-rm -f ./src/Geometry/Sphere.$(OBJEXT)
@@ -420,6 +425,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Cameras/$(DEPDIR)/Perspective.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Box.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Geometry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Mesh.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Plane.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Sphere.Po@am__quote@

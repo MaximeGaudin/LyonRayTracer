@@ -7,16 +7,43 @@
 
 class Box : public Geometry {
   public:
+    /**
+      * Créer une boite dummy 
+      */
     Box ();
-    Box ( Vector3d min, Vector3d max );
-    Box ( Vector3d min, Vector3d max , Material material );
+
+    /**
+      * @param min Coin inférieur gauche de la boite.
+      * @param min Coin supérieur droit de la boite.
+      */
+    Box ( Vector3d const& min, Vector3d const& max );
+
+    /**
+      * @param min Coin inférieur gauche de la boite.
+      * @param min Coin supérieur droit de la boite.
+      * @param material Matériaux à associer à la géométrie.
+      */
+    Box ( Vector3d const& min, Vector3d const& max , Material const& material );
 
   public:
-    HitRecord getRecord ( Ray ray ) const;
-    bool contains ( Triangle* t ) const;
+    HitRecord getRecord ( Ray const& ray ) const;
+
+    /**
+      * @param t Triangle dont il faut vérifier l'appartenance à la boite.
+      * @return true, si le triangle est géométriquement inclu dans la boite,
+      * false, sinon.
+    */
+    bool contains ( const Triangle *const t ) const;
 
   public:
+    /**
+      * @return Le coin inférieur gauche de la boite.
+      */
     Vector3d getMin () const { return min_; }
+
+    /**
+      * @return Le coin supérieur droitde la boite.
+      */
     Vector3d getMax () const { return max_; }
 
   protected:

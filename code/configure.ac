@@ -23,9 +23,10 @@ LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 # Vérification des headers de bases
 AC_CHECK_HEADER([cstdio], [], [AC_MSG_ERROR([Missing header : cstdio])])
 AC_CHECK_HEADER([cstdlib], [], [AC_MSG_ERROR([Missing header : cstdlib])])
-AC_CHECK_HEADER([iostream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
-AC_CHECK_HEADER([sstream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
-AC_CHECK_HEADER([cmath], [], [AC_MSG_ERROR([Missing header : cstdlib])])
+AC_CHECK_HEADER([iostream], [], [AC_MSG_ERROR([Missing header : iostream])])
+AC_CHECK_HEADER([sstream], [], [AC_MSG_ERROR([Missing header : sstream])])
+AC_CHECK_HEADER([cmath], [], [AC_MSG_ERROR([Missing header : cmath])])
+AC_CHECK_HEADER([vector], [], [AC_MSG_ERROR([Missing header : vector])])
 
 # Vérification des fonction de la libpng
 AC_CHECK_HEADER([png.h], [], [AC_MSG_ERROR([Missing header : png.h])])
