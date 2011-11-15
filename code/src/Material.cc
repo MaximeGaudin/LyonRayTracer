@@ -1,29 +1,29 @@
 #include "Material.hpp"
 
   Material::Material ( )
-  : ambient(Color<double>(0.03))
+  : ambient(Color_d(0.03))
   , opacity (1)
   , IOR (1)
   , reflexivity(0.1)
-  , diffuse(Color<double>(0.5))
+  , diffuse(Color_d(0.5))
   , diffuseIntensity(1)
-  , specular(Color<double>(1))
+  , specular(Color_d(1))
     , specularPower(60) 
 { }
 
-  Material::Material ( Color<double> diffuse )
-  : ambient(Color<double>(0.03))
+  Material::Material ( Color_d diffuse )
+  : ambient(Color_d(0.03))
   , opacity (1)
   , IOR (1)
   , reflexivity(0.1)
   , diffuse(diffuse)
   , diffuseIntensity(1)
-  , specular(Color<double>(1))
+  , specular(Color_d(1))
     , specularPower(60) 
 { }
 
 
-  Material::Material ( Color<double> ambient, Color<double> diffuse, Color<double> specular )
+  Material::Material ( Color_d ambient, Color_d diffuse, Color_d specular )
   : ambient(ambient)
   , opacity (1)
   , IOR (1)

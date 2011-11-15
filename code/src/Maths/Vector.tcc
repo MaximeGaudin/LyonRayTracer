@@ -7,7 +7,11 @@
 #include <boost/static_assert.hpp>
 
 #include <iostream>
+
+#define  VECTOR_OUT_OF_BOUNDS_EXCEPTION_MESSAGE "Out of bound."
+
 using namespace std;
+
 typedef Vector<double, 2> Vector2d;
 typedef Vector<double, 3> Vector3d;
 typedef Vector<double, 4> Vector4d;

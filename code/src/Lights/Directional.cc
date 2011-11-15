@@ -25,7 +25,7 @@ Color<double> Directional::getContribution (
     HitRecord record ) const {
 
   feach (Geometry* g, geometries) {
-    Ray newRay ( record.position + record.normal * 0.0001, - direction_, true );
+    Ray newRay ( record.position + record.normal * 0.0001, - direction_ );
     HitRecord currentRecord = g->getRecord ( newRay );
 
     if ( currentRecord.hit ) {

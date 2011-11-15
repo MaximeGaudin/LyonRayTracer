@@ -1,9 +1,9 @@
 #include "DefaultSampler.hpp"
-
+#include <Image.hpp>
 #include <Camera.hpp>
 
 std::vector<Ray> DefaultSampler::getRays ( Scene const& scene,
-      unsigned int X, unsigned int Y ) {
+    unsigned int X, unsigned int Y ) {
   std::vector<Ray> rays;
   double u = (double)X / (double)scene.frame->W();
   double v = (double)Y / (double)scene.frame->H();

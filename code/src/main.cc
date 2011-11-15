@@ -5,6 +5,7 @@
 #include <Lights.hpp>
 #include <Geometries.hpp>
 #include <MeshImporters.hpp>
+#include <Samplers.hpp>
 
 #include <iostream>
 #include <limits>
@@ -49,7 +50,7 @@ void displayProgress ( unsigned int Y, unsigned int H ) {
 
 Ray getReflectedRay ( Ray const& ray, HitRecord const& record ) {
   double d = Vector3d::Dot ( record.normal, -ray.direction() );
-  return Ray ( record.position + 0.01 * record.normal, ( 2 * record.normal * d ) + ray.direction(), true );
+  return Ray ( record.position + 0.01 * record.normal, ( 2 * record.normal * d ) + ray.direction() );
 }
 
 
@@ -64,7 +65,7 @@ Ray getRefractedRay ( Ray const& ray, double IOR, HitRecord const& record ) {
 
   bool input = ( abs ( Vector3d::Dot ( ray.direction(), record.normal ) ) > M_PI / 2.0 );
   Vector3d bias = ( input ) ? -0.01 * record.normal : 0.01 * record.normal;
-  Ray newRay ( record.position + bias, ( n * ray.direction() ) + ( n * d - c ) * record.normal, true );
+  Ray newRay ( record.position + bias, ( n * ray.direction() ) + ( n * d - c ) * record.normal );
 
   //cout << "Original : " << ray.direction() << endl;
   //cout << "New : " << newRay.direction() << endl;
@@ -281,6 +282,28 @@ Scene buildScene6 () {
   return scene;
 }
 
+Scene buildScene8 () {
+  Scene scene;
+
+  scene.ambient = Color_d ( 0.1, 0.1, 0.1 );
+  scene.frame = new Image ( 300, 300 );
+
+  scene.camera = new Perspective ( 0.5,
+     (V3d_Up + V3d_Backward) * 1, V3d_Zero, V3d_Zero );
+
+  scene.lights.push_back ( 
+      new AreaLight ( 
+        (V3d_Up + V3d_Left + V3d_Backward) * 2,
+        (V3d_Down + V3d_Right + V3d_Forward),
+        2, 2, 1,
+        Material ( 0.5 * Color_d_WHITE  ) ) );
+
+  MeshImporter3ds MI;
+  //scene.geometries.push_back ( MI.build ( "models/teapot.3ds" ) );
+  scene.geometries.push_back ( new Plane ( V3d_Down * 0.7, V3d_Up, Material ( Color_d( 0.0,0.7,0.0) ) ) );
+
+  return scene;
+}
 
 int main () {
   PNGWriter IW; 

@@ -1,5 +1,24 @@
+/**
+  * @file Material.hpp / Material.cc
+  * @author Maxime Gaudin.
+  * @date 2011
+  * 
+  * Material définit une classe permettant de stocker les paramètres esthétiques
+  * chaque objet comme sa couleur, son opacité, son indice de réfraction, etc.
+  *
+  * Les paramètres par défault sont :
+  * - ambient ( 0.03, 0.03, 0.03 )
+  * - opacity ( 1.0 )
+  * - IOR ( 1.0 )
+  * - Reflexivity ( 0.1 )
+  * - Diffuse ( 0.5, 0.5, 0.5 )
+  * - Diffuse Intensity ( 1.0 )
+  * - Specular ( 1.0, 1.0, 1.0 )
+  * - SpecularPower ( 60 )
+  */
 #ifndef MATERIAL_H_
 #define MATERIAL_H_
+#include <common.hpp>
 #include <Color.hpp>
 
 class Material {
@@ -9,21 +28,21 @@ class Material {
     /*
      * @param diffuse Couleur diffuse du matériaux.
      */
-    Material ( Color<double> diffuse );
+    Material ( Color_d diffuse );
 
     /*
      * @param diffuse Couleur diffuse du matériaux.
-     * @param diffuse Couleur diffuse du ambient.
-     * @param diffuse Couleur diffuse du specular.
+     * @param diffuse Couleur ambiente du matériaux.
+     * @param diffuse Couleur spéculaire du matériaux.
      */
-    Material ( Color<double> diffuse, Color<double> ambient, Color<double> specular );
+    Material ( Color_d diffuse, Color_d ambient, Color_d specular );
 
   public:
     /*
      * Couleur ambiente du matériaux, i.e. la couleur que possède la matériaux
-     * sans aucun éclairage. Elle est ajouté à toutes les autres couleurs
+     * sans aucun éclairage. Elle est ajouté à toutes les autres couleurs.
      */
-    Color<double> ambient;
+    Color_d ambient;
 
     /*
      * Facteur de transparence :
@@ -39,7 +58,7 @@ class Material {
     double reflexivity;
 
     /// Couleur diffuse du matériaux.
-    Color<double> diffuse;
+    Color_d diffuse;
     
     /**
       * Intensité de la couleur diffuse, 
@@ -48,7 +67,7 @@ class Material {
     double diffuseIntensity;
 
     /// Couleur spéculaire du matériaux.
-    Color<double> specular;
+    Color_d specular;
 
     /// Puissance de spécularitée.
     double specularPower;

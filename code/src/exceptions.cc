@@ -2,19 +2,17 @@
 #include <cstdlib>
 #include <iostream>
 
-using namespace std;
-
-void logException ( string message ) {
-	cerr << "CRITICAL EXCEPTION : " << message << endl;
+void logException ( std::string const& message ) {
+  std::cerr << "CRITICAL EXCEPTION : " << message << std::endl;
 	exit(1);
 }
 
-void logException ( string launcher, string message ) {
-  cerr << launcher; 
+void logException ( std::string const& launcher, std::string const& message ) {
+  std::cerr << launcher; 
   logException ( message );
 	exit(1);
 }
 
-void logInformation ( string launcher, string message ) {
-  cout << "[" << launcher << "] - " << message << endl;
+void logInformation ( std::string const& launcher, std::string const& message ) {
+  std::cout << "[" << launcher << "] - " << message << std::endl;
 }

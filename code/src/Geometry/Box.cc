@@ -42,6 +42,7 @@ HitRecord Box::getRecord ( Ray ray ) const {
   }
 
   record.hit = true;
+  return record;
 }
 
 bool Box::contains ( Triangle* t ) const {

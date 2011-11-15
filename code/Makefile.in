@@ -36,7 +36,7 @@ bin_PROGRAMS = lrt$(EXEEXT)
 subdir = .
 DIST_COMMON = $(am__configure_deps) $(srcdir)/Doxyfile.in \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/config.hh.in $(top_srcdir)/configure depcomp \
+	$(srcdir)/config.hpp.in $(top_srcdir)/configure depcomp \
 	install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -45,16 +45,17 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = config.hh
+CONFIG_HEADER = config.hpp
 CONFIG_CLEAN_FILES = Doxyfile
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_lrt_OBJECTS = ./src/Cameras/Perspective.$(OBJEXT) \
-	./src/DefaultSampler.$(OBJEXT) ./src/exceptions.$(OBJEXT) \
-	./src/Geometry/Box.$(OBJEXT) ./src/Geometry/Mesh.$(OBJEXT) \
-	./src/Geometry/Plane.$(OBJEXT) ./src/Geometry/Sphere.$(OBJEXT) \
+	./src/Samplers/DefaultSampler.$(OBJEXT) \
+	./src/exceptions.$(OBJEXT) ./src/Geometry/Box.$(OBJEXT) \
+	./src/Geometry/Mesh.$(OBJEXT) ./src/Geometry/Plane.$(OBJEXT) \
+	./src/Geometry/Sphere.$(OBJEXT) \
 	./src/Geometry/Triangle.$(OBJEXT) \
 	./src/Graphics/Image.$(OBJEXT) \
 	./src/Graphics/JPGWriter.$(OBJEXT) \
@@ -63,7 +64,7 @@ am_lrt_OBJECTS = ./src/Cameras/Perspective.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
 	./src/MeshImporters/MeshImporter3ds.$(OBJEXT) \
 	./src/Ray.$(OBJEXT) ./src/Optimization/OctreeNode.$(OBJEXT) \
-	./src/Lights/Point.$(OBJEXT)
+	./src/Lights/Point.$(OBJEXT) ./src/Lights/AreaLight.$(OBJEXT)
 lrt_OBJECTS = $(am_lrt_OBJECTS)
 lrt_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -200,9 +201,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc ./src/Lights/Point.cc
+lrt_SOURCES = ./src/Cameras/Perspective.cc ./src/Samplers/DefaultSampler.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Ray.cc ./src/Optimization/OctreeNode.cc ./src/Lights/Point.cc ./src/Lights/AreaLight.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
-all: config.hh
+all: config.hpp
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
@@ -242,22 +243,22 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
 
-config.hh: stamp-h1
+config.hpp: stamp-h1
 	@if test ! -f $@; then \
 	  rm -f stamp-h1; \
 	  $(MAKE) $(AM_MAKEFLAGS) stamp-h1; \
 	else :; fi
 
-stamp-h1: $(srcdir)/config.hh.in $(top_builddir)/config.status
+stamp-h1: $(srcdir)/config.hpp.in $(top_builddir)/config.status
 	@rm -f stamp-h1
-	cd $(top_builddir) && $(SHELL) ./config.status config.hh
-$(srcdir)/config.hh.in:  $(am__configure_deps) 
+	cd $(top_builddir) && $(SHELL) ./config.status config.hpp
+$(srcdir)/config.hpp.in:  $(am__configure_deps) 
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f stamp-h1
 	touch $@
 
 distclean-hdr:
-	-rm -f config.hh stamp-h1
+	-rm -f config.hpp stamp-h1
 @HAVE_DOXYGEN_TRUE@Doxyfile: $(top_builddir)/config.status $(srcdir)/Doxyfile.in
 @HAVE_DOXYGEN_TRUE@	cd $(top_builddir) && $(SHELL) ./config.status $@
 install-binPROGRAMS: $(bin_PROGRAMS)
@@ -305,14 +306,20 @@ src/Cameras/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Cameras/$(DEPDIR)/$(am__dirstamp)
 ./src/Cameras/Perspective.$(OBJEXT): src/Cameras/$(am__dirstamp) \
 	src/Cameras/$(DEPDIR)/$(am__dirstamp)
+src/Samplers/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Samplers
+	@: > src/Samplers/$(am__dirstamp)
+src/Samplers/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ./src/Samplers/$(DEPDIR)
+	@: > src/Samplers/$(DEPDIR)/$(am__dirstamp)
+./src/Samplers/DefaultSampler.$(OBJEXT): src/Samplers/$(am__dirstamp) \
+	src/Samplers/$(DEPDIR)/$(am__dirstamp)
 src/$(am__dirstamp):
 	@$(MKDIR_P) ./src
 	@: > src/$(am__dirstamp)
 src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ./src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
-./src/DefaultSampler.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
 ./src/exceptions.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Geometry/$(am__dirstamp):
@@ -376,6 +383,8 @@ src/Optimization/$(DEPDIR)/$(am__dirstamp):
 	src/Optimization/$(DEPDIR)/$(am__dirstamp)
 ./src/Lights/Point.$(OBJEXT): src/Lights/$(am__dirstamp) \
 	src/Lights/$(DEPDIR)/$(am__dirstamp)
+./src/Lights/AreaLight.$(OBJEXT): src/Lights/$(am__dirstamp) \
+	src/Lights/$(DEPDIR)/$(am__dirstamp)
 lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES) 
 	@rm -f lrt$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(lrt_OBJECTS) $(lrt_LDADD) $(LIBS)
@@ -383,7 +392,6 @@ lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES)
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f ./src/Cameras/Perspective.$(OBJEXT)
-	-rm -f ./src/DefaultSampler.$(OBJEXT)
 	-rm -f ./src/Geometry/Box.$(OBJEXT)
 	-rm -f ./src/Geometry/Mesh.$(OBJEXT)
 	-rm -f ./src/Geometry/Plane.$(OBJEXT)
@@ -392,19 +400,20 @@ mostlyclean-compile:
 	-rm -f ./src/Graphics/Image.$(OBJEXT)
 	-rm -f ./src/Graphics/JPGWriter.$(OBJEXT)
 	-rm -f ./src/Graphics/PNGWriter.$(OBJEXT)
+	-rm -f ./src/Lights/AreaLight.$(OBJEXT)
 	-rm -f ./src/Lights/Directional.$(OBJEXT)
 	-rm -f ./src/Lights/Point.$(OBJEXT)
 	-rm -f ./src/Material.$(OBJEXT)
 	-rm -f ./src/MeshImporters/MeshImporter3ds.$(OBJEXT)
 	-rm -f ./src/Optimization/OctreeNode.$(OBJEXT)
 	-rm -f ./src/Ray.$(OBJEXT)
+	-rm -f ./src/Samplers/DefaultSampler.$(OBJEXT)
 	-rm -f ./src/exceptions.$(OBJEXT)
 	-rm -f ./src/main.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/DefaultSampler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/Material.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/Ray.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/exceptions.Po@am__quote@
@@ -418,10 +427,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/Image.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/JPGWriter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGWriter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/AreaLight.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Directional.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Point.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/MeshImporters/$(DEPDIR)/MeshImporter3ds.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Optimization/$(DEPDIR)/OctreeNode.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Samplers/$(DEPDIR)/DefaultSampler.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -451,11 +462,11 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	mkid -fID $$unique
 tags: TAGS
 
-TAGS:  $(HEADERS) $(SOURCES) config.hh.in $(TAGS_DEPENDENCIES) \
+TAGS:  $(HEADERS) $(SOURCES) config.hpp.in $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	set x; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS) config.hh.in $(LISP) $(TAGS_FILES)'; \
+	list='$(SOURCES) $(HEADERS) config.hpp.in $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
@@ -473,9 +484,9 @@ TAGS:  $(HEADERS) $(SOURCES) config.hh.in $(TAGS_DEPENDENCIES) \
 	  fi; \
 	fi
 ctags: CTAGS
-CTAGS:  $(HEADERS) $(SOURCES) config.hh.in $(TAGS_DEPENDENCIES) \
+CTAGS:  $(HEADERS) $(SOURCES) config.hpp.in $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
-	list='$(SOURCES) $(HEADERS) config.hh.in $(LISP) $(TAGS_FILES)'; \
+	list='$(SOURCES) $(HEADERS) config.hpp.in $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
 	  done | \
@@ -643,7 +654,7 @@ distcleancheck: distclean
 check-am: all-am
 check: check-am
 @HAVE_DOXYGEN_FALSE@all-local:
-all-am: Makefile $(PROGRAMS) config.hh all-local
+all-am: Makefile $(PROGRAMS) config.hpp all-local
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -684,6 +695,8 @@ distclean-generic:
 	-rm -f src/MeshImporters/$(am__dirstamp)
 	-rm -f src/Optimization/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/Optimization/$(am__dirstamp)
+	-rm -f src/Samplers/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/Samplers/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -694,7 +707,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR) ./src/Samplers/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -742,7 +755,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR)
+	-rm -rf ./src/$(DEPDIR) ./src/Cameras/$(DEPDIR) ./src/Geometry/$(DEPDIR) ./src/Graphics/$(DEPDIR) ./src/Lights/$(DEPDIR) ./src/MeshImporters/$(DEPDIR) ./src/Optimization/$(DEPDIR) ./src/Samplers/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

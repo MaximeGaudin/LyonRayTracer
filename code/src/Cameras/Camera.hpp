@@ -10,8 +10,6 @@
 #define CAMERA_H_
 #include <Ray.hpp>
 
-using namespace std;
-
 class Camera {
   public:
     virtual Ray getRay ( double u, double v ) const = 0;

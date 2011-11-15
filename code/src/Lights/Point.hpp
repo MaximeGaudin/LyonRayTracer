@@ -1,9 +1,12 @@
 #ifndef POINT_H_
 #define POINT_H_
+#include <common.hpp>
 #include <Light.hpp>
 
 #include <Vector.hpp>
 #include <Material.hpp>
+
+class Camera;
 
 class Point : public Light {
   public:

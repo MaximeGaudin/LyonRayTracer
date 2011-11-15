@@ -2,6 +2,11 @@
 #define DEFAULT_SAMPLER_H_
 #include <Sampler.hpp>
 
+#include <vector>
+
+#include <Ray.hpp>
+#include <Scene.hpp>
+
 class DefaultSampler : public Sampler {
   public:
   std::vector<Ray> getRays ( Scene const& scene,

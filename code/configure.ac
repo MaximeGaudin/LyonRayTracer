@@ -1,24 +1,26 @@
 AC_INIT([lrt], [0.1], [gaudin.maxime@gmail.com])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror silent-rules])
 
-AC_PROG_CC
-AC_PROG_CXX
+AC_PROG_CC([clang gcc])
+AC_PROG_CXX([clang++ g++])
 
-AC_CONFIG_HEADERS([config.hh])
+AC_CONFIG_HEADERS([config.hpp])
 AC_CONFIG_FILES([Makefile])
 
 AC_LANG(C++)
 
 AM_SILENT_RULES([yes])
 
-NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/"
-CXXFLAGS="$CXXFLAGS $NEW_INCLUDE_PATH"
-CFLAGS="$CFLAGS $NEW_INCLUDE_PATH" 
-CPPFLAGS="$CPPFLAGS $NEW_INCLUDE_PATH"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/ -I./src/Samplers/"
+OPT_FLAGS="-O2"
+CXXFLAGS="$CXXFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH"
+CFLAGS="$CFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH" 
+CPPFLAGS="$CPPFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH"
 
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 LDFLAGS="$LDFLAGS -L/opt/local/lib -L/opt/local/lib/ -ljpeg -lpng -l3ds"
 
+# Vérification des headers de bases
 AC_CHECK_HEADER([cstdio], [], [AC_MSG_ERROR([Missing header : cstdio])])
 AC_CHECK_HEADER([cstdlib], [], [AC_MSG_ERROR([Missing header : cstdlib])])
 AC_CHECK_HEADER([iostream], [], [AC_MSG_ERROR([Missing header : cstdlib])])
