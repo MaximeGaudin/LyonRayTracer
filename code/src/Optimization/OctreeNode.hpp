@@ -10,16 +10,16 @@ class OctreeNode : public Geometry {
   public:
     OctreeNode ();
     OctreeNode (
-      Box box,
-      vector< Triangle* > triangles,
+      Box const& box,
+      vector< Triangle* > const& triangles,
       unsigned int minTriangles);
 
   public:
-    HitRecord getRecord ( Ray ray ) const;
+    HitRecord getRecord ( Ray const& ray ) const;
     Box getBox () const { return box_; }
 
   private:
-    Box createBox ( Vector3d origin ) const;
+    Box createBox ( Vector3d const& origin ) const;
 
   protected:
     Box box_;

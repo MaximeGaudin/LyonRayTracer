@@ -18,10 +18,13 @@
   */
 #ifndef MATERIAL_H_
 #define MATERIAL_H_
+#include <Buildable.hpp>
+#include <MaterialBuilder.hpp>
+
 #include <common.hpp>
 #include <Color.hpp>
 
-class Material {
+class Material : public Buildable {
   public:
     Material ( );
 

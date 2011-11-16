@@ -6,25 +6,32 @@
 
 class Triangle : public Geometry {
   public:
-    Triangle ( Vector3d a, Vector3d b, Vector3d c ); 
-    Triangle ( Vector3d a, Vector3d b, Vector3d c, Material material ); 
-
-    Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal ); 
-    Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal, Material material ); 
+    Triangle ( Vector3d const& a, Vector3d const& b, Vector3d const& c ); 
+    Triangle ( 
+        Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+        Material* material ); 
 
     Triangle ( 
-        Vector3d a, Vector3d b, Vector3d c, 
-        Vector3d aNormal, Vector3d bNormal, Vector3d cNormal 
-        );
+        Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+        Vector3d const& normal ); 
+
+    Triangle (
+        Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+        Vector3d const& normal,
+        Material* material ); 
 
     Triangle ( 
-        Vector3d a, Vector3d b, Vector3d c, 
-        Vector3d aNormal, Vector3d bNormal, Vector3d cNormal,
-        Material material
-        );
+        Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+        Vector3d const& aNormal, Vector3d const& bNormal, Vector3d const& cNormal );
+
+    Triangle ( 
+        Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+        Vector3d const& aNormal, Vector3d const& bNormal, Vector3d const& cNormal,
+        Material* material);
+
   public:
-    HitRecord getRecord ( Ray ray ) const;
-
+    HitRecord getRecord ( Ray const& ray ) const;
+ 
   public:
     Vector3d getBarycenter () const;
     Vector3d getA () const;

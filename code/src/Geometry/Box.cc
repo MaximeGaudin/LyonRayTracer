@@ -1,21 +1,21 @@
 #include "Box.hpp"
 
-Box::Box ()
-  : Geometry()
-  , min_ (V3d_Zero)
-  , max_ (V3d_Zero)
-{}
-
-Box::Box ( Vector3d const& min, Vector3d const& max ) 
-  : Geometry ()
-  , min_(min)
-  , max_(max)
+Box::Box () : 
+  Geometry(),
+  min_ (V3d_Zero),
+  max_ (V3d_Zero)
 { }
 
-  Box::Box ( Vector3d const& min, Vector3d const& max, Material const& material ) 
-  : Geometry (material)
-  , min_(min)
-  , max_(max)
+Box::Box ( Vector3d const& min, Vector3d const& max ) : 
+  Geometry (),
+  min_(min),
+  max_(max)
+{ }
+
+Box::Box ( Vector3d const& min, Vector3d const& max, Material* material ) : 
+  Geometry (material),
+  min_(min),
+  max_(max)
 { }
 
 HitRecord Box::getRecord ( Ray const& ray ) const {

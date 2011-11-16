@@ -17,12 +17,13 @@
   */
 #ifndef CAMERA_H_
 #define CAMERA_H_
+#include <Buildable.hpp>
+
 #include <vector>
 #include <Ray.hpp>
 
-class Camera {
+class Camera : public Buildable {
   public:
-
     /**
       * @return L'ensemble des rayons associés à la coordonnée (u,v)
       */

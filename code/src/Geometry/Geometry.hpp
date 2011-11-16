@@ -8,19 +8,21 @@
   */
 #ifndef GEOMETRY_H_
 #define GEOMETRY_H_
+#include <Buildable.hpp>
+
 #include <HitRecord.hpp>
 #include <Ray.hpp>
 #include <Material.hpp>
 #include <Maths.hpp>
 
-class Geometry {
+class Geometry : public Buildable {
   public:
     Geometry ( );
 
     /**
       * @param material Matériaux lié à la géométrie
       */
-    Geometry ( Material const& material );
+    Geometry ( Material* material );
 
     /**
       * @param material Matériaux lié à la géométrie.
@@ -29,13 +31,12 @@ class Geometry {
       * @param scale Mise à l'échelle à appliquer à la géométrie.
       */ 
     Geometry ( 
-        Material const& material, 
+        Material* material, 
         Vector3d const& translation,
         Vector3d const& rotation,
         Vector3d const& scale );
 
   public:
-
     /**
       * @return L'enregistrement lié à la collision du rayon @a ray et
       * la géométrie.
@@ -48,10 +49,10 @@ class Geometry {
     /**
       * @return Le matériaux de la géométrie.
       */
-    Material material() const { return material_; }
+    Material* material() const { return material_; }
 
   protected:
-    Material material_;
+    Material* material_;
 
     Vector3d translation_; 
     Vector3d rotation_; 

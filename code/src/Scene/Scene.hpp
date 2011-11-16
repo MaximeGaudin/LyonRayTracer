@@ -12,7 +12,12 @@
   */
 #ifndef SCENE_H_
 #define SCENE_H_
+#include <vector>
+#include <map>
+#include <string>
+
 #include <Color.hpp>
+#include <Material.hpp>
 
 class Camera;
 class Light;
@@ -21,8 +26,9 @@ class Image;
 
 struct Scene {
   Camera* camera;
-  vector<Light*> lights;
-  vector<Geometry*> geometries;
+  std::map < std::string, Material* > materials;
+  std::vector<Light*> lights;
+  std::vector<Geometry*> geometries;
 
   Color_d ambient;
 

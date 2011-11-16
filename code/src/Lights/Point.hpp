@@ -1,25 +1,23 @@
 #ifndef POINT_H_
 #define POINT_H_
-#include <common.hpp>
 #include <Light.hpp>
+#include <common.hpp>
+#include <PointBuilder.hpp>
 
 #include <Vector.hpp>
-#include <Material.hpp>
-
-class Camera;
 
 class Point : public Light {
   public:
-    Point ( Vector3d position );
-    Point ( Vector3d position, Material material );
+    Point ( Vector3d const& position );
+    Point ( Vector3d const& position, Material* material );
 
   public:
-    Color<double> getContribution ( 
+    Color_d getContribution ( 
         Camera* camera, 
-        vector<Geometry*> geometries,
-        HitRecord record ) const;
+        std::vector<Geometry*> const& geometries,
+        HitRecord const& record ) const;
 
-    Vector3d getPosition() { return position_; }
+    Vector3d getPosition() const { return position_; }
 
   protected:
     Vector3d position_;

@@ -166,7 +166,7 @@ Matrix < P, 4, 4 > Matrix < P, N, M >::Scale (
 }
 
 template < typename P, int N, int M >
-Matrix < P, 4, 4 > Scale ( Vector3d const& scaleFactor ) {
+Matrix < P, 4, 4 > Matrix< P,N,M >::Scale ( Vector3d const& scaleFactor ) {
   return Matrix<P,N,M>::Scale ( scaleFactor[0], scaleFactor[1], scaleFactor[2] );
 }
 

@@ -3824,7 +3824,7 @@ esac
 AM_BACKSLASH='\'
 
 
-NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/ -I./src/Samplers/"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/ -I./src/Samplers/ -I./src/Scene/ -I./src/Builders/"
 OPT_FLAGS="-O2"
 CXXFLAGS="$CXXFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH"
 CFLAGS="$CFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH"
@@ -5003,6 +5003,22 @@ if test "x$ac_cv_header_boost_static_assert_hpp" = xyes; then :
 
 else
   as_fn_error $? "Missing header : boost/static_assert.hpp" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/property_tree/ptree.hpp" "ac_cv_header_boost_property_tree_ptree_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_property_tree_ptree_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/property_tree/ptree.hpp" "$LINENO" 5
+fi
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/property_tree/xml_parser.hpp" "ac_cv_header_boost_property_tree_xml_parser_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_property_tree_xml_parser_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Missing header : boost/property_tree/xml_parser.hpp" "$LINENO" 5
 fi
 
 

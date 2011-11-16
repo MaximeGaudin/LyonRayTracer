@@ -1,18 +1,18 @@
 #include "Sphere.hpp"
 
-  Sphere::Sphere ( Vector < double, 3 > centre, double radius )
-  : Geometry ( )
-  , centre_(centre)
-    , radius_(radius) 
-{}
+Sphere::Sphere ( Vector3d const& centre, double radius ) :
+  Geometry (),
+  centre_(centre),
+  radius_(radius) 
+{ }
 
-  Sphere::Sphere ( Vector < double, 3 > centre, double radius, Material material )
-  : Geometry(material)
-  , centre_(centre)
-    , radius_(radius) 
-{}
+Sphere::Sphere ( Vector3d const& centre, double radius, Material* material ) :
+  Geometry(material),
+  centre_(centre),
+  radius_(radius) 
+{ }
 
-HitRecord Sphere::getRecord( Ray ray ) const {
+HitRecord Sphere::getRecord( Ray const& ray ) const {
   Vector3d d = ray.direction().Normalized();
   Vector3d p0 = ray.from();
   Vector3d pc = centre_;

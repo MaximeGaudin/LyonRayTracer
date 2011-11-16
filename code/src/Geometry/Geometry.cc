@@ -1,6 +1,15 @@
 #include "Geometry.hpp"
 
-Geometry::Geometry ( Material const& material ) : 
+
+Geometry::Geometry ( ) : 
+  material_(),
+  translation_(V3d_Zero), 
+  rotation_(V3d_Zero), 
+  scale_(V3d_One),
+  transformation_(Matrix<double,4,4>(IDENTITY))
+{}
+
+Geometry::Geometry ( Material* material ) : 
   material_(material),
   translation_(V3d_Zero), 
   rotation_(V3d_Zero), 
@@ -9,7 +18,7 @@ Geometry::Geometry ( Material const& material ) :
 {}
 
 Geometry::Geometry ( 
-        Material const& material, 
+        Material* material, 
         Vector3d const& translation,
         Vector3d const& rotation,
         Vector3d const& scale ) :

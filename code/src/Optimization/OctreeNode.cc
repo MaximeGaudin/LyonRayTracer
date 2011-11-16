@@ -9,12 +9,12 @@ OctreeNode::OctreeNode ()
 {}
 
 OctreeNode::OctreeNode (
-    Box box,
-    vector< Triangle* > triangles,
-    unsigned int minTriangles)
-: Geometry()
-  , box_(box)
-    , triangles_(triangles)
+    Box const& box,
+    vector< Triangle* > const& triangles,
+    unsigned int minTriangles) :
+  Geometry(),
+  box_(box),
+  triangles_(triangles)
 {
   if ( triangles.size() <= minTriangles ) {
     isLeaf_ = true;
@@ -68,7 +68,7 @@ OctreeNode::OctreeNode (
   }
 }
 
-HitRecord OctreeNode::getRecord ( Ray ray ) const {
+HitRecord OctreeNode::getRecord ( Ray const& ray ) const {
   if ( isLeaf_ ) {
     HitRecord closestHit;
     closestHit.hit = false;
@@ -107,7 +107,7 @@ HitRecord OctreeNode::getRecord ( Ray ray ) const {
   }
 }
 
-Box OctreeNode::createBox ( Vector3d origin ) const {
+Box OctreeNode::createBox ( Vector3d const& origin ) const {
   Vector3d O ( box_.getMin() );
   Vector3d half (((box_.getMax() - box_.getMin()) / 2.0));
 

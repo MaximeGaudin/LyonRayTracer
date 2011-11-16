@@ -1,19 +1,18 @@
 #include <Plane.hpp>
 
-  Plane::Plane ( Vector3d point, Vector3d normal ) 
-  : Geometry()
-  , point_(point)
-    , normal_(normal.Normalized())
-{}
+Plane::Plane ( Vector3d const& point, Vector3d const& normal ) :
+  Geometry(),
+  point_(point),
+  normal_(normal.Normalized())
+{ }
 
-  Plane::Plane ( Vector3d point, Vector3d normal, Material material )
-  : Geometry(material)
-  , point_(point)
-    , normal_(normal.Normalized())
-{}
+Plane::Plane ( Vector3d const& point, Vector3d const& normal, Material* material ) :
+  Geometry(material),
+  point_(point),
+  normal_(normal.Normalized())
+{ }
 
-
-HitRecord Plane::getRecord ( Ray ray ) const {
+HitRecord Plane::getRecord ( Ray const& ray ) const {
   HitRecord record;
   record.hit = false;
   record.hitGeometry = this;
@@ -32,4 +31,3 @@ HitRecord Plane::getRecord ( Ray ray ) const {
 
   return record;
 }
-

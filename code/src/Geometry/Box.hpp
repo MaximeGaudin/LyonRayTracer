@@ -23,7 +23,7 @@ class Box : public Geometry {
       * @param min Coin supérieur droit de la boite.
       * @param material Matériaux à associer à la géométrie.
       */
-    Box ( Vector3d const& min, Vector3d const& max , Material const& material );
+    Box ( Vector3d const& min, Vector3d const& max , Material* material );
 
   public:
     HitRecord getRecord ( Ray const& ray ) const;

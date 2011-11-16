@@ -1,8 +1,8 @@
 #ifndef SPHERE_H_
 #define SPHERE_H_
 #include <Geometry.hpp>
-
 #include <Vector.hpp>
+#include <SphereBuilder.hpp>
 
 class Sphere : public Geometry {
   public:
@@ -10,16 +10,17 @@ class Sphere : public Geometry {
       * @param centre Position du centre de la sphère.
       * @param radius Rayon de la sphère.
       */
-    Sphere ( Vector3d centre, double radius );
+    Sphere ( Vector3d const& centre, double radius );
 
     /**
       * @param centre Position du centre de la sphère.
       * @param radius Rayon de la sphère.
       * @param material Matériaux de la sphère.
       */
-    Sphere ( Vector3d centre, double radius, Material material );
+    Sphere ( Vector3d const& centre, double radius, Material* material );
 
-    HitRecord getRecord ( Ray ray ) const;
+  public:
+    HitRecord getRecord ( Ray const& ray ) const;
 
   protected:
     Vector3d centre_;

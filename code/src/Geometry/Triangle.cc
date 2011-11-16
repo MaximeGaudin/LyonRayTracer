@@ -1,64 +1,64 @@
 #include "Triangle.hpp"
 #include <Plane.hpp>
 
-bool isCCW ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal ) {
-  Vector3d u = b - a;
-  Vector3d v = c - a;
-
-  return Vector3d::Cross ( u, v ) == normal;
-}
-
-  Triangle::Triangle ( Vector3d a, Vector3d b, Vector3d c )
-  : Geometry () 
-  , a_(a)
-  , b_(b)
-    , c_(c)
-{ aNormal_ = bNormal_ = cNormal_ = Vector3d::Cross ( b - a, c - a ).Normalized(); }
-
-  Triangle::Triangle ( Vector3d a, Vector3d b, Vector3d c, Material material )
-  : Geometry (material) 
-  , a_(a)
-  , b_(b)
-    , c_(c)
-{
-  aNormal_ = bNormal_ = cNormal_ = Vector3d::Cross ( b - a, c - a ).Normalized();
-}
-
-  Triangle::Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal )
-  : Geometry () 
-  , a_(a)
-  , b_(b)
-    , c_(c)
-{
-  aNormal_ = bNormal_ = cNormal_ = normal; 
-}
-
-  Triangle::Triangle ( Vector3d a, Vector3d b, Vector3d c, Vector3d normal, Material material )
-  : Geometry (material) 
-  , a_(a)
-  , b_(b)
-    , c_(c)
-{
-  if ( !isCCW (a, b, c, normal) ) {
-    b_ = c;
-    c_ = b;
-  }
-
-  aNormal_ = bNormal_ = cNormal_ = normal; 
+Triangle::Triangle ( Vector3d const& a, Vector3d const& b, Vector3d const& c ) :
+  Geometry (),
+  a_(a),
+  b_(b),
+  c_(c)
+{ 
+  aNormal_ = bNormal_ = cNormal_ = 
+    Vector3d::Cross ( b - a, c - a ).Normalized();
 }
 
 Triangle::Triangle ( 
-    Vector3d a, Vector3d b, Vector3d c, 
-    Vector3d aNormal, Vector3d bNormal, Vector3d cNormal 
-    ) 
-  : Geometry()
-  , a_(a)
-  , b_(b)
-  , c_(c)
-  , barycentre_( (a + b + c) / 3.0 )
-  , aNormal_(aNormal)
-  , bNormal_(bNormal)
-    , cNormal_(cNormal)
+    Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+    Material* material ) :
+  Geometry (material),
+  a_(a),
+  b_(b),
+  c_(c)
+{
+  aNormal_ = bNormal_ = cNormal_ = 
+    Vector3d::Cross ( b - a, c - a ).Normalized();
+}
+
+Triangle::Triangle ( 
+    Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+    Vector3d const& normal ) : 
+  Geometry (),
+  a_(a),
+  b_(b),
+  c_(c)
+{
+  aNormal_ = bNormal_ = cNormal_ = 
+    normal; 
+}
+
+Triangle::Triangle ( 
+    Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+    Vector3d const& normal, 
+    Material* material ) :
+  Geometry (material),
+  a_(a),
+  b_(b),
+  c_(c)
+{
+  aNormal_ = bNormal_ = cNormal_ = 
+    normal; 
+}
+
+Triangle::Triangle ( 
+    Vector3d const& a, Vector3d const& b, Vector3d const& c, 
+    Vector3d const& aNormal, Vector3d const& bNormal, Vector3d const& cNormal ):
+  Geometry(),
+  a_(a),
+  b_(b),
+  c_(c),
+  barycentre_( (a + b + c) / 3.0 ),
+  aNormal_(aNormal),
+  bNormal_(bNormal),
+  cNormal_(cNormal)
 { }
 
 // Getters 
@@ -71,7 +71,7 @@ Vector3d Triangle::getB () const { return b_; }
 Vector3d Triangle::getC () const { return c_; }
 
 // Worker methods
-HitRecord Triangle::getRecord ( Ray ray ) const {
+HitRecord Triangle::getRecord ( Ray const& ray ) const {
   HitRecord record;
   record.hit = false;
   record.hitGeometry = this;

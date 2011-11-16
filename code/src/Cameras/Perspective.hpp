@@ -5,6 +5,7 @@
 #include <common.hpp>
 
 #include <Camera.hpp>
+#include <PerspectiveBuilder.hpp>
 
 #include <Vector.hpp>
 #include <Ray.hpp>

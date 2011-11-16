@@ -1,15 +1,15 @@
 #ifndef PLANE_H_
 #define PLANE_H_
 #include <Geometry.hpp>
-
 #include <Vector.hpp>
+#include <PlaneBuilder.hpp>
 
 class Plane : public Geometry {
   public:
-    Plane ( Vector3d point, Vector3d normal );
-    Plane ( Vector3d point, Vector3d normal, Material material );
+    Plane ( Vector3d const& point, Vector3d const& normal );
+    Plane ( Vector3d const& point, Vector3d const& normal, Material* material );
 
-    HitRecord getRecord ( Ray ray ) const;
+    HitRecord getRecord ( Ray const& ray ) const;
 
   protected:
     Vector3d point_;

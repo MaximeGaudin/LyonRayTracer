@@ -11,7 +11,7 @@ AC_LANG(C++)
 
 AM_SILENT_RULES([yes])
 
-NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/ -I./src/Samplers/"
+NEW_INCLUDE_PATH="-I/opt/local/include -I/opt/local/include/ -I./ -I./src/ -I./src/Maths/ -I./src/Graphics/ -I./src/Cameras/ -I./src/Geometry/ -I./src/Lights/ -I./src/MeshImporters/ -I./src/Optimization/ -I./src/Samplers/ -I./src/Scene/ -I./src/Builders/"
 OPT_FLAGS="-O2"
 CXXFLAGS="$CXXFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH"
 CFLAGS="$CFLAGS $OPT_FLAGS $NEW_INCLUDE_PATH" 
@@ -57,6 +57,8 @@ AC_CHECK_HEADER([boost/foreach.hpp], [], [AC_MSG_ERROR([Missing header : boost/f
 AC_CHECK_HEADER([boost/format.hpp], [], [AC_MSG_ERROR([Missing header : boost/format.h])])
 AC_CHECK_HEADER([boost/type_traits.hpp], [], [AC_MSG_ERROR([Missing header : boost/type_traits.hpp])])
 AC_CHECK_HEADER([boost/static_assert.hpp], [], [AC_MSG_ERROR([Missing header : boost/static_assert.hpp])])
+AC_CHECK_HEADER([boost/property_tree/ptree.hpp], [], [AC_MSG_ERROR([Missing header : boost/property_tree/ptree.hpp])])
+AC_CHECK_HEADER([boost/property_tree/xml_parser.hpp], [], [AC_MSG_ERROR([Missing header : boost/property_tree/xml_parser.hpp])])
 
 
 # Intégration de Doxygen au processus et vérification

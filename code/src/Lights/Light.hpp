@@ -1,26 +1,29 @@
 #ifndef LIGHT_H_
 #define LIGHT_H_
-#include <Material.hpp>
-#include <Camera.hpp>
-#include <Geometry.hpp>
-#include <HitRecord.hpp>
+#include <Buildable.hpp>
+#include <common.hpp>
 
 #include <vector>
 
-using namespace std;
+#include <HitRecord.hpp>
+#include <Color.hpp>
 
-class Light {
+class Camera;
+class Material;
+class Geometry;
+
+class Light : public Buildable {
   public:
     Light () {}
-    Light (Material material) : material_(material) {}
+    Light (Material* material) : material_(material) {}
 
   public:
-    virtual Color<double> getContribution ( 
+    virtual Color_d getContribution ( 
         Camera* camera, 
-        vector<Geometry*> geometries,
-        HitRecord record ) const = 0;
+        std::vector<Geometry*> const& geometries,
+        HitRecord const& record ) const = 0;
 
   protected:
-    Material material_;
+    Material* material_;
 };
 #endif // LIGHT_H_

@@ -1,22 +1,22 @@
 #ifndef DIRECTIONAL_H_
 #define DIRECTIONAL_H_
 #include <Light.hpp>
+#include <common.hpp>
 
 #include <Vector.hpp>
-#include <Material.hpp>
 
 class Directional : public Light {
   public:
-    Directional ( Vector3d direction );
-    Directional ( Vector3d direction, Material material );
+    Directional ( Vector3d const& direction );
+    Directional ( Vector3d const& direction, Material* material );
 
   public:
-    Color<double> getContribution ( 
+    Color_d getContribution ( 
         Camera* camera, 
-        vector<Geometry*> geometries,
-        HitRecord record ) const;
+        std::vector<Geometry*> const& geometries,
+        HitRecord const& record ) const;
 
-    Vector3d getDirection() { return direction_; }
+    Vector3d getDirection() const { return direction_; }
 
   protected:
     Vector3d direction_;

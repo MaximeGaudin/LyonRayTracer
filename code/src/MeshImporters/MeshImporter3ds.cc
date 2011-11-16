@@ -1,21 +1,24 @@
 #include "MeshImporter3ds.hpp"
+#include <vector>
 
-//#include <lib3ds.h>
 #include <lib3ds/file.h>
 #include <lib3ds/mesh.h>
 
+#include <Triangle.hpp>
 #include <Vector.hpp>
+#include <Mesh.hpp>
 
 #include <exceptions.hpp>
 
-Mesh* MeshImporter3ds::build ( string const& filename ) {
+Mesh* MeshImporter3ds::build ( string const& filename,
+        Matrix<double,4,4> const& transformation ) { 
   Lib3dsFile* model;
   model = lib3ds_file_load(filename.c_str());
   if ( !model ) logException ("MeshImporter3ds", "Can't open file.");
 
   logInformation ( "MeshImporter3ds", str ( format("Loading %1%...") % filename ) );
 
-  vector < Triangle* > triangleList;
+  std::vector < Triangle* > triangleList;
   Lib3dsMesh* mesh;
   for(mesh = model->meshes;mesh != NULL;mesh = mesh->next) {
     Lib3dsVector* normals = new Lib3dsVector[3 * sizeof(Lib3dsVector) * mesh->faces];
@@ -47,6 +50,7 @@ Mesh* MeshImporter3ds::build ( string const& filename ) {
       NC[1] = normals[3*i + 2][1];
       NC[2] = normals[3*i + 2][2];
 
+      // Reste à appliquer la transformation
 
       triangleList.push_back( new Triangle (A, B, C, NA, NB, NC) );
     }
@@ -54,7 +58,6 @@ Mesh* MeshImporter3ds::build ( string const& filename ) {
     delete[] normals;
   }
 
-  logInformation ( "MeshImporter3ds", str ( format("OK (%1$d faces)") % triangleList.size() ) );
   lib3ds_file_free( model );
 
   return new Mesh ( triangleList ); 

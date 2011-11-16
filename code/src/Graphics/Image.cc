@@ -2,14 +2,20 @@
 #define IMAGE_TI_H_
 #include "Image.hpp"
 
+#include <exceptions.hpp>
+
 // Ctor & Dtor
-Image::Image (unsigned int width, unsigned int height) 
-  : w_ (width)
-    , h_ (height)
+Image::Image (unsigned int width, unsigned int height) : 
+  w_ (width),
+  h_ (height)
 {
   pixelsData_ = new Color<double>* [ width ];
   for ( unsigned int X = 0; X < width; ++X ) 
     pixelsData_[X] = new Color<double> [ height ];
+
+  logInformation ("Image", 
+      str( format ("Building new output frame (%1%, %2%)... OK")
+          % width % height ) );
 }
 
 Image::~Image () {
