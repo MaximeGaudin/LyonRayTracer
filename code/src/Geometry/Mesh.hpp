@@ -1,21 +1,22 @@
 #ifndef MESH_H_
 #define MESH_H_
-#include <common.hpp>
 #include <Geometry.hpp>
+#include <common.hpp>
 
 #include <vector>
 
-#include <Maths.hpp>
+#include <MeshBuilder.hpp>
+#include <Vector.hpp>
 
 class OctreeNode;
 class Triangle;
+class Material;
 
 class Mesh: public Geometry {
   public:
-    Mesh ( std::vector<Triangle*> const& triangleList );
-
     Mesh ( 
         std::vector<Triangle*> const& triangleList, 
+        Material* material,
         Vector3d const& translation, 
         Vector3d const& rotation,
         Vector3d const& scale );

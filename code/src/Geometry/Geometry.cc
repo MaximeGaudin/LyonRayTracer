@@ -1,6 +1,5 @@
 #include "Geometry.hpp"
 
-
 Geometry::Geometry ( ) : 
   material_(),
   translation_(V3d_Zero), 

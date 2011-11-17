@@ -11,7 +11,11 @@
 #include <exceptions.hpp>
 
 Mesh* MeshImporter3ds::build ( string const& filename,
-        Matrix<double,4,4> const& transformation ) { 
+        Material* material,
+        Vector3d const& translation, 
+        Vector3d const& rotation,
+        Vector3d const& scale ) const 
+{
   Lib3dsFile* model;
   model = lib3ds_file_load(filename.c_str());
   if ( !model ) logException ("MeshImporter3ds", "Can't open file.");
@@ -50,8 +54,6 @@ Mesh* MeshImporter3ds::build ( string const& filename,
       NC[1] = normals[3*i + 2][1];
       NC[2] = normals[3*i + 2][2];
 
-      // Reste à appliquer la transformation
-
       triangleList.push_back( new Triangle (A, B, C, NA, NB, NC) );
     }
 
@@ -60,5 +62,6 @@ Mesh* MeshImporter3ds::build ( string const& filename,
 
   lib3ds_file_free( model );
 
-  return new Mesh ( triangleList ); 
+  logInformation ( "MeshImporter3ds", str ( format("Done ! (%1% faces)") % triangleList.size() ) );
+  return new Mesh ( triangleList, material, translation, rotation, scale ); 
 }

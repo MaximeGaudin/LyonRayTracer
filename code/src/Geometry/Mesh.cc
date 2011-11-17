@@ -1,15 +1,19 @@
 #include "Mesh.hpp"
-#include "Triangle.hpp"
-#include "OctreeNode.hpp"
+
+#include <Triangle.hpp>
+#include <OctreeNode.hpp>
 
 #include <boost/foreach.hpp>
-#define feach BOOST_FOREACH
 
-Mesh::Mesh ( vector<Triangle*> const& triangleList ) : 
-  Geometry(),
-  triangleList_(triangleList)
+Mesh::Mesh ( 
+        std::vector<Triangle*> const& triangleList, 
+        Material* material,
+        Vector3d const& translation, 
+        Vector3d const& rotation,
+        Vector3d const& scale ) :
+  Geometry( material, translation, rotation, scale ),
+  triangleList_ ( triangleList )
 {
-
   setupMesh ();
 }
 
@@ -19,8 +23,7 @@ Mesh::~Mesh () {
 }
 
 void Mesh::setupMesh () {
-  logInformation ( "Mesh", str ( format("OK (%1$d faces)") 
-        % triangleList_.size() ) );
+  // TODO Transformation des triangles
 
   logInformation("Mesh", "Bounding box computation...");
   Vector3d center; 
@@ -38,7 +41,7 @@ void Mesh::setupMesh () {
   octreeRoot_ = new OctreeNode ( 
       Box (center + (1.0 + maxDistance) * (V3d_Down + V3d_Left + V3d_Forward),
       center + (1.0 + maxDistance) * (V3d_Up + V3d_Right + V3d_Backward) ),
-      triangleList_, 20 );
+      triangleList_, 25 );
 }
 
 HitRecord Mesh::getRecord ( Ray const& ray ) const {

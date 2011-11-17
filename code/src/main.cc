@@ -6,7 +6,6 @@
 #include <Graphics.hpp>
 #include <Lights.hpp>
 #include <Geometries.hpp>
-#include <MeshImporters.hpp>
 #include <Samplers.hpp>
 
 #include <iostream>
@@ -134,7 +133,14 @@ void Render ( Scene& scene, Sampler* sampler ) {
   cout << endl << endl;
 }
 
-int main () {
+int main ( int argc, char** argv ) {
+  if ( argc < 2 ) return 0;
+
+  std::string inputFile = string(argv[1]);
+  std::string outputFile = "result.png";
+
+  if ( argc == 3 ) inputFile = string(argv[2]);
+
   logInformation("Core", "Builders discovering...");
   SceneReader SR;
   SR.addBuilder ( new MaterialBuilder() );
@@ -145,9 +151,10 @@ int main () {
 
   SR.addBuilder ( new SphereBuilder() );
   SR.addBuilder ( new PlaneBuilder() );
+  SR.addBuilder ( new MeshBuilder() );
 
   logInformation("Core", "Building scene...");
-  Scene scene = SR.read ( "scenes/SimpleSphere.lrt" );
+  Scene scene = SR.read ( inputFile );
 
   Sampler* sampler = new DefaultSampler ();
   logInformation ( "Core", "Rendering..." );
@@ -155,7 +162,7 @@ int main () {
 
   PNGWriter IW;  
   logInformation ( "Core", "Saving..." );
-  IW.Save ( *scene.frame, "result.png" );
+  IW.Save ( *scene.frame, outputFile );
 
   logInformation ( "Core", "Cleanup..." );
 
