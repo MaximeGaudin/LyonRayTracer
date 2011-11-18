@@ -22,6 +22,8 @@ class Sphere : public Geometry {
   public:
     HitRecord getRecord ( Ray const& ray ) const;
 
+    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const;
+
   protected:
     Vector3d centre_;
     double radius_;

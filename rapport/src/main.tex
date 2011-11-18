@@ -1,0 +1,51 @@
+%!TEX TS-program = xetex 
+%!TEX encoding = UTF-8 Unicode
+\documentclass[a4paper]{article}
+
+\input{../build/shapeperfect/utils}
+\input{../build/shapeperfect/sp}
+\input{../build/shapeperfect/extra}
+
+\title{Lyon Ray Tracer}
+\authors{Maxime \tsc{Gaudin}}
+\shorttitle{}
+
+\newcommand{\eng}[1]{\tsl{#1}}
+\newcommand{\raytracing}[0]{\eng{raytracing}}
+
+\newcommand{\fimage}[4]
+{
+\begin{figure}
+  \begin{center}
+    \includegraphics[keepaspectratio=true, width=#4\textwidth]{#2}
+    \caption{#3\label{#1}}
+  \end{center}
+\end{figure}
+}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.multipart} 
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+
+\input{introduction}
+
+\input{state_of_the_art}
+
+\input{architecture}
+
+\input{results}
+
+\input{analysis}
+
+\newpage
+\glsaddall
+\printglossaries
+\bibliography{references}
+\vfill
+\tableofcontents
+\end{document}
+

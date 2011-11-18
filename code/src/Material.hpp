@@ -24,6 +24,8 @@
 #include <common.hpp>
 #include <Color.hpp>
 
+class Image;
+
 class Material : public Buildable {
   public:
     Material ( );
@@ -74,5 +76,8 @@ class Material : public Buildable {
 
     /// Puissance de spécularitée.
     double specularPower;
+
+    bool hasTexture;
+    Image* texture;
 };
 #endif // MATERIAL_H_

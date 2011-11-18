@@ -1,6 +1,8 @@
+===============
 Lyon Ray Tracer
 ===============
 
+-----------
 Dépendances
 -----------
 Voici les différentes bibliothèques nécessaire à la compilation de LRT :

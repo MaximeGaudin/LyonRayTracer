@@ -9,7 +9,10 @@ class Plane : public Geometry {
     Plane ( Vector3d const& point, Vector3d const& normal );
     Plane ( Vector3d const& point, Vector3d const& normal, Material* material );
 
+  public:
     HitRecord getRecord ( Ray const& ray ) const;
+
+    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const { }
 
   protected:
     Vector3d point_;

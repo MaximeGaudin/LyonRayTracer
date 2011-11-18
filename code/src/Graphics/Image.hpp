@@ -15,12 +15,12 @@
 class Image {
   public: // Ctor && Dtor
     /**
-      * Constructeur d'Image.
-      *
       * @param width Largeur de l'image.
       * @param height Hauteur de l'image.
       */
     Image (unsigned int width, unsigned int height);
+
+    Image (Color<double>** const& pixelsData);
 
     ~Image ();
 

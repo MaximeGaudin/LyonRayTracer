@@ -46,3 +46,25 @@ HitRecord Sphere::getRecord( Ray const& ray ) const {
 
   return record;
 }
+
+Vector<double, 2> Sphere::getUVFromHit ( HitRecord const& record ) const {
+  Vector<double, 2> result;
+
+  Vector3d Vn = V3d_Up;
+  Vector3d Ve = V3d_Right;
+
+  Vector3d Vp = (record.position - centre_).Normalized();
+
+  double phi = acos( - Vector3d::Dot ( Vn, Vp ));
+  double theta = ( arccos( Vector3d::Dot( Vp, Ve ) / sin( phi )) ) 
+    / ( 2.0 * M_PI);
+
+  double v = phi / M_PI;
+  double u = ( Vector3d::Dot ( Vector3d::Cross( Vn, Ve ), Vp ) > 0 ) ? 
+    theta : 1 - theta;
+
+  result[0] = u;
+  result[1] = v;
+
+  return result;
+}

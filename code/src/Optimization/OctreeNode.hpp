@@ -17,6 +17,7 @@ class OctreeNode : public Geometry {
   public:
     HitRecord getRecord ( Ray const& ray ) const;
     Box getBox () const { return box_; }
+    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const { }
 
   private:
     Box createBox ( Vector3d const& origin ) const;
