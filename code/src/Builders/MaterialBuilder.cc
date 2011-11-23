@@ -41,6 +41,8 @@ result->IOR = pt.get<double>("IOR", 1.5);
 result->specularPower = pt.get<double>("specularPower", 60);
 result->diffuseIntensity = pt.get<double>("diffuseIntensity", 1.5);
 
+result->UVScale = pt.get<double>("UVScale", 1.0);
+
 std::string textureFilename = pt.get<std::string>("texture", "");
 result->hasTexture = false; 
 if ( !textureFilename.empty() ) {

@@ -79,5 +79,7 @@ class Material : public Buildable {
 
     bool hasTexture;
     Image* texture;
+
+    double UVScale;
 };
 #endif // MATERIAL_H_

@@ -63,8 +63,8 @@ Vector<double, 2> Sphere::getUVFromHit ( HitRecord const& record ) const {
   double u = ( Vector3d::Dot ( Vector3d::Cross( Vn, Ve ), Vp ) > 0 ) ? 
     theta : 1 - theta;
 
-  result[0] = u;
-  result[1] = v;
+  result[0] = fmod (u * material_->UVScale, 1.0);
+  result[1] = fmod (v * material_->UVScale, 1.0);
 
   return result;
 }
