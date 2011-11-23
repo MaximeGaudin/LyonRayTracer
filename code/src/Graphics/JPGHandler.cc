@@ -1,4 +1,4 @@
-#include "JPGWriter.hpp"
+#include "JPGHandler.hpp"
 
 #include <Color.hpp>
 
@@ -9,7 +9,7 @@
 
 #include <exceptions.hpp>
 
-void JPGWriter::Save ( Image const& img, string const& filename ) {
+void JPGHandler::Save ( Image const& img, string const& filename ) {
 	struct jpeg_compress_struct cinfo;
 	struct jpeg_error_mgr jerr;
 

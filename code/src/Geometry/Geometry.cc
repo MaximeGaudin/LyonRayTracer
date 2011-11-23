@@ -30,3 +30,8 @@ Geometry::Geometry (
     * Matrix<double,4,4>::Scale ( scale )
     * Matrix<double,4,4>::Translation ( translation_ ))
 { }
+
+Vector<double, 2> Geometry::getUVFromHit ( HitRecord const& record ) const {
+  Vector<double, 2> result;
+  return result;
+}

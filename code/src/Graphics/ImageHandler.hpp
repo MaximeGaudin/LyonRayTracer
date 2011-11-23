@@ -20,5 +20,7 @@ class ImageHandler {
   virtual void Save ( Image const& img, std::string const& filename ) = 0;
 
   virtual Image* Load ( std::string const& filename ) = 0;
+
+  virtual bool Validate ( std::string const& filename ) = 0;
 };
 #endif // IMAGE_HANDLER_H

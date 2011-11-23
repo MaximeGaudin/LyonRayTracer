@@ -2,5 +2,4 @@
 
 #include <Color.hpp>
 
-#include <JPGHandler.hpp>
-#include <PNGHandler.hpp>
+#include <ImageFactory.hpp>

@@ -45,7 +45,7 @@ class Geometry : public Buildable {
       */
     virtual HitRecord getRecord ( Ray const& ray ) const = 0 ;
 
-    virtual Vector<double, 2> getUVFromHit ( HitRecord const& record ) const = 0;
+    virtual Vector<double, 2> getUVFromHit ( HitRecord const& record ) const;
 
   public:
     /**

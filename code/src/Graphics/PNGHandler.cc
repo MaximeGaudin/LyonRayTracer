@@ -1,6 +1,7 @@
 #include "PNGHandler.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <cstdio>
 
@@ -60,8 +61,8 @@ void PNGHandler::Save ( Image const& img, string const& filename ) {
   free(row_pointers);
 }
 
-bool PNGHandler::validate(std::istream& source) {
-  const unsigned int PNG_SIG_SIZE = 8;
+bool PNGHandler::Validate(std::string const& filename) {
+ /* const unsigned int PNG_SIG_SIZE = 8;
   png_byte pngsig[PNG_SIG_SIZE];
   int is_png = 0;
 
@@ -70,13 +71,15 @@ bool PNGHandler::validate(std::istream& source) {
   source.read((char*)pngsig, PNG_SIG_SIZE);
   is_png = png_sig_cmp(pngsig, 0, PNG_SIG_SIZE);
   return (is_png == 0);
+  */
+  return true;
 }
 
 Image* PNGHandler::Load ( std::string const& filename ) {
-  ifstream inputFile (filename);
-
-  if (!validate(inputFile))
+  if (!Validate(filename))
     logException ( "PNGwriter", "Can't open file or wrong file format." );
+
+  std::ifstream inputFile (filename.c_str());
 
   png_structp pngPtr = 
     png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);

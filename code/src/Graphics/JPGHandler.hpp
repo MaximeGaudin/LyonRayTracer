@@ -8,6 +8,8 @@ class JPGHandler : public ImageHandler {
   public:
     void Save ( Image const& img, string const& filename );
     
-    virtual Image* Load ( std::string const& filename ) = 0;
+    Image* Load ( std::string const& filename );
+
+    bool Validate ( std::string const& filename );
 };
 #endif

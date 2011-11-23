@@ -16,6 +16,8 @@
 
 #include <boost/foreach.hpp>
 
+#include <PNGHandler.hpp>
+
 using namespace std;
 
 const unsigned char MAX_RECURSION = 8;
@@ -136,6 +138,8 @@ void Render ( Scene& scene, Sampler* sampler ) {
 int main ( int argc, char** argv ) {
   if ( argc < 2 ) return 0;
 
+  ImageFactory::addHandler ( new PNGHandler() );
+
   std::string inputFile = string(argv[1]);
   std::string outputFile = "result.png";
 
@@ -160,9 +164,8 @@ int main ( int argc, char** argv ) {
   logInformation ( "Core", "Rendering..." );
   Render ( scene, sampler ); 
 
-  PNGWriter IW;  
   logInformation ( "Core", "Saving..." );
-  IW.Save ( *scene.frame, outputFile );
+  ImageFactory::Save ( *scene.frame, outputFile );
 
   logInformation ( "Core", "Cleanup..." );
 

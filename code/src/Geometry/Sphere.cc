@@ -56,7 +56,7 @@ Vector<double, 2> Sphere::getUVFromHit ( HitRecord const& record ) const {
   Vector3d Vp = (record.position - centre_).Normalized();
 
   double phi = acos( - Vector3d::Dot ( Vn, Vp ));
-  double theta = ( arccos( Vector3d::Dot( Vp, Ve ) / sin( phi )) ) 
+  double theta = ( acos( Vector3d::Dot( Vp, Ve ) / sin( phi )) ) 
     / ( 2.0 * M_PI);
 
   double v = phi / M_PI;

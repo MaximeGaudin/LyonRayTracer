@@ -26,8 +26,6 @@ class Mesh: public Geometry {
   public:
     HitRecord getRecord ( Ray const& ray ) const;
 
-    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const { }
-
   private:
     void setupMesh();
 

@@ -32,8 +32,6 @@ class Triangle : public Geometry {
   public:
     HitRecord getRecord ( Ray const& ray ) const;
 
-    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const { }
- 
   public:
     Vector3d getBarycenter () const;
     Vector3d getA () const;

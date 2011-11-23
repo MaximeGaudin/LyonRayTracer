@@ -28,8 +28,6 @@ class Box : public Geometry {
   public:
     HitRecord getRecord ( Ray const& ray ) const;
 
-    Vector<double, 2> getUVFromHit ( HitRecord const& record ) const { }
-
     /**
       * @param t Triangle dont il faut vérifier l'appartenance à la boite.
       * @return true, si le triangle est géométriquement inclu dans la boite,

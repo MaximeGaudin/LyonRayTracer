@@ -64,8 +64,8 @@ am_lrt_OBJECTS = ./src/Builders/Builder.$(OBJEXT) \
 	./src/Geometry/Sphere.$(OBJEXT) \
 	./src/Geometry/Triangle.$(OBJEXT) \
 	./src/Graphics/Image.$(OBJEXT) \
-	./src/Graphics/JPGWriter.$(OBJEXT) \
-	./src/Graphics/PNGWriter.$(OBJEXT) \
+	./src/Graphics/ImageFactory.$(OBJEXT) \
+	./src/Graphics/PNGHandler.$(OBJEXT) \
 	./src/Lights/Directional.$(OBJEXT) \
 	./src/Lights/Point.$(OBJEXT) ./src/main.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
@@ -209,7 +209,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/JPGWriter.cc ./src/Graphics/PNGWriter.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
+lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/ImageFactory.cc ./src/Graphics/PNGHandler.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hpp
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -370,9 +370,9 @@ src/Graphics/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Graphics/$(DEPDIR)/$(am__dirstamp)
 ./src/Graphics/Image.$(OBJEXT): src/Graphics/$(am__dirstamp) \
 	src/Graphics/$(DEPDIR)/$(am__dirstamp)
-./src/Graphics/JPGWriter.$(OBJEXT): src/Graphics/$(am__dirstamp) \
+./src/Graphics/ImageFactory.$(OBJEXT): src/Graphics/$(am__dirstamp) \
 	src/Graphics/$(DEPDIR)/$(am__dirstamp)
-./src/Graphics/PNGWriter.$(OBJEXT): src/Graphics/$(am__dirstamp) \
+./src/Graphics/PNGHandler.$(OBJEXT): src/Graphics/$(am__dirstamp) \
 	src/Graphics/$(DEPDIR)/$(am__dirstamp)
 src/Lights/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Lights
@@ -444,8 +444,8 @@ mostlyclean-compile:
 	-rm -f ./src/Geometry/Sphere.$(OBJEXT)
 	-rm -f ./src/Geometry/Triangle.$(OBJEXT)
 	-rm -f ./src/Graphics/Image.$(OBJEXT)
-	-rm -f ./src/Graphics/JPGWriter.$(OBJEXT)
-	-rm -f ./src/Graphics/PNGWriter.$(OBJEXT)
+	-rm -f ./src/Graphics/ImageFactory.$(OBJEXT)
+	-rm -f ./src/Graphics/PNGHandler.$(OBJEXT)
 	-rm -f ./src/Lights/Directional.$(OBJEXT)
 	-rm -f ./src/Lights/Point.$(OBJEXT)
 	-rm -f ./src/Material.$(OBJEXT)
@@ -479,8 +479,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Sphere.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Triangle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/Image.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/JPGWriter.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGWriter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/ImageFactory.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Directional.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Point.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/MeshImporters/$(DEPDIR)/MeshImporter3ds.Po@am__quote@
