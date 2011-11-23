@@ -1,0 +1,62 @@
+\subsection{Objectifs du projet}
+Les objectifs du projet sont nombreux, aussi bien sur le plan de
+l'architecture logiciel, que de la gestion de projet ou encore u
+développement.
+
+\paragraph{Architecture logiciel}
+Un des buts principal du projet (si ce n'est le but principal du projet) est
+de créer un programme ouvert à l'extension et pouvant servir de base à la
+création d'un \raytracing plus évolué, ou plus rapide, ou plus facile à
+utiliser, etc.
+
+\paragraph{Portabilité}
+Afin d'être le plus portable possible, j'ai décidé d'utiliser un mélange
+d'outils standards comme :
+\begin{itemize}
+  \item C/C++ : Compilable sur presque toutes les plateformes.
+  \item Les autotools\footnote{\url{http://sources.redhat.com/autobook/}} :
+  Système de build standard et ne nécessitant aucun autre programme que make
+  et bash.
+  \item Boost : La bibliothèque C++ de référence.
+  \item libpng/libjpg : Pour l'import texture et l'export des résultats.
+  \item lib3ds : Pour l'importation des modèles 3D.
+\end{itemize}
+
+\paragraph{Gestion de projet}
+J'ai réalisé ce projet seul du 24 Septembre au 1 Décembre en utilisant un
+style de développement \gls{XP}\footnote{\url{http://www.extremeprogramming.org/}}.
+Le gestionnaire de version utilisé est git et le projet ainsi que son
+\href{http://digitalguru.github.com/LyonRayTracer}{site web} sont hébergés sur
+GitHub.
+
+\paragraph{Implémentation}
+Il était pour moi primordial de respecter tout au long de ce projet des
+\eng{guidelines} afin d'assurer une cohérence de tout le code (de plusieurs
+miliers de lignes tout de même). La documentation fait aussi partie intégrante
+du processus de développement et la génération de celle-ci fait partie du
+\eng{pipeline} de compilation.
+
+\paragraph{Fonctionnalité du ray tracer}
+Reprenons les objectifs fixés dans le sujet :
+\begin{enumerate}
+  \item Un moteur de \raytracing ``classique''.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+  \item La gestion de primitives (sphères, plan, tores, et en général toutes
+    les figures ayant une représentation paramétrique).\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+  \item La gestion de plusieurs types de caméras : Orthographique,
+    perspective, \etc\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+  \item La gestion de plusieurs types de lumières : Point, plan, sphérique,
+    \etc.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+  \item La gestion d'au moins un format de représentation polygonale.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+  \item La mise en place des structures accélératrices.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
+\end{enumerate}
+
+\newpar J'ai aussi pris le temps d'implémenter :
+\begin{enumerate}
+  \item Un chargeur de scènes XML.
+  \item La lecture et l'écriture d'images au format PNG ou JPG (avec la
+  possibilité d'ajouter d'autre formats).
+  \item La gestion des textures.
+  \item Le \gls{supersampling}.
+\end{enumerate}
+
+

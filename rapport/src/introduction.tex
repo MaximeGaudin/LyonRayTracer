@@ -28,73 +28,46 @@ logiciels de visualisation 3D. Mais depuis quelques plus de 30 ans
 rendu simple mais très puissante : Le \raytracing !
 
 \subsection{Le \raytracing ?}
+Le \raytracing est une technique de rendu qui, à la manière des réseau de
+neurones, tente de s'approcher au plus des phénomènes physique pour obtenir
+un rendu photoréaliste. 
 
-\subsection{Objectifs du projet}
-Les objectifs du projet sont nombreux, aussi bien sur le plan de
-l'architecture logiciel, que de la gestion de projet ou encore u
-développement.
+\newpar À défaut de décrire le \tsl{pipeline} complet d'un ray tracer (ce
+n'est pas l'objectif du rapport), il m'a tout de même semblé important
+d'écrire une brève introduction sur ce qui pourrait bien être la principale
+méthode de rendu dans un futur proche.
 
-\paragraph{Architecture logiciel}
-Un des buts principal du projet (si ce n'est le but principal du projet) est
-de créer un programme ouvert à l'extension et pouvant servir de base à la
-création d'un \raytracing plus évolué, ou plus rapide, ou plus facile à
-utiliser, etc.
-
-\paragraph{Portabilité}
-Afin d'être le plus portable possible, j'ai décidé d'utiliser un mélange
-d'outils standards comme :
+\paragraph{Le modèle de propagation de la lumière}
+L'œil humain perçoit les objets grâce à la lumière qu'ils réfléchissent. Nous
+pourrions donc imaginer calculer l'ensemble des interactions lumineuse d'un
+scène en partant de toutes les sources de lumière. Un tel modèle supposerai
+cependant une puissance de calcul infinie et pour que les calculs restent
+raisonnable, les simplifications suivantes ont dû être faite :
 \begin{itemize}
-  \item C/C++ : Compilable sur presque toutes les plateformes.
-  \item Les autotools\footnote{\url{http://sources.redhat.com/autobook/}} :
-  Système de build standard et ne nécessitant aucun autre programme que make
-  et bash.
-  \item Boost : La bibliothèque C++ de référence.
-  \item libpng/libjpg : Pour l'import texture et l'export des résultats.
-  \item lib3ds : Pour l'importation des modèles 3D.
+  \item La lumière se propage en ligne droite : Nous abandonnons donc le
+    modèle ondulatoire de la lumière pour nous restreindre à l'optique
+    géométrique.
+  \item La lumière que nous recevons est la même que si la source était notre
+    œil : En effet, plutôt que de lancer la majorité des rayons dans le vide
+    (\ie des rayons qui ne parviendraient pas jusqu'à notre œil), il est plus
+    judicieux de lancer les rayons depuis la caméra jusqu'à notre scène.
+  \item Le nombre de rebond que fait la lumière est fini : En optique
+    géométrie, il n'y a pas de perte d'énergie et considérer tous les rebonds
+    mènerai à des récursions infinies.
 \end{itemize}
 
-\paragraph{Gestion de projet}
-J'ai réalisé ce projet seul du 24 Septembre au 1 Décembre en utilisant un
-style de développement \gls{XP}\footnote{\url{http://www.extremeprogramming.org/}}.
-Le gestionnaire de version utilisé est git et le projet ainsi que son
-\href{http://digitalguru.github.com/LyonRayTracer}{site web} sont hébergés sur
-GitHub.
+\paragraph{L'algorithme simplifié}
+Cette courte introduction nous amène à l'algorithme de rendu suivant :
+\input{algo}
 
-\paragraph{Implémentation}
-Il était pour moi primordial de respecter tout au long de ce projet des
-\eng{guidelines} afin d'assurer une cohérence de tout le code (de plusieurs
-miliers de lignes tout de même). La documentation fait aussi partie intégrante
-du processus de développement et la génération de celle-ci fait partie du
-\eng{pipeline} de compilation.
+\todo{Intégrer l'image}
 
-\paragraph{Fonctionnalité du ray tracer}
-Reprenons les objectifs fixés dans le sujet :
-\begin{enumerate}
-  \item Un moteur de \raytracing ``classique''.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-  \item La gestion de primitives (sphères, plan, tores, et en général toutes
-    les figures ayant une représentation paramétrique).\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-  \item La gestion de plusieurs types de caméras : Orthographique,
-    perspective, \etc\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-  \item La gestion de plusieurs types de lumières : Point, plan, sphérique,
-    \etc.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-  \item La gestion d'au moins un format de représentation polygonale.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-  \item La mise en place des structures accélératrices.\textcolor[rgb]{0.0, 0.9, 0.2}{\checkmark}
-\end{enumerate}
+Il est impressionnant de constater la simplicité d'un algorithme pourtant si
+puissant. En quelques lignes, nous venons de décrire la propagation de la
+lumière aux travers d'objets transparents et/ou réfléchissant !
 
-\newpar J'ai aussi pris le temps d'implémenter :
-\begin{enumerate}
-  \item Un chargeur de scènes XML.
-  \item La lecture et l'écriture d'images au format PNG ou JPG (avec la
-  possibilité d'ajouter d'autre formats).
-  \item La gestion des textures.
-  \item Le \gls{supersampling}.
-\end{enumerate}
+Nous verrons cependant que, pour rester ouvert à l'extension et garder un
+couplage faible, une architecture solide est nécessaire.
 
-\subsection{Non-objectifs}
-Comme dans tout projet, celui-ci possède des non-objectifs, \ie des objectifs
-que j'ai décider volontairement de ne pas atteindre, ou en tout cas de ne pas
-viser. 
-
-\newpar D'abord, la vitesse d'exécution. Les \eng{raytracers} commerciaux sont
-de réelles prouesses d'ingénierie et d'optimisation et j'ai considérer que
-l'optimisation de tels programme sort du contexte d'un projet personnel.
+\input{objectives}
+\input{non_objectives}
