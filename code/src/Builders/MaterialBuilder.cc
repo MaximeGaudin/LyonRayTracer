@@ -1,6 +1,9 @@
 #include "MaterialBuilder.hpp"
+#include <string>
+
 #include <Vector.hpp>
 #include <Material.hpp>
+#include <ImageFactory.hpp>
 
 MaterialBuilder::MaterialBuilder () :
   Builder ( "material" )
@@ -37,6 +40,13 @@ result->reflexivity = pt.get<double>("reflexivity", 0.2);
 result->IOR = pt.get<double>("IOR", 1.5);
 result->specularPower = pt.get<double>("specularPower", 60);
 result->diffuseIntensity = pt.get<double>("diffuseIntensity", 1.5);
+
+std::string textureFilename = pt.get<std::string>("texture", "");
+result->hasTexture = false; 
+if ( !textureFilename.empty() ) {
+  result->texture = ImageFactory::Load ( textureFilename );
+  if(result->texture != NULL) result->hasTexture = true;
+} 
 
 logInformation ("MaterialBuilder", 
     str ( format ( "New material with diffuse = %1%." )

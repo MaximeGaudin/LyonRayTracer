@@ -10,6 +10,7 @@
   <materials>
     <material name="red">
       <diffuse><color R="1" G="0" B="0" /></diffuse>
+      <texture>textures/metal.png</texture>
     </material>
     <material name="blue">
       <diffuse><color R="0" G="0" B="1" /></diffuse>
