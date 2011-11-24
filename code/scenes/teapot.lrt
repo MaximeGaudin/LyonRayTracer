@@ -14,8 +14,8 @@
     </material>
 
     <material name="grey">
-      <diffuse><color R="0.5" G="0.5" B="0.5" /></diffuse>
-      <reflexivity>0.1</reflexivity>
+      <diffuse><color R="0.6" G="0.6" B="0.6" /></diffuse>
+      <reflexivity>1</reflexivity>
     </material>
  
   </materials>

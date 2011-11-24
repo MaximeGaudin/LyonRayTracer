@@ -54,10 +54,12 @@ am__dirstamp = $(am__leading_dot)dirstamp
 am_lrt_OBJECTS = ./src/Builders/Builder.$(OBJEXT) \
 	./src/Builders/MaterialBuilder.$(OBJEXT) \
 	./src/Builders/MeshBuilder.$(OBJEXT) \
+	./src/Builders/PerspectiveDOFBuilder.$(OBJEXT) \
 	./src/Builders/PerspectiveBuilder.$(OBJEXT) \
 	./src/Builders/PlaneBuilder.$(OBJEXT) \
 	./src/Builders/PointBuilder.$(OBJEXT) \
 	./src/Builders/SphereBuilder.$(OBJEXT) \
+	./src/Cameras/PerspectiveDOF.$(OBJEXT) \
 	./src/Cameras/Perspective.$(OBJEXT) ./src/exceptions.$(OBJEXT) \
 	./src/Geometry/Box.$(OBJEXT) ./src/Geometry/Geometry.$(OBJEXT) \
 	./src/Geometry/Mesh.$(OBJEXT) ./src/Geometry/Plane.$(OBJEXT) \
@@ -209,7 +211,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/ImageFactory.cc ./src/Graphics/PNGHandler.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
+lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveDOFBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/PerspectiveDOF.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/ImageFactory.cc ./src/Graphics/PNGHandler.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hpp
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -319,6 +321,9 @@ src/Builders/$(DEPDIR)/$(am__dirstamp):
 	src/Builders/$(DEPDIR)/$(am__dirstamp)
 ./src/Builders/MeshBuilder.$(OBJEXT): src/Builders/$(am__dirstamp) \
 	src/Builders/$(DEPDIR)/$(am__dirstamp)
+./src/Builders/PerspectiveDOFBuilder.$(OBJEXT):  \
+	src/Builders/$(am__dirstamp) \
+	src/Builders/$(DEPDIR)/$(am__dirstamp)
 ./src/Builders/PerspectiveBuilder.$(OBJEXT):  \
 	src/Builders/$(am__dirstamp) \
 	src/Builders/$(DEPDIR)/$(am__dirstamp)
@@ -334,6 +339,8 @@ src/Cameras/$(am__dirstamp):
 src/Cameras/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Cameras/$(DEPDIR)
 	@: > src/Cameras/$(DEPDIR)/$(am__dirstamp)
+./src/Cameras/PerspectiveDOF.$(OBJEXT): src/Cameras/$(am__dirstamp) \
+	src/Cameras/$(DEPDIR)/$(am__dirstamp)
 ./src/Cameras/Perspective.$(OBJEXT): src/Cameras/$(am__dirstamp) \
 	src/Cameras/$(DEPDIR)/$(am__dirstamp)
 src/$(am__dirstamp):
@@ -433,10 +440,12 @@ mostlyclean-compile:
 	-rm -f ./src/Builders/MaterialBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/MeshBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/PerspectiveBuilder.$(OBJEXT)
+	-rm -f ./src/Builders/PerspectiveDOFBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/PlaneBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/PointBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/SphereBuilder.$(OBJEXT)
 	-rm -f ./src/Cameras/Perspective.$(OBJEXT)
+	-rm -f ./src/Cameras/PerspectiveDOF.$(OBJEXT)
 	-rm -f ./src/Geometry/Box.$(OBJEXT)
 	-rm -f ./src/Geometry/Geometry.$(OBJEXT)
 	-rm -f ./src/Geometry/Mesh.$(OBJEXT)
@@ -468,10 +477,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/MaterialBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/MeshBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/PerspectiveBuilder.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/PerspectiveDOFBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/PlaneBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/PointBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/SphereBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Cameras/$(DEPDIR)/Perspective.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Cameras/$(DEPDIR)/PerspectiveDOF.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Box.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Geometry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Geometry/$(DEPDIR)/Mesh.Po@am__quote@

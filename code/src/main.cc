@@ -1,5 +1,8 @@
 #include <common.hpp>
 
+#include <cstdlib>
+#include <ctime>
+
 #include <Maths.hpp>
 #include <Basics.hpp>
 #include <Cameras.hpp>
@@ -134,9 +137,11 @@ void Render ( Scene& scene, Sampler* sampler ) {
         Color_d pixel = Color_d_BLACK;
 
         while ( it != rays.end() ) { 
-          pixel += getPixel ( scene, *it, 1.0, 0 ) / rays.size();
+          pixel += getPixel ( scene, *it, 1.0, 0 ) / (double)rays.size();
+          //cout << pixel << endl;
           ++it;
         }
+        //cout << "===============" << endl;
 
         (*scene.frame)[X][Y] = pixel;
     }
@@ -148,6 +153,7 @@ void Render ( Scene& scene, Sampler* sampler ) {
 int main ( int argc, char** argv ) {
   if ( argc < 2 ) return 0;
 
+  srand(time(NULL));
   ImageFactory::addHandler ( new PNGHandler() );
 
   std::string inputFile = string(argv[1]);
@@ -160,6 +166,7 @@ int main ( int argc, char** argv ) {
   SR.addBuilder ( new MaterialBuilder() );
 
   SR.addBuilder ( new PerspectiveBuilder() );
+  SR.addBuilder ( new PerspectiveDOFBuilder() );
 
   SR.addBuilder ( new PointBuilder() );
 
