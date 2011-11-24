@@ -81,16 +81,6 @@ Ray getRefractedRay ( Ray const& ray, double IOR, HitRecord const& record ) {
   return newRay;
 }
 
-Color_d getGeometryColor ( HitRecord record ) {
-  if ( !record.hitGeometry->material()->hasTexture )
-      return record.hitGeometry->material()->diffuse;
-
-  Image* texture = record.hitGeometry->material()->texture;
-  Vector <double,2> UV = record.hitGeometry->getUVFromHit ( record );
-
-  return (*texture)[(int)(UV[0] * texture->W())][(int)(UV[1] * texture->H())];
-}
-
 Color_d getPixel ( Scene const& scene, Ray const& ray, 
     double IOR,
     unsigned char recursionsLevel ) {
@@ -101,7 +91,7 @@ Color_d getPixel ( Scene const& scene, Ray const& ray,
   HitRecord record = getClosestHit ( ray, scene.geometries );
 
   if ( record.hit ) {
-    Color_d directColor = getGeometryColor ( record );
+    Color_d directColor = Material::getGeometryColor ( record );
     Color_d directLighting = computeDirectLighting ( scene, record );
 
     Color_d reflectedColor;
@@ -169,6 +159,7 @@ int main ( int argc, char** argv ) {
   SR.addBuilder ( new PerspectiveDOFBuilder() );
 
   SR.addBuilder ( new PointBuilder() );
+  SR.addBuilder ( new AreaBuilder() );
 
   SR.addBuilder ( new SphereBuilder() );
   SR.addBuilder ( new PlaneBuilder() );

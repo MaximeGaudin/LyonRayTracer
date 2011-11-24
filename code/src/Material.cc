@@ -1,4 +1,6 @@
 #include "Material.hpp"
+#include <Geometry.hpp>
+#include <Image.hpp>
 
   Material::Material ( )
   : ambient(Color_d(0.03))
@@ -33,5 +35,15 @@
   , specular(specular)
     , specularPower(60) 
 { }
+
+Color_d Material::getGeometryColor ( HitRecord const& record ) {
+  if ( !record.hitGeometry->material()->hasTexture )
+      return record.hitGeometry->material()->diffuse;
+
+  Image* texture = record.hitGeometry->material()->texture;
+  Vector <double,2> UV = record.hitGeometry->getUVFromHit ( record );
+
+  return (*texture)[(int)(UV[0] * texture->W())][(int)(UV[1] * texture->H())];
+}
 
 

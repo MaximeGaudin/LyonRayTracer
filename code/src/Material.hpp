@@ -21,6 +21,8 @@
 #include <Buildable.hpp>
 #include <MaterialBuilder.hpp>
 
+#include <HitRecord.hpp>
+
 #include <common.hpp>
 #include <Color.hpp>
 
@@ -41,6 +43,8 @@ class Material : public Buildable {
      * @param diffuse Couleur spéculaire du matériaux.
      */
     Material ( Color_d diffuse, Color_d ambient, Color_d specular );
+
+    static Color_d getGeometryColor ( HitRecord const& record );
 
   public:
     /*

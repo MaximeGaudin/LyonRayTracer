@@ -52,6 +52,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_lrt_OBJECTS = ./src/Builders/Builder.$(OBJEXT) \
+	./src/Builders/AreaBuilder.$(OBJEXT) \
 	./src/Builders/MaterialBuilder.$(OBJEXT) \
 	./src/Builders/MeshBuilder.$(OBJEXT) \
 	./src/Builders/PerspectiveDOFBuilder.$(OBJEXT) \
@@ -68,7 +69,7 @@ am_lrt_OBJECTS = ./src/Builders/Builder.$(OBJEXT) \
 	./src/Graphics/Image.$(OBJEXT) \
 	./src/Graphics/ImageFactory.$(OBJEXT) \
 	./src/Graphics/PNGHandler.$(OBJEXT) \
-	./src/Lights/Directional.$(OBJEXT) \
+	./src/Lights/Area.$(OBJEXT) ./src/Lights/Directional.$(OBJEXT) \
 	./src/Lights/Point.$(OBJEXT) ./src/main.$(OBJEXT) \
 	./src/Material.$(OBJEXT) \
 	./src/MeshImporters/MeshImporter3ds.$(OBJEXT) \
@@ -211,7 +212,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
-lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveDOFBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/PerspectiveDOF.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/ImageFactory.cc ./src/Graphics/PNGHandler.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
+lrt_SOURCES = ./src/Builders/Builder.cc ./src/Builders/AreaBuilder.cc ./src/Builders/MaterialBuilder.cc ./src/Builders/MeshBuilder.cc ./src/Builders/PerspectiveDOFBuilder.cc ./src/Builders/PerspectiveBuilder.cc ./src/Builders/PlaneBuilder.cc ./src/Builders/PointBuilder.cc ./src/Builders/SphereBuilder.cc ./src/Cameras/PerspectiveDOF.cc ./src/Cameras/Perspective.cc ./src/exceptions.cc ./src/Geometry/Box.cc ./src/Geometry/Geometry.cc ./src/Geometry/Mesh.cc ./src/Geometry/Plane.cc ./src/Geometry/Sphere.cc ./src/Geometry/Triangle.cc ./src/Graphics/Image.cc ./src/Graphics/ImageFactory.cc ./src/Graphics/PNGHandler.cc ./src/Lights/Area.cc ./src/Lights/Directional.cc ./src/Lights/Point.cc ./src/main.cc ./src/Material.cc ./src/MeshImporters/MeshImporter3ds.cc ./src/Optimization/OctreeNode.cc ./src/Ray.cc ./src/Samplers/DefaultSampler.cc ./src/Scene/SceneReader.cc
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp
 all: config.hpp
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -316,6 +317,8 @@ src/Builders/$(DEPDIR)/$(am__dirstamp):
 	@: > src/Builders/$(DEPDIR)/$(am__dirstamp)
 ./src/Builders/Builder.$(OBJEXT): src/Builders/$(am__dirstamp) \
 	src/Builders/$(DEPDIR)/$(am__dirstamp)
+./src/Builders/AreaBuilder.$(OBJEXT): src/Builders/$(am__dirstamp) \
+	src/Builders/$(DEPDIR)/$(am__dirstamp)
 ./src/Builders/MaterialBuilder.$(OBJEXT):  \
 	src/Builders/$(am__dirstamp) \
 	src/Builders/$(DEPDIR)/$(am__dirstamp)
@@ -387,6 +390,8 @@ src/Lights/$(am__dirstamp):
 src/Lights/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) ./src/Lights/$(DEPDIR)
 	@: > src/Lights/$(DEPDIR)/$(am__dirstamp)
+./src/Lights/Area.$(OBJEXT): src/Lights/$(am__dirstamp) \
+	src/Lights/$(DEPDIR)/$(am__dirstamp)
 ./src/Lights/Directional.$(OBJEXT): src/Lights/$(am__dirstamp) \
 	src/Lights/$(DEPDIR)/$(am__dirstamp)
 ./src/Lights/Point.$(OBJEXT): src/Lights/$(am__dirstamp) \
@@ -436,6 +441,7 @@ lrt$(EXEEXT): $(lrt_OBJECTS) $(lrt_DEPENDENCIES)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ./src/Builders/AreaBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/Builder.$(OBJEXT)
 	-rm -f ./src/Builders/MaterialBuilder.$(OBJEXT)
 	-rm -f ./src/Builders/MeshBuilder.$(OBJEXT)
@@ -455,6 +461,7 @@ mostlyclean-compile:
 	-rm -f ./src/Graphics/Image.$(OBJEXT)
 	-rm -f ./src/Graphics/ImageFactory.$(OBJEXT)
 	-rm -f ./src/Graphics/PNGHandler.$(OBJEXT)
+	-rm -f ./src/Lights/Area.$(OBJEXT)
 	-rm -f ./src/Lights/Directional.$(OBJEXT)
 	-rm -f ./src/Lights/Point.$(OBJEXT)
 	-rm -f ./src/Material.$(OBJEXT)
@@ -473,6 +480,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/Ray.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/exceptions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/AreaBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/Builder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/MaterialBuilder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Builders/$(DEPDIR)/MeshBuilder.Po@am__quote@
@@ -492,6 +500,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/Image.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/ImageFactory.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Graphics/$(DEPDIR)/PNGHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Area.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Directional.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/Lights/$(DEPDIR)/Point.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./src/MeshImporters/$(DEPDIR)/MeshImporter3ds.Po@am__quote@
