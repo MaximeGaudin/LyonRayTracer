@@ -6,7 +6,7 @@ formats d'image.
 Pour cela, l'architecture du module est basé autours d'un \tsl{Builder} (\cf
 \cite{DesignPatternsBook}, \tsl{p. 97}) dont une seule instance est autorisée
 (\tsl{design pattern Singleton, p. 127}). Ainsi, il est possible de créer une
-collection de classe capable de manipuler différents formats d'images. Par la
+collection de classes capables de manipuler différents formats d'images. Par la
 suite, le \tsl{Builder} pourra choisir la bonne implémentation des méthodes de
 chargement et de sauvegarde de l'image correspondant au format demandé.
 
@@ -15,10 +15,9 @@ chargement et de sauvegarde de l'image correspondant au format demandé.
 
 \paragraph{[Implémentée] JPGHandler} Permet de manipuler le format JPG. 
 
-\paragraph{[Non implémentée] Autre} Il existe plusieurs dizaines de format
+\paragraph{[Non implémentée] Autre} Il existe plusieurs dizaines de formats
 qu'il faudrait supporter.
 
-\subsection{Diagramme de classe}
 \begin{figure}[h]
 \begin{center}
   \includegraphics[width=.4\textwidth]{../../architecture/ImageHandlers}

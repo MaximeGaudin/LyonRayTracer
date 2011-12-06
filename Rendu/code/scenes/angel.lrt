@@ -1,0 +1,42 @@
+<scene width="300" height="300">
+
+  <camera type="perspective">
+    <eye><vector3 X="0" Y="1.2" Z="1.2" /></eye>
+    <lookat><vector3 X="0" Y="0" Z="0" /></lookat>
+    <up><vector3 X="0" Y="1" Z="0" /></up>
+    <focalDistance>0.5</focalDistance>
+  </camera>
+
+  <materials>
+    <material name="blue">
+      <diffuse><color R="0" G="0" B="1" /></diffuse>
+      <reflexivity>0.9</reflexivity>
+    </material>
+
+    <material name="grey">
+      <diffuse><color R="0.5" G="0.5" B="0.5" /></diffuse>
+      <reflexivity>0.1</reflexivity>
+    </material>
+ 
+  </materials>
+
+  <lights>
+    <light type="point">
+      <position><vector3 X="-20" Y="20" Z="20" /></position>
+    </light>
+  </lights>
+
+  <geometries>
+   <geometry type="mesh" material="grey">
+     <filename>models/angel.3ds</filename>
+     <position><vector3 X="0" Y="0" Z="0" /></position>
+   </geometry>
+
+   <geometry type="plane" material="blue">
+     <point><vector3 X="0" Y="-0.4" Z="0" /></point>
+     <normal><vector3 X="0" Y="1" Z="0" /></normal>
+   </geometry>
+  </geometries>
+
+
+</scene>

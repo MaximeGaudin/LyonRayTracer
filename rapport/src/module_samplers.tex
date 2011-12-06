@@ -1,11 +1,13 @@
 \section{Sampler}
-Les \tsl{samplers} ont pour objectif d'échantillonner le nombre de rayons
-lancé par pixel. Il est donc possible de \tsl{supersampler}, \ie lancer plus
-de rayons qu'il ne semble nécessaire afin d'éviter les phénomènes de
-crénelage.
+Les \tsl{samplers}\ ont pour objectif d'échantillonner le nombre de rayons
+lancés pour chaque pixel. Pour cela, il est nécessaire de leur fournir toute
+la scène car ils nécessitent au moins la caméra mais peuvent avoir besoin de
+beaucoup d'autre éléments (par exemple, l'ensemble des géométries). Il est par
+exemple possible de \tsl{supersampler}, \ie lancer plus de rayons qu'il ne
+semble nécessaire afin d'éviter les phénomènes de crénelage.\\
 
-Encore une fois, les \tsl{samplers} doivent respecter l'interface définit à la
-\tsl{fig. \ref{fig:ISampler}}.
+Encore une fois, les \tsl{samplers}\ doivent respecter la même interface
+définit à la \tsl{fig. \ref{fig:ISampler}}.
 
 \begin{figure}[h]
   \inputcode{c++}{../../code/src/Samplers/Sampler.hpp}
@@ -14,21 +16,24 @@ Encore une fois, les \tsl{samplers} doivent respecter l'interface définit à la
 \end{figure}
 
 \subsection{Spécialisations}
-\paragraph{[Implémentée] DefaultSampler} Ce sampler lance un seul rayon par pixel.
+\paragraph{[Implémentée] DefaultSampler} Ce \tsl{sampler}\ lance un seul rayon
+par pixel.
 
-\paragraph{[Implémentée] SuperSampler} Ce sampler lance $N$ rayons par pixel où $N$ est
-passé en paramètre.
+\paragraph{[Implémentée] SuperSampler} Ce \tsl{sampler}\ lance $N$ rayons par
+pixel où $N$ est passé en paramètre.
 
-\paragraph{[Non implémentée] Adaptative sampling} Il existe un sampler que je
-n'ai pas eu le temps d'implémenter et qui pourtant définit la stratégie la
-plus intelligente d'échantillonnage. Il s'agit de l'échantillonnage adaptatif
-qui, tant que la moyenne des pixels environnant est supérieure à un certain
-seuil de différence, lance des rayons selon une distribution statistique.
+\paragraph{[Non implémentée] Adaptative sampling} Il existe un \tsl{sampler}\
+que je n'ai pas eu le temps d'implémenter et qui pourtant définit la stratégie
+la plus intelligente d'échantillonnage. Il s'agit de l'échantillonnage
+adaptatif qui, tant que la moyenne des pixels environnant est supérieure à un
+certain seuil de différence, lance des rayons selon une distribution
+statistique.
 
-\subsection{Diagramme de classe}
+\vspace*{\fill}
 \begin{figure}[h]
 \begin{center}
-  \includegraphics[width=\textwidth]{../../architecture/Samplers}
+  \noindent\hbox to \textwidth
+  {\hss\includegraphics[width=1.5\textwidth]{../../architecture/Samplers}\hss}
   \caption{Diagramme de classe du module Sampler\label{fig:CDSamplers}}
 \end{center}
 \end{figure}

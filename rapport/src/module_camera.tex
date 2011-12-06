@@ -2,7 +2,7 @@
 L'ensemble des caméras doivent respecter l'interface de la \tsl{fig.
 \ref{fig:ICamera}}. Concrètement, chaque caméra doit pouvoir, à partir des
 coordonnées de l'espace écran (coordonnées UV), fournir l'ensemble des rayons
-nécessaire au dessin de la scène.
+nécessaires au dessin de la scène.
 
 \begin{figure}[h]
   \inputcode{c++}{../../code/src/Cameras/Camera.hpp}
@@ -24,10 +24,10 @@ orthographique (utiles pour les rendu de pièce en 3D et le métrage).
 \paragraph{[Non implémentée] Caméra fish eye} Cette caméra permet d'utiliser
 des matrices de projection grand angle.
 
-\subsection{Diagramme de classe}
 \begin{figure}[h]
 \begin{center}
-  \includegraphics[width=\textwidth]{../../architecture/Cameras}
+  \noindent\makebox[\textwidth]{%
+    \includegraphics[width=1.5\textwidth]{../../architecture/Cameras}}
   \caption{Diagramme de classe du module Caméra\label{fig:CDCamera}}
 \end{center}
 \end{figure}

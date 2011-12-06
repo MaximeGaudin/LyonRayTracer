@@ -1,8 +1,35 @@
 \chapter{Manuel utilisateur}
 \section{Compilation}
+Le \eng{pipeline} de compilation est tout ce qu'il y a de plus classique :
+\begin{center}
+\begin{verbatim}
+./configure
+make
+\end{verbatim}
+\end{center}
 
 \subsection{Dépendances}
+Afin de pouvoir compiler ce programme, le script \ttt{configure} va s'assurer
+que vous posséder :
+\begin{itemize}
+  \item boost @1.47.0, Revision 2 $(>=)$
+  \item lib3ds @20080909 $(>=)$
+  \item libpng @1.4.8 $(==)$
+\end{itemize}
 
 \section{Licence}
+C'est la première fois que j'ai à faire au problème des license et avec
+seulement 3 bibliothèque, cela semble déjà être un casse tête. Je crois
+cependant que la license la plus restrictive est la \tsl{Boost licence version
+1.0} et que par conséquent, ce programme doit être distribué sous cette
+license.
 
 \section{Utilisation}
+L'utilisation du programme est très simple :
+\begin{center}
+\begin{verbatim}
+./lrt SCENE.lrt [fichierDeSortie.png]
+\end{verbatim}
+\end{center}
+
+\remark{Par défaut, le fichier de sortie est \ttt{result.png}.}

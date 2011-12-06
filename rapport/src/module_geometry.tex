@@ -1,13 +1,8 @@
 \section{Geometry}
 Ce module regroupe l'ensemble des géométries que le programme peut calculer.
-Chacune de ces classes doivent respecter l'interface définit à la
-\tsl{fig. \ref{fig:IGeometry}}.
+Chacune de ces classes doivent respecter l'interface suivante :
 
-\begin{figure}[h]
-  \inputcode{c++}{../../code/src/Geometry/Geometry.hpp}
-  \caption{Code de l'interface commune à toutes les
-  géométrie \label{fig:IGeometry}}
-\end{figure}
+\inputcode{c++}{../../code/src/Geometry/Geometry.hpp}
 
 \subsection{Spécialisations}
 \paragraph{[Implémentée] Sphère}
@@ -17,21 +12,19 @@ structure d'Octree.
 
 \paragraph{[Implémentée] Triangle}
 
-\paragraph{[Implémentée] Mesh} Qui est en réalité un aggrégat de triangles
-stockés dans un octree.
+\paragraph{[Implémentée] Mesh} Qui est en réalité un agrégat de triangles
+stockés dans un \tsl{octree}.
 
 \paragraph{[Non implémentée] Quadric} Les \tsl{quadrics} sont un ensemble de
-géométrie paramétré par une équation de la forme $$xQx^T + Px^T + R = 0$$. 
+géométries paramétrés par une équation de la forme $$xQx^T + Px^T + R = 0$$. 
 
-Cette équation permet de décrire tout une gamme de forme allant de l'ellipse à
-la sphère en passant par plusieurs types de cônes.\footnote{Pour la liste
+Cette équation permet de décrire toute une gamme de formes allant de l'ellipse
+à la sphère en passant par plusieurs types de cônes.\footnote{Pour la liste
 complète, je vous invite à consulter
 \url{http://en.wikipedia.org/wiki/Quadric}.}.
 
-\subsection{Diagramme de classe}
 \begin{figure}[h]
-\begin{center}
-  \includegraphics[width=\textwidth]{../../architecture/Geometries}
+  \hbox to \textwidth
+  {\hss\includegraphics[width=1.5\textwidth]{../../architecture/Geometries}\hss}
   \caption{Diagramme de classe du module Geometry\label{fig:CDGeometry}}
-\end{center}
 \end{figure}

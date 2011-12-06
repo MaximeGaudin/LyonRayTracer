@@ -1,8 +1,6 @@
 \section{Lumières}
-L'ensemble des sources de lumières doivent respecter l'interface de la \tsl{fig.
-\ref{fig:ILights}}. Concrètement, chaque caméra doit pouvoir, à partir des
-coordonnées de l'espace écran (coordonnées UV), fournir l'ensemble des rayons
-nécessaire au dessin de la scène.
+L'ensemble des sources de lumières doivent respecter l'interface de la
+\tsl{fig.\ref{fig:ILights}}. 
 
 \begin{figure}[h]
   \inputcode{c++}{../../code/src/Lights/Light.hpp}
@@ -11,26 +9,25 @@ nécessaire au dessin de la scène.
 \end{figure}
 
 \subsection{Spécialisations}
-\paragraph{[Implémentée] Lumière directionnelle} Cette source éclaire tout selon une
-direction passée en paramètre.
+\paragraph{[Implémentée] Lumière directionnelle} Cette source éclaire tout
+selon une direction passée en paramètre. Elle simule une source très lointaine
+dont tous les rayons sont parallèles.
 
-\paragraph{[Implémentée] Lumière ponctuelle} Cette source, définit grâce à sa position,
-rayonne autour d'elle comme une sphère lumineuse.
+\paragraph{[Implémentée] Lumière ponctuelle} Cette source définie par sa
+position, rayonne autour d'elle comme une point lumineuse.
 
-\paragraph{[Implémentée] Lumière surfacique plane} Cette source a la particularité d'avoir une
-composante surfacique ce qui permet de générer des ombres douces (\cf
-\tsl{section \ref{sec:softshadows}}).
+\paragraph{[Implémentée] Lumière surfacique plane} Cette source a la
+particularité d'avoir une composante surfacique qui permet de générer des
+ombres douces (\cf \tsl{section \ref{sec:softshadows}}).
 
 \paragraph{[Non implémentée] Cone de lumière}
 
 \paragraph{[Non implémentée] Autre lumières surfaciques} Il est possible de
-rajouter tout les types de lumières surfaciques comme des sphères lumineuse et
-même des mesh lumineux. 
+rajouter tout les types de lumières surfaciques comme des sphères lumineuses et
+même des \eng{mesh}\ lumineux. 
 
-\subsection{Diagramme de classe}
 \begin{figure}[h]
-\begin{center}
-  \includegraphics[width=\textwidth]{../../architecture/Lights}
+  \hbox to \textwidth
+  {\hss\includegraphics[width=1.3\textwidth]{../../architecture/Lights}\hss}
   \caption{Diagramme de classe du module Light\label{fig:CDLights}}
-\end{center}
 \end{figure}

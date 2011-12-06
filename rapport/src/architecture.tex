@@ -1,30 +1,42 @@
 \chapter{Architecture\label{sec:architecture}}
-Après avoir fait un tout d'horizons de différents modules, je vous propose
+Après avoir fait un tour d'horizon des différents modules, je vous propose
 d'étudier l'architecture complète du programme.
 
-\section{Modules}
-\remark{Bien qu'il ne s'agisse pas vraiment de module (ce concept n'existe pas en
-C++), il existe tout de même des groupements de classes (qu'il soit sémantique
-ou fonctionnel).}
+\remark{Bien qu'il ne s'agisse pas vraiment de modules (ce concept n'existe pas
+en C++), il existe tout de même des groupements de classes qu'il soit
+sémantique ou fonctionnel. C'est ce que j'assimilerai comme définition pour
+``module''.}
+
+\input{module_camera} % CHECKED
 \clearpage
 
-\input{module_camera}
+\input{module_samplers} % CHECKED
 \clearpage
 
-\input{module_samplers}
+\input{module_lights} % CHECKED
 \clearpage
 
-\input{module_lights}
+\input{module_geometry} % CHECKED
 \clearpage
 
-\input{module_geometry}
+\input{module_builder} % CHECKED
 \clearpage
 
-\input{module_builder}
+\input{module_scene} % CHECKED
 \clearpage
 
-\input{module_scene}
+\input{module_imagehandler} % CHECKED
 \clearpage
 
-\input{module_imagehandler}
-\clearpage
+\section{Architecture complète}
+La figure \ref{fig:archiAll} présente l'architecture des principaux modules du
+programme. Malheureusement, il est impossible de présenter sous forme
+intelligible l'ensemble des interactions et pour cette raison, je vous invite
+à consulter la documentation \tsl{Doxygen} qui parvient bien mieux que moi à
+mettre en valeurs les relations entres les classes.
+
+\begin{figure}[p]
+  \vspace*{-4cm}
+  \hbox to \textwidth
+  {\hss\includegraphics[angle=90,width=.6\textwidth]{../../architecture/LRT.pdf}\hss}
+\end{figure}

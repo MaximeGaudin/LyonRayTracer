@@ -1,7 +1,7 @@
 \section{Builder}
-Chaque objet constructive doit aussi définir un \tsl{builder}, \ie une classe
-permettant, à partir de la description textuelle de l'objet (\cf section
-\ref{sec:scenemanager}), de construire se représentation mémoire.
+Chaque objet constructible doit aussi définir un \tsl{builder}, \ie une classe
+permettant à partir de la description textuelle de l'objet (\cf section
+\ref{sec:scenemanager}), de construire sa représentation mémoire.
 
 L'interface à respecter est celle présentée à la \tsl{fig.
 \ref{fig:IBuilders}}.
@@ -14,21 +14,13 @@ L'interface à respecter est celle présentée à la \tsl{fig.
 
 
 \subsection{Spécialisations}
-\paragraph{[Implémentée] DefaultSampler} Ce sampler lance un seul rayon par pixel.
+Un pour chaque objet constructible. On peut citer \ttt{MaterialBuilder},
+\ttt{SphereBuilder}, \ttt{DirectionalBuilder}, \etc
 
-\paragraph{[Implémentée] SuperSampler} Ce sampler lance $N$ rayons par pixel où $N$ est
-passé en paramètre.
-
-\paragraph{[Non implémentée] Adaptative sampling} Il existe un sampler que je
-n'ai pas eu le temps d'implémenter et qui pourtant définit la stratégie la
-plus intelligente d'échantillonnage. Il s'agit de l'échantillonnage adaptatif
-qui, tant que la moyenne des pixels environnant est supérieure à un certain
-seuil de différence, lance des rayons selon une distribution statistique.
-
-\subsection{Diagramme de classe}
 \begin{figure}[h]
 \begin{center}
-  \includegraphics[width=\textwidth]{../../architecture/Builders}
+  \vspace*{-4cm}
+  \includegraphics[angle=90,width=.4\textwidth]{../../architecture/Builders}
   \caption{Diagramme de classe du module Sampler\label{fig:CDBuilders}}
 \end{center}
 \end{figure}
