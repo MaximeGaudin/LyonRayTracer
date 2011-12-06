@@ -1,3 +1,10 @@
+/**
+  * @file PlaneBuilder.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Builder associé à l'objet Plane.
+  */
 #ifndef PLANE_BUILDER_H_
 #define PLANE_BUILDER_H_
 #include <Builder.hpp>

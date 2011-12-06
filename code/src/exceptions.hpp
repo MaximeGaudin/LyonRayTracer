@@ -1,3 +1,11 @@
+/**
+  * @file exceptions.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Ce fichier déclare des fonctions d'aide permettant de normaliser l'accès
+  * aux méchanisme de journalisation.
+  */
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 #include <string>

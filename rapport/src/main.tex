@@ -1,51 +1,50 @@
-%!TEX TS-program = xetex 
-%!TEX encoding = UTF-8 Unicode
-\documentclass[a4paper]{article}
+\documentclass[]{report}
 
-\input{../build/shapeperfect/utils}
-\input{../build/shapeperfect/sp}
-\input{../build/shapeperfect/extra}
+\input{../framework/sp}
+\splanguage{french}
+\input{extra}
 
-\title{Lyon Ray Tracer}
-\authors{Maxime \tsc{Gaudin}}
-\shorttitle{}
-
-\newcommand{\eng}[1]{\tsl{#1}}
-\newcommand{\raytracing}[0]{\eng{raytracing}}
-
-\newcommand{\fimage}[4]
-{
-\begin{figure}
-  \begin{center}
-    \includegraphics[keepaspectratio=true, width=#4\textwidth]{#2}
-    \caption{#3\label{#1}}
-  \end{center}
-\end{figure}
+\title{\tbf{Projet personnel en Informatique\\ Lyon Ray Tracer}}
+\author{%
+Maxime \tsc{Gaudin}\\
+~\\
+\small \href{mailto:maxime.gaudin@polymtl.ca}{maxime.gaudin@polymtl.ca}\\
+\small Institue National des Sciences Appliquées de Lyon (INSA)\\
+\small École Polytechnique de Montréal
 }
-
-\usepackage{tikz}
-\usetikzlibrary{shapes.multipart} 
+\customdate
 
 \begin{document}
 \maketitle
 
-\input{abstract}
+\input{abstract} % CHECKED
 
-\input{introduction}
+\input{introduction} % CHECKED
 
-\input{state_of_the_art}
+\input{objectives} % CHECKED
+
+\input{state_of_the_art} % CHECKED
 
 \input{architecture}
 
-\input{results}
+\input{results} % CHECKED
 
-\input{analysis}
+\input{manual}
 
-\newpage
+\input{conclusion} % CHECKED
+
 \glsaddall
 \printglossaries
-\bibliography{references}
-\vfill
-\tableofcontents
-\end{document}
 
+\bibliography{references}
+
+\tableofcontents
+
+\listoffigures 
+
+\newpage
+\vspace*{\fill}
+\quote[Donald Knuth \smiley]{S'il est plus près du programme de \tsc{Whitted} que de
+\tsl{Renderman}\footnote{Pixar}, \tsl{LRT} reste très prometteur !}
+\vspace*{\fill}
+\end{document}

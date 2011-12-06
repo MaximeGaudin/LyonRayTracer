@@ -1,3 +1,10 @@
+/**
+  * @file PerspectiveDOFBuilder.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Builder associé à l'objet PerspectiveDOF.
+  */
 #ifndef PERSPECTIVE_DOF_BUILDER_H_
 #define PERSPECTIVE_DOF_BUILDER_H_
 #include <Builder.hpp>

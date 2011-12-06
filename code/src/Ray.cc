@@ -4,9 +4,9 @@
 
 #include <sstream>
 
-Ray::Ray ( Vector3d const& from, Vector3d const& direction ) 
-: from_(from)
-, direction_(direction.Normalized())
+Ray::Ray ( Vector3d const& from, Vector3d const& direction ) : 
+  from_(from),
+  direction_(direction.Normalized())
 {
   for ( unsigned int i = 0; i < 3; ++i ) 
     if ( direction_[i] == -0.0 ) direction_[i] = 0.0;

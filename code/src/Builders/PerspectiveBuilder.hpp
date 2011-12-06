@@ -1,3 +1,10 @@
+/**
+  * @file PerspectiveBuilder.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Builder associé à l'objet Perspective.
+  */
 #ifndef PERSPECTIVE_BUILDER_H_
 #define PERSPECTIVE_BUILDER_H_
 #include <Builder.hpp>

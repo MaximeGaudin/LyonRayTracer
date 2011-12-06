@@ -1,0 +1,19 @@
+% This file is a part of ShaperPerfect Article 2.0
+% and entirely the property of Maxime Gaudin.
+%
+% 2011
+
+\usepackage{multicol}
+\usepackage{varioref}
+\usepackage{ifthen}
+
+\safeusepackage{float}
+\safeusepackage{todonotes}
+\safeusepackage{lipsum}
+
+\ifpackageavailable{pdflscape}
+{\usepackage{pdflscape}}
+{\usepackage{lscape}}
+
+\def\texcapitalize#1#2/{{\uppercase{}#2}}
+\newcommand{\capitalize}[1]{\texcapitalize#1/}

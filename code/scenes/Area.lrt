@@ -23,9 +23,9 @@
     <light type="area">
       <point><vector3 X="-20" Y="20" Z="20" /></point>
       <normal><vector3 X="1" Y="-1" Z="-1" /></normal>
-      <sizeX>10</sizeX>
-      <sizeY>10</sizeY>
-      <sampling>16</sampling>
+      <sizeX>20</sizeX>
+      <sizeY>20</sizeY>
+      <sampling>6</sampling>
     </light>
   </lights>
 

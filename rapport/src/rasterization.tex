@@ -1,0 +1,27 @@
+\subsection{La \eng{rasterisation}\label{sec:rasterization}}
+Encore aujourd'hui, la méthode privilégiée de visualisation 3D est la
+\eng{rasterisation}. Cette technique consiste à modéliser
+l'\tsl{univers}\footnote{Au sens mathématique, \ie tout ce qui est contenu
+dans un système en $n$ dimensions.}\ par un ensemble de triangles. Ces
+triangles sont transformés (\eg translatés, mis à l'échelle, \etc) puis
+projetés dans un monde plan : \tsl{notre écran}.
+
+La \tsl{fig.\ref{rasterisationPipeline}}\ représente grossièrement le
+cheminement des données jusqu'à l'image finale.
+
+\input{img/rasterisation.tex}
+
+L'avantage de cette technique vient du fait que les calculs sont très aisément
+parallélisables. En effet, la même opération est répétée sur chaque sommet à
+tracer. Nous assistons d'ailleurs à un développement de la technologie dans ce
+sens : les \glspl{GPU} sont devenus de vraies collections de processeurs !\\
+
+Hélas, cette technique n'offre pas que des avantages. En effet, la
+complexification des scènes et surtout la demande du publique pour des rendus
+encore plus réalistes poussent matériel et logiciel dans leur retranchement.
+Les ingénieurs doivent désormais rivaliser d'ingéniosité en créer des
+\glspl{shader} de plus en plus compliqués et gourmands.\\
+
+Heureusement, depuis plus de 30 ans sous l'impulsion de \cite{Whitted1980},
+chercheurs et ingénieurs développent une technique de rendu conceptuellement
+simple mais très puissante : le \raytracing{}\ !

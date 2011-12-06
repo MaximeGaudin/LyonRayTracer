@@ -1,3 +1,0 @@
-#! /bin/sh
-mkdir /opt/latexmk
-wget "http://distrib-coffee.ipsl.jussieu.fr/pub/mirrors/ctan/support/latexmk/latexmk.pl" /opt/latexmk

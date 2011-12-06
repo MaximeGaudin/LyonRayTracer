@@ -1,3 +1,12 @@
+/**
+  * @file HitRecord.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Ce fichier définit la structure permettant de stocker le résultat 
+  * d'un lancer de rayon. Il permet de mémoriser toutes les informations 
+  * nécessaires aux différents calcul dans le cas où il y a eu intersection.
+  */
 #ifndef HIT_RECORD_H_
 #define HIT_RECORD_H_
 #include <common.hpp>
@@ -14,14 +23,14 @@ struct HitRecord {
   bool hit;
 
   /**
-    * Indique à quelle endroit du rayon la géométrie à été
+    * Indique à quel endroit du rayon la géométrie à été
     * touchée.
     * @remark Valable si seulement une géométrie à été touchée.
     */
   double t;
 
   /**
-    * Indique la normal à l'endroit de l'intersection.
+    * Indique la normale à l'endroit de l'intersection.
     * @remark Valable si seulement une géométrie à été touchée.
     */
   Vector3d normal;
@@ -33,7 +42,7 @@ struct HitRecord {
   Vector3d position;
 
   /**
-    * Indique l'endroit de l'intersection.
+    * Indique la géométrie touchée.
     * @remark Valable si seulement une géométrie à été touchée.
     */
   Geometry const* hitGeometry;

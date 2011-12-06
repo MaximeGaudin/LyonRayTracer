@@ -1,3 +1,10 @@
+/**
+* @file MeshBuilder.hpp
+* @author Maxime Gaudin
+* @date 2011
+*
+* Builder associé à l'objet Mesh.
+*/
 #ifndef MESH_BUILDER_H_
 #define MESH_BUILDER_H_
 #include <Builder.hpp>

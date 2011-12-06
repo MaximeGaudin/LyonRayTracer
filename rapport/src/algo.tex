@@ -1,34 +1,32 @@
-\begin{algorithm}[H]
-\caption{getPixel}
-\begin{algorithmic}
-\REQUIRE X, l'abscisse du point dont on veux la couleur.
-\REQUIRE Y, l'ordonnée du point dont on veux la couleur.
-\REQUIRE L, le niveau de récursion, \ie le nombre de fois que le rayon a été
-réfléchi ou réfracté.
-\ENSURE La couleur du pixel demandé.
+\begin{algorithm}
+  \SetKwInOut{Input}{Entrée}
+  \SetKwInOut{Output}{Sortie}
 
-\STATE FinalColor $\leftarrow$ BLACK
-\IF {L $\gt$ MAX\_RECURSION\_LEVEL}
-  \RETURN FinalColor
-\ENDIF
-\STATE
-\STATE Ray $\leftarrow$ Camera.getRay (X, Y)
-\STATE Record $\leftarrow$ getClosestHit ( Ray )
-\STATE
-\IF {Hit}
- \IF{La surface est réfléchissante}
-    \STATE Lancer le rayon réfléchi.
- \ENDIF
+  \Input{Ray, rayon incident.}
+  \Input{L, le niveau de récursion, \ie le nombre de fois que le rayon a été
+  réfléchi ou réfracté.}
+  \Output{La couleur du pixel demandé.}
+  ~\\
 
- \IF{La surface est transparente}
-    \STATE Lancer le rayon transmis.
- \ENDIF
- \STATE
- \STATE FinalColor $\leftarrow$ Couleur ambiente + 
-  Contribution Lumineuse * (Couleur de l'objet + Couleur du rayon transmis +
-  Couleur du rayon réfléchi)
-\ENDIF
-\STATE
-\RETURN FinalColor
-\end{algorithmic}
+  \ttt{FinalColor} $\leftarrow$ BLACK\;
+  \If {L $>$ MAX\_RECURSION\_LEVEL}{\textbf{return} FinalColor\;}
+  ~\\
+
+  \ttt{Record} $\leftarrow$ getClosestHit ( \ttt{Ray} ) \;
+  ~\\
+ 
+  \If{Hit}{
+    \If{La surface est réfléchissante}{getPixel ( Rayon réfléchi, $L + 1$ ) \;}
+    \If{La surface est transparente}{getPixel ( Rayon transmis, $L + 1$ ) \;}
+    ~\\
+
+    \ttt{FinalColor} $\leftarrow$ Couleur ambiente + Contribution Lumineuse
+    $\times$ (Couleur de l'objet + Couleur du rayon transmis + Couleur du rayon
+    réfléchi) \;
+  }
+  ~\\
+  
+  \tbf{return} FinalColor \;
+
+  \caption{getPixel\label{alg:getPixel}}
 \end{algorithm}

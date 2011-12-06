@@ -1,0 +1,49 @@
+% This file is a part of ShaperPerfect Article 2.0
+% and entirely the property of Maxime Gaudin.
+%
+% 2011
+
+\newcommand{\spuselatex}[1]{
+  \infomessage{LaTeX selected (#1).}
+    \usepackage[utf8x]{inputenc}
+    \usepackage[#1]{babel}
+}
+
+\newcommand{\spusexelatex}[1]{
+ \ifpackageavailable{xunicode xltxtra fontspec polyglossia}
+ {
+  \infomessage{XeLaTeX selected.}
+  	  \usepackage{xunicode}
+  	  \usepackage{xltxtra}
+  	  \usepackage{fontspec}
+  	  \usepackage{polyglossia}
+ 
+      \setdefaultlanguage{#1}
+  	  \defaultfontfeatures{Mapping=tex-text}
+  	  
+  	  \newcommand{\og}{«}
+  	  \newcommand{\fg}{»}
+  }
+  {}
+}
+
+\newcommand{\splanguage}[1]
+{
+  \ifpackageavailable{ifxetex}{
+    \usepackage{ifxetex}
+
+    \ifthenelse{\boolean{xetex}}{
+      \spusexelatex{#1}
+    }{
+      \spuselatex{#1}
+    }
+  }
+  { \spuselatex{#1} }
+
+  \fetchpackage{float}  
+  \fetchpackage{ifthen}
+  \fetchpackage{xspace}
+  \fetchpackage{relsize}
+  \fetchpackage{algorithm2e}
+  \usepackage[#1, boxruled, linesnumbered, vlined]{algorithm2e}
+}

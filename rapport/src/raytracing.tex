@@ -1,0 +1,56 @@
+\section{Le \raytracing ?}
+Le \raytracing{}\ est une technique de rendu qui, à la manière des réseaux de
+neurones, tente de s'approcher au plus prêt de la réalité physique des
+phénomènes dans l'espoir d'obtenir un résultat. 
+
+À défaut de décrire le \tsl{pipeline}\ complet d'un \tsl{ray tracer}\ (ce
+n'est pas l'objectif du rapport), il m'a tout de même semblé important
+d'écrire une brève introduction sur ce qui pourrait bien être \tsl{la
+principale méthode de rendu dans un futur (très) proche.}\footnote{À ce sujet,
+je vous invite à consulter les travaux de
+\href{http://developer.nvidia.com/optix}{NVidia} et
+\href{http://www.tgdaily.com/business-and-law-features/36606-inside-intels-ray-tracing-research}{Intel}
+sur le ray tracing.}
+
+\subsection{Le modèle de propagation de la lumière}
+Comme son nom l'indique, l'idée du \raytracing{}\ est de calculer le chemin que
+parcourent les rayons lumineux au travers d'une scène virtuelle.
+
+Dans la réalité, l'œil humain perçoit les objets grâce à la lumière qu'ils
+réfléchissent. Nous pourrions donc imaginer calculer l'ensemble des
+interactions lumineuses d'une scène en partant de toutes les sources de
+lumière. 
+
+Un tel modèle supposerai cependant une puissance de calcul infinie et pour que
+les calculs restent raisonnables, les simplifications suivantes ont dû être
+faites : 
+\begin{enumerate}
+  \item \tbf{La lumière se propage en ligne droite :} Nous abandonnons donc le
+    modèle ondulatoire de la lumière pour nous restreindre à l'optique
+    géométrique.\footnote{Nous verrons tout de même dans la \tsl{sec.
+    \ref{sec:state_of_the_art}}\ qu'il est possible d'intégrer des phénomènes
+    ondulatoires au rendu.}
+
+  \item \tbf{La lumière que nous recevons est la même que si la source était notre
+    œil :} En effet, plutôt que de lancer la majorité des rayons dans le vide
+    (\ie des rayons qui ne parviendraient pas jusqu'à notre œil), il est plus
+    judicieux de lancer les rayons depuis la caméra jusqu'à notre scène --- 
+    \tsl{C'est le Principe du retour inverse de la lumière de Fermat.}
+
+  \item \tbf{Le nombre de rebonds que fait la lumière est fini :} En optique
+    géométrique, il n'y a pas de perte d'énergie et considérer tous les rebonds
+    mènerai à des récursions infinies.\footnote{Comme pour les phénomène
+    ondulatoire, nous verrons qu'il est possible de raffiner le modèle pour
+    intégrer des pertes d'énergies (\cf \tsl{sec. \ref{sec:radiosity}}).}
+\end{enumerate}
+
+\subsection{L'algorithme simplifié :}
+Cette courte introduction nous amène à l'algorithme de rendu suivant :
+\input{algo}
+
+Il est impressionnant de constater la simplicité d'un algorithme pourtant si
+puissant. En quelques lignes, nous venons de décrire la propagation de la
+lumière aux travers d'objets transparents et/ou réfléchissant !
+
+Nous verrons cependant que, pour rester ouvert à l'extension et garder un
+couplage faible, une architecture robuste est nécessaire.

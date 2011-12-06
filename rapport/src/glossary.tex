@@ -1,20 +1,33 @@
 % Sample 
 % \newglossaryentry{sample}{name={sample}, description={A sample entry}}
-\newglossaryentry{backface_culling}{name={Backface Culling}, 
+\newglossaryentry{backface_culling}{name={backface culling}, 
 description={(Abattage?) Appelé aussi simplement \eng{culling}, c'est
 l'opération consistant à éliminer toutes les faces faisant dos à la caméra et
 ne pouvant par conséquent pas être vues.}}
 
-\newglossaryentry{motion_blur}{name={Motion blur}, 
+\newglossaryentry{motion_blur}{name={motion blur}, 
 description={(Flou de mouvement) C'est le flou généré par une vitesse
 d'obturation de la caméra trop grande. }}
 
-\newglossaryentry{clipping}{name={Clipping},
+\newglossaryentry{clipping}{name={clipping},
 description={C'est l'élimination des face hors du champ de la caméra.}}
 
-\newglossaryentry{aliasing}{name={Aliasing},
+\newglossaryentry{aliasing}{name={aliasing},
 description={Le crénelage sur une image.}}
 
-\newglossaryentry{supersampling}{name={Supersampling},
+\newglossaryentry{supersampling}{name={supersampling},
 description={Littéralement, sur-échantillonnage, cette technique permet
 d'éviter des effets d'aliasing.}}
+
+\newglossaryentry{jittering}{name={jittering},
+description={C'est la perturbation que les rayons lumineux subissent
+lorsqu'une surface mal polie les réfléchi (par exemple du verre sablé).}}
+
+\newglossaryentry{adaptative_sampling}{name={adaptative sampling},
+description={C'est une forme de supersampling qui n'est réalisée que si un
+certain seuil d'aliasing est détecté.}}
+
+\newglossaryentry{shader}{name={shader},
+description={Un shader est un programme appliqué à l'ensemble des pixel ou des
+sommets des polygones de la scène. Ils sont aujourd'hui incorporés dans le
+pipeline de rendu des cartes graphiques.}}

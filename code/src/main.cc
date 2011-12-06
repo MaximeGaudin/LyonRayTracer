@@ -23,7 +23,7 @@
 
 using namespace std;
 
-const unsigned char MAX_RECURSION = 8;
+const unsigned char MAX_RECURSION = 4;
 
 HitRecord getClosestHit ( Ray ray, vector<Geometry*> const& geometries ) {
   HitRecord closestHit; closestHit.hit = false;
@@ -61,23 +61,22 @@ Ray getReflectedRay ( Ray const& ray, HitRecord const& record ) {
   return Ray ( record.position + 0.01 * record.normal, ( 2 * record.normal * d ) + ray.direction() );
 }
 
-
-Ray getRefractedRay ( Ray const& ray, double IOR, HitRecord const& record ) {
+Ray getRefractedRay ( 
+    Ray const& ray, 
+    double IOR, 
+    HitRecord const& record ) 
+{
   double n1 = IOR;
   double n2 = record.hitGeometry->material()->IOR;
   double n = n1 / n2;
+  cout << n << endl;
 
-  //cout << n << endl;
-  double d = Vector3d::Dot ( record.normal, -ray.direction() );
-  double c = sqrt( 1 - n * n * (1 - d * d) );
+  double d = -Vector3d::Dot (- record.normal, ray.direction().Normalized() );
+  double c = sqrt( 1 - (n * n) * (1 - (d * d)) );
 
-  bool input = ( abs ( Vector3d::Dot ( ray.direction(), record.normal ) ) > M_PI / 2.0 );
-  Vector3d bias = ( input ) ? -0.01 * record.normal : 0.01 * record.normal;
-  Ray newRay ( record.position + bias, ( n * ray.direction() ) + ( n * d - c ) * record.normal );
-
-  //cout << "Original : " << ray.direction() << endl;
-  //cout << "New : " << newRay.direction() << endl;
-
+  Vector3d newDirection = (( n * ray.direction() ) + ( (n * d) - c ) * (-record.normal)).Normalized();
+  Ray newRay ( record.position + 0.01 * newDirection, newDirection ); 
+  
   return newRay;
 }
 
@@ -86,30 +85,32 @@ Color_d getPixel ( Scene const& scene, Ray const& ray,
     unsigned char recursionsLevel ) {
 
   Color_d c;
-  if ( recursionsLevel > MAX_RECURSION ) return c;
 
-  HitRecord record = getClosestHit ( ray, scene.geometries );
+  if ( recursionsLevel <= MAX_RECURSION ) { 
+    HitRecord record = getClosestHit ( ray, scene.geometries );
 
-  if ( record.hit ) {
-    Color_d directColor = Material::getGeometryColor ( record );
-    Color_d directLighting = computeDirectLighting ( scene, record );
+    if ( record.hit ) {
+      Color_d directColor = Material::getGeometryColor ( record );
+      Color_d directLighting = computeDirectLighting ( scene, record );
 
-    Color_d reflectedColor;
-    if ( record.hitGeometry->material()->reflexivity != 0 ) 
-      reflectedColor = getPixel ( scene, 
-          getReflectedRay ( ray, record ), IOR, recursionsLevel + 1 );
+      Color_d reflectedColor;
+      if ( record.hitGeometry->material()->reflexivity != 0 ) 
+        reflectedColor = getPixel ( scene, 
+            getReflectedRay ( ray, record ), IOR, recursionsLevel + 1 );
 
-    Color_d refractedColor;
-    if ( record.hitGeometry->material()->opacity != 1.0 ) 
-      refractedColor = getPixel ( scene, 
-          getRefractedRay ( ray, IOR, record ), 
-          record.hitGeometry->material()->IOR, recursionsLevel + 1 );
+      Color_d refractedColor;
+      if ( record.hitGeometry->material()->opacity != 1.0 )
+        refractedColor = getPixel ( scene, 
+            getRefractedRay ( ray, IOR, record ), 
+            record.hitGeometry->material()->IOR, recursionsLevel + 1 );
 
-    c += directColor * record.hitGeometry->material()->opacity;
-    c += reflectedColor * record.hitGeometry->material()->reflexivity;
-//    c += refractedColor * ( 1.0 - record.hitGeometry->material().opacity);
-    c = c * directLighting;
-  }
+      c += directColor * record.hitGeometry->material()->opacity;
+      c += reflectedColor * record.hitGeometry->material()->reflexivity;
+      c += refractedColor * ( 1.0 - record.hitGeometry->material()->opacity);
+      c = c * directLighting;
+    }
+  } 
+  //else cout << "MAX RECURSION" << endl;
 
   c += scene.ambient;
   return c.Clamped();
@@ -120,20 +121,17 @@ void Render ( Scene& scene, Sampler* sampler ) {
     displayProgress ( Y, scene.frame->H() );
 
     for ( unsigned int X = 0; X < scene.frame->W(); ++X ){
-        vector<Ray> rays = sampler->getRays ( scene, X, Y );
-        vector<Ray>::const_iterator it = rays.begin();
+      vector<Ray> rays = sampler->getRays ( scene, X, Y );
+      vector<Ray>::const_iterator it = rays.begin();
 
-        //cout << *it << endl;
-        Color_d pixel = Color_d_BLACK;
+      Color_d pixel = Color_d_BLACK;
 
-        while ( it != rays.end() ) { 
-          pixel += getPixel ( scene, *it, 1.0, 0 ) / (double)rays.size();
-          //cout << pixel << endl;
-          ++it;
-        }
-        //cout << "===============" << endl;
+      while ( it != rays.end() ) { 
+        pixel += getPixel ( scene, *it, 1.0, 0 ) / (double)rays.size();
+        ++it;
+      }
 
-        (*scene.frame)[X][Y] = pixel;
+      (*scene.frame)[X][Y] = pixel;
     }
   } 
 

@@ -45,5 +45,3 @@ Color_d Material::getGeometryColor ( HitRecord const& record ) {
 
   return (*texture)[(int)(UV[0] * texture->W())][(int)(UV[1] * texture->H())];
 }
-
-

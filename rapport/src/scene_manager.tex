@@ -1,0 +1,54 @@
+\section{Gestionnaire de scènes\label{scenemanager}}
+Un des élément principaux, il permet grâce à une description textuelle, de
+générer la représentation mémoire de la scène. C'est par conséquent
+l'interface de communication entre l'utilisateur et le client.
+
+La démocratisation et la facilité du langage XML m'ont poussé à le choisir
+comme métalangage de description. De plus, la disponibilité d'outils pour le
+\eng{parser}\ rend son utilisation beaucoup plus simple\footnote{Dans mon cas,
+la \tsl{parsing}\ est assuré par \tsl{Boost}\ ce qui le rend très solide.}.
+
+Enfin, il augmente l'interopérabilité avec d'autre logiciel comme les
+modeleurs par exemple.
+
+\subsection{Exemple} 
+La code suivant est un exemple simple de scène mettant en jeu 3 sphères, 1 plan
+et une caméra avec gestion de la profondeur de champ :
+
+\inputcode{xml}{../../code/scenes/DOF.lrt}
+
+Comme ci-dessus, une description de scène est composée de 4 blocs :
+\begin{enumerate}
+  \item Un nœud \ttt{camera} : C'est ici qu'est déclaré l'\tsl{unique}\ caméra
+  de la scène.
+  \item Un nœud \ttt{materials} : C'est ici que doivent être déclaré l'ensemble
+  des matériaux identifiés par une chaine de caractère \tsl{unique}.
+  \item Un nœud \ttt{lights}.
+  \item Un nœud \ttt{geometries}.
+\end{enumerate}
+\remark{L'ordre n'est pas imposé.}\vspace*{1em}
+
+Comme précisé dans l'architecture, c'est chaque \eng{builder}\ qui décrit les
+paramètres dont il a besoin pour fonctionner. Certains sont obligatoires,
+d'autres optionnels.
+
+\subsection{Améliorations}
+\begin{description}
+  \item [Gestion de la casse] Pour l'instant, la détection des paramètres est
+    \tsl{case-sensitive}, c'est inutile et source d'erreurs difficiles à
+    débusquer.
+\item [Auto-description] Chaque \tsl{builder}\ devrait pouvoir se décrire via
+  la ligne de commande en expliquant quels sont les paramètres dont il a
+  besoin et leurs domaines de définitions.
+\end{description}
+
+Ces deux améliorations sont relativement simples à implémenter et c'est
+principalement le développement d'autres fonctionnalité et le manque de temps
+qui m'ont empêcher de les ajouter au programme. 
+
+Il faut tout de même noter que la seconde amélioration n'avait pas été prévu
+et qu'il faudra par conséquent changer l'interface des \tsl{builder}, ce qui impacte
+l'ensemble de code existant.  C'est donc un oubli très gênant de ma part.
+
+\subsection{Bug connu}
+Aucun.

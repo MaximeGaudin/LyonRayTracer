@@ -1,0 +1,59 @@
+\section{Journalisation}
+Pour un programme d'une telle ampleur, il est important de pouvoir retracer le
+l'exécution sans avoir à utiliser un debugger. C'est pourquoi j'ai choisi de
+me tourner vers une gestion centralisée et systématique des logs.
+
+\subsection{Exemple :} Rendu de la scène \ttt{DOF.lrt} 
+\begin{center}
+\begin{verbatim}
+[Core] - Builders discovering...
+[SceneReader] - 'material' builder added.
+[SceneReader] - 'perspective' builder added.
+[SceneReader] - 'perspectiveDOF' builder added.
+[SceneReader] - 'point' builder added.
+[SceneReader] - 'area' builder added.
+[SceneReader] - 'sphere' builder added.
+[SceneReader] - 'plane' builder added.
+[SceneReader] - 'mesh' builder added.
+[Core] - Building scene...
+[SceneReader] - Reading scene : scenes/DOF.lrt ...
+[SceneReader] - Image...
+[Image] - Building new output frame (600, 600)... OK
+[SceneReader] - Camera...
+[PerspectiveDOF] - New Camera : Eye - ( 0 ,0 ,8 ), LookAt - ( 0 ,0 ,0 ),
+Direction ( 0 ,0 ,-1 )
+[SceneReader] - Materials...
+[MaterialBuilder] - New material with diffuse = [ R=1, G=0, B=0 ].
+[MaterialBuilder] - New material with diffuse = [ R=1, G=1, B=0 ].
+[MaterialBuilder] - New material with diffuse = [ R=0, G=1, B=0 ].
+[MaterialBuilder] - New material with diffuse = [ R=0, G=0, B=1 ].
+[SceneReader] - Lights...
+[SphereBuilder] - New point light at ( -20 ,20 ,20 )
+[SceneReader] - Geometry...
+[SphereBuilder] - New sphere at ( 0 ,0 ,0 ) (radius = 1)
+[SphereBuilder] - New sphere at ( -1 ,0 ,4 ) (radius = 1)
+[SphereBuilder] - New sphere at ( 2 ,0 ,-4 ) (radius = 1)
+[PlaneBuilder] - New plane at ( 0 ,-1.2 ,0 ) (normal= ( 0 ,1 ,0 ))
+[Core] - Rendering...
+
+0%...........................................................
+10%...........................................................
+20%...........................................................
+...
+100%..........................................................
+[Core] - Saving...
+[Core] - Cleanup...
+\end{verbatim}
+\end{center}
+
+\subsection{Améliorations}
+\begin{description}
+  \item [Gestion des niveaux d'alerte] Alors que certaines informations
+    peuvent être utiles à l'utilisateur, d'autres sont purement fonctionnelles
+    et permettent un débugage plus rapide. Il serait donc judicieux de pouvoir
+    affecter des niveaux aux événements de journalisation dans le but de
+    pouvoir les filtrer.
+\end{description}
+
+\subsection{Bug connu} 
+Aucun.

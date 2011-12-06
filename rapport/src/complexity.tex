@@ -1,0 +1,24 @@
+\section{Analyse rapide de la complexité algorithmique}
+Avant de conclure ce rapport, j'aimerai effectuer une brève analyse de
+complexité.
+
+Supposons
+\begin{itemize}
+  \item $\delta$, la valeur d'échantillonnage de l'effet de profondeur de champ.
+  \item $\lambda$, la valeur d'échantillonnage des ombres douces.
+  \item $l$, le nombre de sources de lumières.
+  \item $N$, le nombre minimal d'intersections à tester.
+\end{itemize}
+
+Par conséquence, la génération d'un seul rayon primaire engendre $N_r$ rayons
+secondaires tels que :
+$$\mbox{En cas de collision : } N_r = 3 N (\delta (l \lambda))$$
+Soit pour des valeurs raisonnables des paramètres : 
+$$N_r = 3 \times 50 ( 128 ( 3 \times 8 )) = 400 000+$$
+
+Sachant que ce calcul est valable pour un seul pixel, je vous laisse imaginer
+la durée d'un rendu complexe en full HD.
+
+Il faut savoir que ce calcul est largement sous-estimé car il ne tient compte
+que d'une récursion.
+

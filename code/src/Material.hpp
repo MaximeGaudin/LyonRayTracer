@@ -44,6 +44,14 @@ class Material : public Buildable {
      */
     Material ( Color_d diffuse, Color_d ambient, Color_d specular );
 
+    /*
+     * Fonction d'aide permettant d'obtenir la couleur de la géométrie
+     * en fonction de l'intersection avec un rayon. Si la géométrie est texturée
+     * c'est la couleur de la texture à l'endroit de l'intersection qui est 
+     * retournée. Sinon, c'est la couleur diffuse.
+     *
+     * @param record Enregistrement du lancé.
+     */
     static Color_d getGeometryColor ( HitRecord const& record );
 
   public:
@@ -81,9 +89,13 @@ class Material : public Buildable {
     /// Puissance de spécularitée.
     double specularPower;
 
+    /// Indique si le matériau est composé d'une texture.
     bool hasTexture;
+
+    /// La texture en question.
     Image* texture;
 
+    /// La mise à l'échelle à appliquer à la texture.
     double UVScale;
 };
 #endif // MATERIAL_H_

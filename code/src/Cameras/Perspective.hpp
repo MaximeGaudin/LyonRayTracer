@@ -1,3 +1,11 @@
+/**
+  * @file Perspective.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Déclare la caméra Perspective. C'est une caméra "normale" avec 
+  * projection perspective.
+  */
 #ifndef PERSPECTIVE_H_
 #define PERSPECTIVE_H_
 #include <vector>
@@ -14,7 +22,7 @@ class Perspective : public Camera {
   public:
     /**
      * @param eye Position de la caméra.
-     * @param lookTo Endroit où la caméra pointe.
+     * @param lookAt Endroit où la caméra pointe.
      * @param up Vecteur indiquant où doit pointer le haut de l'image.
      *
      * @remark Par défaut, la distance focale de la caméra est 1.0.
@@ -27,7 +35,7 @@ class Perspective : public Camera {
     /**
      * @param focaleDistance Distance focale de la caméra.
      * @param eye Position de la caméra.
-     * @param lookTo Endroit où la caméra pointe.
+     * @param lookAt Endroit où la caméra pointe.
      * @param up Vecteur indiquant où doit pointer le haut de l'image.
      */
     Perspective ( 

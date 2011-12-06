@@ -1,69 +1,27 @@
-include build/Makefile.conf
-include build/style.conf
+DEPS=$(shell find src/)
+OUTPUT=proof.pdf
 
-COMPILE_SUCCESS=0
-COMPILE_FAIL=1
-COMPILE=${COMPILE_SUCCESS}
+all: tmp/main.pdf
+	
+tmp/main.pdf: ${DEPS} 
+	@mkdir tmp 2>/dev/null; true
+	@echo "Compiling ..." && cd src/ && pdflatex -output-directory ../tmp/ -halt-on-error -shell-escape main.tex || (cat ../tmp/main.log | grep -A 20 "!" ; exit 1)
+	open tmp/main.pdf
 
-all: check_directory check_git ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf clean_latexmk_files
+proof:
+	@mkdir tmp 2>/dev/null; true
+	@echo "Compiling (1/3)..." && cd src/ && pdflatex -output-directory ../tmp/ -halt-on-error -shell-escape main.tex >/dev/null || (cat ../tmp/main.log | grep -A 20 "!" ; exit 1)
+	-@echo "Bibtex (1/1)..." && cp src/references.bib tmp/ && cd tmp/ && bibtex main >/dev/null
+	@echo "Glossary (1/1)..." && cd tmp/ && makeindex -s main.ist -t main.alg -o main.acr main.acn >/dev/null
+	@echo "Compiling (2/3)..." && cd src/ && pdflatex -output-directory ../tmp/ -shell-escape main.tex >/dev/null
+	@echo "Compiling (3/4)..." && cd src/ && pdflatex -output-directory ../tmp/ -shell-escape main.tex >/dev/null
+	@cp tmp/main.pdf ${OUTPUT} && open ${OUTPUT}
 
-${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf: ${SRC_DIRECTORY}*.tex ${SRC_DIRECTORY}*.bib 
-	@COMPILE=0; \
-	echo ${CYAN} "${HEADER}Compilation ..." ${NORMAL}; \
-	cd src && latexmk -r ../${BUILD_DIRECTORY}${LATEXMKRC} -pdf -f- -silent main.tex || COMPILE=1; \
-	if [ $${COMPILE} = 1 ]; then \
-		echo ${ROUGE} "${HEADER}La compilation a échouée." ${NORMAL}; \
-		echo ${ROUGE} "${HEADER}Liste des erreurs :" ${NORMAL}; \
-		grep -E -A7 "^\!" ${INPUT_FILENAME}.log; \
-		exit 1; \
-	else \
-		echo ${VERT} "${HEADER}Compilation effectuée avec succès !" ${NORMAL}; \
-		${CMD_MV} ${INPUT_FILENAME}.pdf ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
-		${CMD_VIEWER} ../${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf; \
-	fi; 
 
-check_git:
-	@if [ -d .git ]; then \
-		cp ${BUILD_DIRECTORY}/pre-commit .git/hooks/; chmod 774 .git/hooks/pre-commit; \
-		if [ ! -e .gitignore ]; then \
-			echo ".DS_STORE" >> .gitignore; \
-			echo "Makefile" >> .gitignore; \
-			echo "*.pdf" >> .gitignore; \
-			cat ${BUILD_DIRECTORY}ext.conf >> .gitignore; \
-		fi; \
-	fi
-
-check_directory:
-	@if [ ! -d ${BIN_DIRECTORY} ]; then ${CMD_MKDIR} ${BIN_DIRECTORY}; fi
-	@if [ ! -d ${TMP_DIRECTORY} ]; then ${CMD_MKDIR} ${TMP_DIRECTORY}; fi
-
-clean: clean_latexmk_files
-	@${CMD_RM} -f ${BIN_DIRECTORY}${OUTPUT_FILENAME}.pdf
-	@${CMD_RM} -f ${BIN_DIRECTORY}${OUTPUT_FILENAME}.ps
+clean:
+	@rm tmp/main.pdf 2>/dev/null; true
+	@rm ${OUTPUT} 2>/dev/null; true
 
 mrproper: clean
-	@${CMD_RM} -f ${BIN_DIRECTORY}*.pdf
-
-clean_latexmk_files:
-	@echo ${CYAN} "${HEADER}Cleanup latexmk mess..." ${NORMAL}; \
-	EXT=aux && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=glo && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=glg && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=gls && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=ist && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=maf && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=mtc && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=mtc0 && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=log && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=acn && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=idx && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=out && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=ilg && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=ind && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=toc && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=bak && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=tns && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=bbl && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=blg && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=dvi && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;		\
-	EXT=fdb_latexmk && if [ -e ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ]; then ${CMD_MV} ${SRC_DIRECTORY}${INPUT_FILENAME}.$${EXT} ${TMP_DIRECTORY}; fi;
+	@rm -rf tmp 2>/dev/null; true
+	@rm src/main.pyg 2>/dev/null; true

@@ -1,0 +1,18 @@
+% This file is a part of ShaperPerfect Article 2.0
+% and entirely the property of Maxime Gaudin.
+%
+% 2011
+
+\ifpackageavailable{ifdraft} 
+{
+  \usepackage{ifdraft}
+
+    \ifoptiondraft{
+      \safeusepackage{draftwatermark}
+      \SetWatermarkScale{5}
+      \SetWatermarkText{\textbf{DRAFT}}
+      \SetWatermarkLightness{0.90}
+    }
+    {} 
+}
+{\infomessage{Draft support disabled.}}

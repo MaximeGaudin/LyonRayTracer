@@ -1,73 +1,12 @@
-\section{Introduction}
+\chapter{Introduction}
 Dans un monde où l'informatique et la virtualisation des environnements de
-travail est omniprésente, la visualisation des données est devenu un enjeux
-primordiale pour des domaines aussi variés que la médecine, l'architecture,
+travail est omniprésent, la visualisation des données est devenu un enjeux
+primordiale dans des domaines aussi variés que la médecine, l'architecture,
 l'industrie du jeux vidéo ou encore les interfaces utilisateur.
 
-\paragraph{\eng{Rasterisation}}
-Encore aujourd'hui, la méthode privilégiée de visualisation des environnements
-3D est la \eng{rasterisation}. Cette technique consiste à modéliser
-l'\tsl{univers}\footnote{Au sens mathématique, \ie tout ce qui est contenu
-dans un système en troi dimensions.} par un ensemble de triangles. Ces
-triangles sont transformé (\ie translatés, mis à l'échelle, \etc) puis projeté
-dans un monde plan : Notre écran. La \fref{rasterisationPipeline} représente
-grossièrement le cheminement des données jusqu'à l'image finale.
+\input{rasterization} % CHECKED
 
-\input{img/rasterisation.tex}
+\input{raytracing} % CHECKED
 
-L'avantage de cette technique vient du fait que les calculs sont très
-aisément parallélisables. Nous assistons d'ailleurs à un développement de
-technologie dans ce sens : Les \gls{GPU} sont devenu de vraies collections de
-processeurs.
+\input{content} % CHECKED
 
-\newpar Mais cette technique n'offre pas que des avantages. En effet, la
-compleification des scènes en 3D et surtout la demande du publique pour des
-rendu encore plus réaliste pousse dans ses retranchement le matériel et les
-logiciels de visualisation 3D. Mais depuis quelques plus de 30 ans
-\cite{Whitted1980}, chercheurs et ingénieurs développent une technique de
-rendu simple mais très puissante : Le \raytracing !
-
-\subsection{Le \raytracing ?}
-Le \raytracing est une technique de rendu qui, à la manière des réseau de
-neurones, tente de s'approcher au plus des phénomènes physique pour obtenir
-un rendu photoréaliste. 
-
-\newpar À défaut de décrire le \tsl{pipeline} complet d'un ray tracer (ce
-n'est pas l'objectif du rapport), il m'a tout de même semblé important
-d'écrire une brève introduction sur ce qui pourrait bien être la principale
-méthode de rendu dans un futur proche.
-
-\paragraph{Le modèle de propagation de la lumière}
-L'œil humain perçoit les objets grâce à la lumière qu'ils réfléchissent. Nous
-pourrions donc imaginer calculer l'ensemble des interactions lumineuse d'un
-scène en partant de toutes les sources de lumière. Un tel modèle supposerai
-cependant une puissance de calcul infinie et pour que les calculs restent
-raisonnable, les simplifications suivantes ont dû être faite :
-\begin{itemize}
-  \item La lumière se propage en ligne droite : Nous abandonnons donc le
-    modèle ondulatoire de la lumière pour nous restreindre à l'optique
-    géométrique.
-  \item La lumière que nous recevons est la même que si la source était notre
-    œil : En effet, plutôt que de lancer la majorité des rayons dans le vide
-    (\ie des rayons qui ne parviendraient pas jusqu'à notre œil), il est plus
-    judicieux de lancer les rayons depuis la caméra jusqu'à notre scène.
-  \item Le nombre de rebond que fait la lumière est fini : En optique
-    géométrie, il n'y a pas de perte d'énergie et considérer tous les rebonds
-    mènerai à des récursions infinies.
-\end{itemize}
-
-\paragraph{L'algorithme simplifié}
-Cette courte introduction nous amène à l'algorithme de rendu suivant :
-\input{algo}
-
-\todo{Intégrer l'image}
-
-Il est impressionnant de constater la simplicité d'un algorithme pourtant si
-puissant. En quelques lignes, nous venons de décrire la propagation de la
-lumière aux travers d'objets transparents et/ou réfléchissant !
-
-Nous verrons cependant que, pour rester ouvert à l'extension et garder un
-couplage faible, une architecture solide est nécessaire.
-
-\input{objectives}
-\input{non_objectives}

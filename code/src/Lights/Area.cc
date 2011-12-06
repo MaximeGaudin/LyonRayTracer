@@ -69,7 +69,7 @@ Color_d Area::getContribution (
         HitRecord currentRecord = g->getRecord ( r );
 
         if ( !currentRecord.hit )
-          finalColor += material_->diffuse / (sampling_ * sampling_);
+          finalColor += material_->diffuse / (2 * sampling_ * sampling_);
       }
     }
   }

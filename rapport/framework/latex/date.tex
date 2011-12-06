@@ -1,0 +1,14 @@
+% This file is a part of ShaperPerfect Article 2.0
+% and entirely the property of Maxime Gaudin.
+%
+% 2011
+
+\newcommand{\customdate}[0]{
+  \ifpackageavailable{datetime} 
+  {
+    \usepackage{datetime}
+    \newdateformat{customdateformat}{\monthname[\THEMONTH] \THEYEAR}
+    \date{\customdateformat\today}
+  }
+  {\date{\today}}
+}

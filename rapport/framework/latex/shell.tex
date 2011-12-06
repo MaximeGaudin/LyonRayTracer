@@ -1,0 +1,40 @@
+% This file is a part of ShaperPerfect Article 2.0
+% and entirely the property of Maxime Gaudin.
+%
+% 2011
+
+% Execute #1 dans le shell disponible.
+\newcommand{\shell}[1] {\immediate\write18{#1}}
+
+% Execute #1 puis #2 si la commande a réussi, #3 sinon.
+\newcommand{\shelltest}[3]{%
+  \immediate\write18{#1 && touch witness}%
+  \IfFileExists{witness}%
+  {#2%
+    \shell{rm witness 2>/dev/null}%
+  }%
+  {#3}%
+}
+
+% Exécute #2 si le package #1 est disponible.
+\newcommand{\ifpackageavailable}[3]
+{\shelltest{\sppath utils/findpackage.sh #1}{#2}{#3}}
+
+% Affiche le message #1 dans la console lors de la compilation.
+\newcommand{\infomessage}[1]
+{\shell{\sppath utils/infomessage.sh "#1"}}
+
+\newcommand{\fetchpackage}[1]
+{
+  \ifpackageavailable{#1}{}
+  {
+    \shell{\sppath utils/fetchlist.sh}
+    \shell{\sppath utils/fetchpackage.sh #1}
+  }
+}
+
+\newcommand{\safeusepackage}[1]
+{
+  \fetchpackage{#1}
+  \usepackage{#1}
+}

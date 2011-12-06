@@ -1,0 +1,18 @@
+\section{Scene}
+Pour être construite, la scène doit lire un fichier au format XML (\cf
+\tsl{section \ref{sec:scenemanager}}).
+
+Une scène contient les champs suivant :
+\begin{itemize}
+  \item Une caméra
+  \item Une liste de matériaux
+  \item Une liste de géométries
+  \item Une liste de lumière.
+  \item Une couleur ambiante,\ie la ``couleur du vide''.
+  \item L'image où sera écrite le rendu.
+\end{itemize}
+
+Lors de la création, le programme lit le fichier XML et appelle successivement
+tous les \tsl{builders} disponible afin d'en trouver un capable de construire
+la représentation mémoire de l'objet.
+

@@ -1,0 +1,34 @@
+\section{Sampler}
+Les \tsl{samplers} ont pour objectif d'échantillonner le nombre de rayons
+lancé par pixel. Il est donc possible de \tsl{supersampler}, \ie lancer plus
+de rayons qu'il ne semble nécessaire afin d'éviter les phénomènes de
+crénelage.
+
+Encore une fois, les \tsl{samplers} doivent respecter l'interface définit à la
+\tsl{fig. \ref{fig:ISampler}}.
+
+\begin{figure}[h]
+  \inputcode{c++}{../../code/src/Samplers/Sampler.hpp}
+  \caption{Code de l'interface commune à tous les
+  samplers\label{fig:ISamplers}}
+\end{figure}
+
+\subsection{Spécialisations}
+\paragraph{[Implémentée] DefaultSampler} Ce sampler lance un seul rayon par pixel.
+
+\paragraph{[Implémentée] SuperSampler} Ce sampler lance $N$ rayons par pixel où $N$ est
+passé en paramètre.
+
+\paragraph{[Non implémentée] Adaptative sampling} Il existe un sampler que je
+n'ai pas eu le temps d'implémenter et qui pourtant définit la stratégie la
+plus intelligente d'échantillonnage. Il s'agit de l'échantillonnage adaptatif
+qui, tant que la moyenne des pixels environnant est supérieure à un certain
+seuil de différence, lance des rayons selon une distribution statistique.
+
+\subsection{Diagramme de classe}
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\textwidth]{../../architecture/Samplers}
+  \caption{Diagramme de classe du module Sampler\label{fig:CDSamplers}}
+\end{center}
+\end{figure}

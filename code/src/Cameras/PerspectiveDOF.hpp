@@ -1,3 +1,13 @@
+/**
+  * @file Perspective.hpp
+  * @author Maxime Gaudin
+  * @date 2011
+  *
+  * Déclare la caméra Perspective. C'est une caméra "normale" avec 
+  * projection perspective et effet de profondeur de champ. Le réglage
+  * de celui-ci n'est pas trivial et il faut tester plusieurs ouvertures avant
+  * d'obtenir un effet réaliste.
+  */
 #ifndef PERSPECTIVE_DOF_H_
 #define PERSPECTIVE_DOF_H_
 #include <vector>
@@ -15,8 +25,12 @@ class PerspectiveDOF : public Camera {
   public:
     /**
      * @param eye Position de la caméra.
-     * @param lookTo Endroit où la caméra pointe.
+     * @param lookAt Endroit où la caméra pointe.
      * @param up Vecteur indiquant où doit pointer le haut de l'image.
+     * @param focusPoint Point net.
+     * @param sampling Échantillonnage de l'effet.
+     * @param aperture "Ouverture" de l'objectif (correspond à la 
+     * disturbance appliquée aux rayons.)
      *
      * @remark Par défaut, la distance focale de la caméra est 1.0.
      */
@@ -31,8 +45,16 @@ class PerspectiveDOF : public Camera {
     /**
      * @param focaleDistance Distance focale de la caméra.
      * @param eye Position de la caméra.
-     * @param lookTo Endroit où la caméra pointe.
+     * @param lookAt Endroit où la caméra pointe.
      * @param up Vecteur indiquant où doit pointer le haut de l'image.
+     * @param focusPoint Point net.
+     * @param sampling Échantillonnage de l'effet.
+     * @param focusPoint Point net.
+     * @param sampling Échantillonnage de l'effet.
+     * @param aperture "Ouverture" de l'objectif (correspond à la 
+     * disturbance appliquée aux rayons.)
+     * @param aperture "Ouverture" de l'objectif (correspond à la 
+     * disturbance appliquée aux rayons.)
      */
     PerspectiveDOF ( 
         double focaleDistance,
